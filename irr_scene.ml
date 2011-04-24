@@ -78,6 +78,8 @@ external node_set_id : obj -> int -> unit = "ml_ISceneNode_setID"
 
 external node_get_id : obj -> int = "ml_ISceneNode_getID"
 
+external node_add_child : obj -> obj -> unit = "ml_ISceneNode_addChild"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
@@ -88,6 +90,7 @@ class node obj = object(self)
       inherit Irr_video.material obj
     end
   method add_animator (anim : animator) = node_add_animator self#obj anim#obj
+  method add_child (node : node) = node_add_child self#obj node#obj
   method set_material_flag flag b =
     node_set_material_flag self#obj flag b
   method set_material_texture ?(layer = 0) (tex : Irr_video.texture) =

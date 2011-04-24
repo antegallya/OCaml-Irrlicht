@@ -82,6 +82,11 @@ extern "C" CAMLprim value ml_ISceneNode_getID(value v_node) {
 	return Val_int(((ISceneNode*) v_node)->getID());
 }
 
+extern "C" CAMLprim value ml_ISceneNode_addChild(value v_node, value v_child) {
+	((ISceneNode*) v_node)->addChild((ISceneNode*) v_child);
+	return Val_unit;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(

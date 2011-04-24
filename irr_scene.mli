@@ -27,6 +27,7 @@ class node : obj -> object
   method id : int
   method material : int -> Irr_video.material
   method add_animator : animator -> unit
+  method add_child : node -> unit
   method set_material_flag : Irr_enums.material_flag -> bool -> unit
   method set_material_texture : ?layer:int -> Irr_video.texture -> unit
   method set_material_type : Irr_enums.material_type -> unit
