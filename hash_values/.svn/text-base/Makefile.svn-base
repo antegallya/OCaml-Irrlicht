@@ -1,0 +1,2 @@
+all:
+	ocamlbuild main.byte
