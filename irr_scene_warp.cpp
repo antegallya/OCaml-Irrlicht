@@ -94,6 +94,10 @@ extern "C" CAMLprim value ml_ISceneNode_clone(value v_node, value v_parent) {
 	return (value) ((ISceneNode*) v_node)->clone(parent);
 }
 
+extern "C" CAMLprim value ml_ISceneNode_getAutomaticCulling(value v_node) {
+	return Val_culling_type(((ISceneNode*) v_node)->getAutomaticCulling());
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(

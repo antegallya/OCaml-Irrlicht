@@ -28,6 +28,7 @@ class node : obj -> object
   method material : int -> Irr_video.material
   method add_animator : animator -> unit
   method add_child : node -> unit
+  method automatic_culling : Irr_enums.culling_type
   method clone : ?parent:node -> unit -> node
   method set_material_flag : Irr_enums.material_flag -> bool -> unit
   method set_material_texture : ?layer:int -> Irr_video.texture -> unit
