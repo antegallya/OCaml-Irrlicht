@@ -87,6 +87,13 @@ extern "C" CAMLprim value ml_ISceneNode_addChild(value v_node, value v_child) {
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_ISceneNode_clone(value v_node, value v_parent) {
+	ISceneNode* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (ISceneNode*) Field(v_parent, 0);
+	return (value) ((ISceneNode*) v_node)->clone(parent);
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
