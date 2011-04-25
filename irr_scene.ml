@@ -96,9 +96,13 @@ external node_get_name : obj -> string = "ml_ISceneNode_getName"
 external node_set_automatic_culling : obj -> Irr_enums.culling_type -> unit =
   "ml_ISceneNode_setAutomaticCulling"
 
+external node_get_rotation : obj -> Irr_core.vector3df =
+  "ml_ISceneNode_getRotation"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
+  method rot = node_get_rotation self#obj
   method material i =
     let obj = node_get_material self#obj i in
     object

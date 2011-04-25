@@ -117,6 +117,10 @@ extern "C" CAMLprim value ml_ISceneNode_setAutomaticCulling(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_ISceneNode_getRotation(value v_node) {
+	return copy_vector3df(((ISceneNode*) v_node)->getRotation());
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
