@@ -132,3 +132,16 @@ value copy_matrix4(matrix4 mat) {
 	CAMLreturn(v);
 }
 
+aabbox3d<f32> Aabbox3df_val(value v) {
+	return aabbox3d<f32>(Vector3df_val(Field(v, 0)), Vector3df_val(Field(v, 1)));
+}
+
+value copy_aabbox3df(aabbox3d<f32> box) {
+	CAMLparam0();
+	CAMLlocal1(v);
+	v = caml_alloc(2, 0);
+	Store_field(v, 0, copy_vector3df(box.MinEdge));
+	Store_field(v, 1, copy_vector3df(box.MaxEdge));
+	CAMLreturn(v);
+}
+

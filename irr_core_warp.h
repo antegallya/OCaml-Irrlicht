@@ -32,4 +32,7 @@ value copy_SColorf(SColorf);
 matrix4 Matrix4_val(value);
 value copy_matrix4(matrix4);
 
+aabbox3d<f32> Aabbox3df_val(value);
+value copy_aabbox3df(value);
+
 #endif

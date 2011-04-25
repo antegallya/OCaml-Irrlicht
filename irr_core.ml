@@ -24,3 +24,5 @@ type matrix4 = float array
 
 let matrix_identity () =
   Array.init 16 (fun i -> if i mod 4 = i / 4 then 1. else 0.)
+
+type 'a aabbox3d = 'a vector_3d * 'a vector_3d
