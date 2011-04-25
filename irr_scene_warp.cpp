@@ -102,6 +102,10 @@ extern "C" CAMLprim value ml_ISceneNode_getBoundingBox(value v_node) {
 	return copy_aabbox3df(((ISceneNode*) v_node)->getBoundingBox());
 }
 
+extern "C" CAMLprim value ml_ISceneNode_getMaterialCount(value v_node) {
+	return Val_int(((ISceneNode*) v_node)->getMaterialCount());
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(

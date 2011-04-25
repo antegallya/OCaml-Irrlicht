@@ -30,6 +30,7 @@ class node : obj -> object
   method add_child : node -> unit
   method automatic_culling : Irr_enums.culling_type
   method bounding_box : float Irr_core.aabbox3d
+  method material_count : int
   method clone : ?parent:node -> unit -> node
   method set_material_flag : Irr_enums.material_flag -> bool -> unit
   method set_material_texture : ?layer:int -> Irr_video.texture -> unit

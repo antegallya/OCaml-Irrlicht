@@ -88,6 +88,9 @@ external node_get_automatic_culling : obj -> Irr_enums.culling_type =
 external node_get_bounding_box : obj -> float Irr_core.aabbox3d =
   "ml_ISceneNode_getBoundingBox"
 
+external node_get_material_count : obj -> int =
+  "ml_ISceneNode_getMaterialCount"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
@@ -105,6 +108,7 @@ class node obj = object(self)
     new node obj
   method automatic_culling = node_get_automatic_culling self#obj
   method bounding_box = node_get_bounding_box self#obj
+  method material_count = node_get_material_count self#obj
   method set_material_flag flag b =
     node_set_material_flag self#obj flag b
   method set_material_texture ?(layer = 0) (tex : Irr_video.texture) =
