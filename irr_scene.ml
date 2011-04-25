@@ -107,6 +107,8 @@ external node_get_type : obj -> Irr_enums.node_type =
 
 external node_is_truly_visible : obj -> bool = "ml_ISceneNode_isTrulyVisible"
 
+external node_is_visible : obj -> bool = "ml_ISceneNode_isVisible"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
@@ -130,6 +132,7 @@ class node obj = object(self)
   method name = node_get_name self#obj
   method get_type = node_get_type self#obj
   method is_truly_visible = node_is_truly_visible self#obj
+  method is_visible = node_is_visible self#obj
   method set_automatic_culling t = node_set_automatic_culling self#obj t
   method set_material_flag flag b =
     node_set_material_flag self#obj flag b
