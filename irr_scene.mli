@@ -34,6 +34,7 @@ class node : obj -> object
   method bounding_box : float Irr_core.aabbox3d
   method material_count : int
   method name : string
+  method get_type : Irr_enums.node_type
   method set_automatic_culling : Irr_enums.culling_type -> unit
   method clone : ?parent:node -> unit -> node
   method set_material_flag : Irr_enums.material_flag -> bool -> unit

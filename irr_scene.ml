@@ -102,6 +102,9 @@ external node_get_rotation : obj -> Irr_core.vector3df =
 external node_get_scale : obj -> Irr_core.vector3df =
   "ml_ISceneNode_getScale"
 
+external node_get_type : obj -> Irr_enums.node_type =
+  "ml_ISceneNode_getType"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
@@ -123,6 +126,7 @@ class node obj = object(self)
   method bounding_box = node_get_bounding_box self#obj
   method material_count = node_get_material_count self#obj
   method name = node_get_name self#obj
+  method get_type = node_get_type self#obj
   method set_automatic_culling t = node_set_automatic_culling self#obj t
   method set_material_flag flag b =
     node_set_material_flag self#obj flag b
