@@ -5,6 +5,7 @@ type obj = Irr_base.obj
 (** Class Irrlicht Device *)
 class device : obj -> object
   inherit Irr_base.reference_counted
+  method close : unit
   method cursor : Irr_gui.cursor
   method run : bool
   method driver : Irr_video.driver

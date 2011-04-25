@@ -85,3 +85,8 @@ extern "C" CAMLprim value ml_IrrlichtDevice_setResizable(
   return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IrrlichtDevice_closeDevice(value v_device) {
+	((IrrlichtDevice*) v_device)->closeDevice();
+	return Val_unit;
+}
+
