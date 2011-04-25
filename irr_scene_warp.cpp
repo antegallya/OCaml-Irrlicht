@@ -106,6 +106,17 @@ extern "C" CAMLprim value ml_ISceneNode_getMaterialCount(value v_node) {
 	return Val_int(((ISceneNode*) v_node)->getMaterialCount());
 }
 
+extern "C" CAMLprim value ml_ISceneNode_getName(value v_node) {
+	return copy_string(((ISceneNode*) v_node)->getName());
+}
+
+extern "C" CAMLprim value ml_ISceneNode_setAutomaticCulling(
+		value v_node, value v_type)
+{
+	((ISceneNode*) v_node)->setAutomaticCulling(culling_type_val(v_type));
+	return Val_unit;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
