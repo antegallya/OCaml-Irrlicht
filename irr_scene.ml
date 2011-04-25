@@ -109,6 +109,8 @@ external node_is_truly_visible : obj -> bool = "ml_ISceneNode_isTrulyVisible"
 
 external node_is_visible : obj -> bool = "ml_ISceneNode_isVisible"
 
+external node_set_name : obj -> string -> unit = "ml_ISceneNode_setName"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
@@ -134,6 +136,7 @@ class node obj = object(self)
   method is_truly_visible = node_is_truly_visible self#obj
   method is_visible = node_is_visible self#obj
   method set_automatic_culling t = node_set_automatic_culling self#obj t
+  method set_name name = node_set_name self#obj name
   method set_material_flag flag b =
     node_set_material_flag self#obj flag b
   method set_material_texture ?(layer = 0) (tex : Irr_video.texture) =

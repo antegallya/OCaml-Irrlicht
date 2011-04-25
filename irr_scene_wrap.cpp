@@ -137,6 +137,11 @@ extern "C" CAMLprim value ml_ISceneNode_isVisible(value v_node) {
 	return Val_bool(((ISceneNode*) v_node)->isVisible());
 }
 
+extern "C" CAMLprim value ml_ISceneNode_setName(value v_node, value v_name) {
+	((ISceneNode*) v_node)->setName(String_val(v_name));
+	return Val_unit;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
