@@ -43,7 +43,10 @@ external device_yield : obj -> unit = "ml_IrrlichtDevice_yield"
 external device_set_resizable : obj -> bool -> unit =
   "ml_IrrlichtDevice_setResizable"
 
-external device_close_device : obj -> unit = "ml_IrrlichtDevice_close"
+external device_close_device : obj -> unit = "ml_IrrlichtDevice_closeDevice"
+
+external device_get_color_format : obj -> Irr_enums.color_format =
+  "ml_IrrlichtDevice_getColorFormat"
 
 let free x = (print_endline "big free"; x#drop; print_endline "big free done")
 
@@ -51,6 +54,7 @@ class device obj =
   object(self)
     inherit Irr_base.reference_counted obj
     method close = device_close_device self#obj
+    method color_format = device_get_color_format self#obj
     method run = device_run self#obj
     method cursor =
       let obj = device_get_cursor_control self#obj in

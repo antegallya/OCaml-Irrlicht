@@ -6,6 +6,7 @@ type obj = Irr_base.obj
 class device : obj -> object
   inherit Irr_base.reference_counted
   method close : unit
+  method color_format : Irr_enums.color_format
   method cursor : Irr_gui.cursor
   method run : bool
   method driver : Irr_video.driver
