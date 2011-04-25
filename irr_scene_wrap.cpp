@@ -129,6 +129,10 @@ extern "C" CAMLprim value ml_ISceneNode_getType(value v_node) {
 	return Val_node_type(((ISceneNode*) v_node)->getType());
 }
 
+extern "C" CAMLprim value ml_ISceneNode_isTrulyVisible(value v_node) {
+	return Val_bool(((ISceneNode*) v_node)->isTrulyVisible());
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(

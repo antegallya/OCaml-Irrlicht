@@ -35,6 +35,7 @@ class node : obj -> object
   method material_count : int
   method name : string
   method get_type : Irr_enums.node_type
+  method is_truly_visible : bool
   method set_automatic_culling : Irr_enums.culling_type -> unit
   method clone : ?parent:node -> unit -> node
   method set_material_flag : Irr_enums.material_flag -> bool -> unit
