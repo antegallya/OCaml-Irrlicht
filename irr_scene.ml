@@ -99,10 +99,14 @@ external node_set_automatic_culling : obj -> Irr_enums.culling_type -> unit =
 external node_get_rotation : obj -> Irr_core.vector3df =
   "ml_ISceneNode_getRotation"
 
+external node_get_scale : obj -> Irr_core.vector3df =
+  "ml_ISceneNode_getScale"
+
 class node obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method pos = node_get_position self#obj
   method rot = node_get_rotation self#obj
+  method scale = node_get_scale self#obj
   method material i =
     let obj = node_get_material self#obj i in
     object

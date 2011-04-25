@@ -25,6 +25,7 @@ class node : obj -> object
   inherit Irr_base.attribute_exchanging_object
   method pos : Irr_core.vector3df
   method rot : Irr_core.vector3df
+  method scale : Irr_core.vector3df
   method id : int
   method material : int -> Irr_video.material
   method add_animator : animator -> unit
