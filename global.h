@@ -19,8 +19,8 @@ using namespace scene;
 using namespace io;
 
 /* Stub includes */
-#include "irr_enums_warp.h"
-#include "irr_base_warp.h"
-#include "irr_core_warp.h"
+#include "irr_enums_wrap.h"
+#include "irr_base_wrap.h"
+#include "irr_core_wrap.h"
 
 #endif

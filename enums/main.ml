@@ -41,7 +41,7 @@ let create_c_header_values_aux e file =
   ()
 
 let create_c_header_values enums =
-  let file = open_out "irr_enums_warp_values.h" in
+  let file = open_out "irr_enums_wrap_values.h" in
   List.iter (fun e -> create_c_header_values_aux e file) enums;
   flush file;
   close_out file
@@ -84,7 +84,7 @@ let enum_val e file =
 
 (* Create the C implentation of conversions file *)
 let create_c_conv_impl enums =
-  let file = open_out "irr_enums_warp_conv.cpp" in
+  let file = open_out "irr_enums_wrap_conv.cpp" in
   List.iter (fun e ->
     val_enum e file;
     enum_val e file
@@ -95,7 +95,7 @@ let create_c_conv_impl enums =
 (* Print the header of conversions *)
 
 let create_c_conv_header enums =
-  let file = open_out "irr_enums_warp_conv.h" in
+  let file = open_out "irr_enums_wrap_conv.h" in
   List.iter (fun e ->
     fprintf file "value Val_%s(%s);\n" e.name e.c_name;
     fprintf file "%s %s_val(value);\n\n" e.c_name e.name

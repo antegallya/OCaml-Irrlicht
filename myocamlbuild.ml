@@ -9,14 +9,14 @@ let ocamlmklib = "ocamlmklib"
 let irrlicht_include = "/usr/include/irrlicht"
 
 let c_objs =
-  ["utils.o"; "irr_base_warp.o"; "irr_core_warp.o";  "irr_io_warp.o";
-  "irr_gui_warp.o"; "irr_video_warp.o"; "irr_scene_warp.o"; "irr_warp.o";
-  "irr_enums_warp.o"]
+  ["utils.o"; "irr_base_wrap.o"; "irr_core_wrap.o";  "irr_io_wrap.o";
+  "irr_gui_wrap.o"; "irr_video_wrap.o"; "irr_scene_wrap.o"; "irr_wrap.o";
+  "irr_enums_wrap.o"]
 
 let c_headers =
-  ["global.h"; "irr_enums_warp_conv.h"; "irr_enums_warp_values.h";
-  "irr_base_warp.h";  "irr_enums_warp.h"; "methods_hash_values.h";
-  "irr_core_warp.h"; "utils.h"; "irr_enums_warp_poly_values.h"]
+  ["global.h"; "irr_enums_wrap_conv.h"; "irr_enums_wrap_values.h";
+  "irr_base_wrap.h";  "irr_enums_wrap.h"; "methods_hash_values.h";
+  "irr_core_wrap.h"; "utils.h"; "irr_enums_wrap_poly_values.h"]
 
 let () = dispatch & function
   | Before_options ->
@@ -24,14 +24,14 @@ let () = dispatch & function
   | After_rules ->
       flag ["ocaml"; "doc"] (A "-hide-warnings");
       rule "make_enums"
-        ~prods:["irr_enums_warp_values.h"; "irr_enums_warp_poly_values.h";
-          "irr_enums_warp_conv.h"; "irr_enums_warp_conv.cpp"; "irr_enums.mli";
+        ~prods:["irr_enums_wrap_values.h"; "irr_enums_wrap_poly_values.h";
+          "irr_enums_wrap_conv.h"; "irr_enums_wrap_conv.cpp"; "irr_enums.mli";
           "irr_enums.ml"]
         ~deps:["enums/main.byte"; "hash_values/main.byte"; "irr_enums.txt"]
         (fun _ _ ->
           Seq [Cmd(S[A "enums/main.byte"; Px "irr_enums.txt"]);
           Cmd(S[A "hash_values/main.byte"; Px "irr_enums_poly_values.txt";
-            Sh ">"; Px "irr_enums_warp_poly_values.h"]);
+            Sh ">"; Px "irr_enums_wrap_poly_values.h"]);
           Cmd(S [A "cp"; Px "irr_enums.mli"; Px "irr_enums.ml"])]);
       rule "make_method_hash_values"
         ~prod:"methods_hash_values.h"
@@ -58,5 +58,5 @@ let () = dispatch & function
       (S [A "-cclib"; A "-lIrrlicht"]);
       flag ["file:hash_values/main.byte"] (A "-custom");
       dep ["file:hash_values/main.byte"] ["hash_values/hash.o"];
-      dep ["file:irr_enums_warp.o"] ["irr_enums_warp_conv.cpp"]
+      dep ["file:irr_enums_wrap.o"] ["irr_enums_wrap_conv.cpp"]
   | _ -> ()

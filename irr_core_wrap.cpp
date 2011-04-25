@@ -1,6 +1,6 @@
 /* C++ stub for Irr_core module */
 
-#include "irr_core_warp.h"
+#include "irr_core_wrap.h"
 
 dimension2d<u32> Dimension2d_u32_val(value v) {
 	return dimension2d<u32>(Int_val(Field(v, 0)), Int_val(Field(v, 1)));

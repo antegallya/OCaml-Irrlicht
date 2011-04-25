@@ -1,6 +1,6 @@
 /* C++ stub for the module Irr_base */
 
-#include "irr_base_warp.h"
+#include "irr_base_wrap.h"
 
 using namespace irr;
 
