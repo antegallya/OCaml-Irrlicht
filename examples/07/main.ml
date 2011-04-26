@@ -1,8 +1,7 @@
 let add_room (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#get_mesh "../../media/room.3ds" in
   let node = smgr#add_animated_mesh_node mesh in
-  node#set_material_texture (driver#get_texture "../../media/wall.jpg");
-  node#set_material_flag `lighting false
+  node#set_material_texture (driver#get_texture "../../media/wall.jpg")
 
 let add_water (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#add_hill_plane_mesh "myHill" (20., 20.)
@@ -13,8 +12,7 @@ let add_water (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   node#set_material_texture (driver#get_texture "../../media/stones.jpg");
   let water_texture = driver#get_texture "../../media/water.jpg" in
   node#set_material_texture ~layer:1 water_texture;
-  node#set_material_type `reflection_2_layer;
-  node#set_material_flag `lighting false
+  node#set_material_type `reflection_2_layer
 
 let add_lighting_ball (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let light_node = smgr#add_light_node ~color:(Irr_core.colorf_RGB 1. 0.6 0.7)
