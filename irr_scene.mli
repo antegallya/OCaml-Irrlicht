@@ -128,6 +128,11 @@ class particle_affector : obj -> object
   inherit Irr_base.attribute_exchanging_object
 end
 
+(** Class IParticleFadeOutAffector *)
+class particle_fade_out_affector : obj -> object
+  inherit particle_affector
+end
+
 (** Class IParticleSystemSceneNode *)
 class particle_system_node : obj -> object
   inherit node
