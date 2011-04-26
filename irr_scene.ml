@@ -575,6 +575,10 @@ external manager_add_volume_light_scene_node :
     "ml_ISceneManager_addVolumeLightSceneNode_bytecode"
     "ml_ISceneManager_addVolumeLightSceneNode_native"
 
+external manager_create_texture_animator :
+  obj -> obj list -> int -> bool -> obj =
+    "ml_ISceneManager_createTextureAnimator"
+
 let free x = (print_endline "free"; x#drop)
 
 class manager obj = object(self)
@@ -791,6 +795,13 @@ class manager obj = object(self)
     let obj = manager_create_triangle_selector self#obj node#obj in
     object(self1)
       inherit triangle_selector obj
+      initializer Gc.finalise free self1
+    end
+  method create_texture_animator textures ?(loop = true) time =
+    let list = List.map (fun (x : Irr_video.texture) -> x#obj) textures in
+    let obj = manager_create_texture_animator self#obj list time loop in
+    object(self1)
+      inherit animator obj
       initializer Gc.finalise free self1
     end
   method draw_all = manager_draw_all self#obj

@@ -236,6 +236,8 @@ class manager : obj -> object
       ?ellipsoid_translation:Irr_core.vector3df -> ?sliding:float ->
       node -> animator_collision_response
   method create_triangle_selector : animated_mesh_node -> triangle_selector
+  method create_texture_animator :
+    Irr_video.texture list -> ?loop:bool -> int -> animator
   method draw_all : unit
   method get_mesh : string -> animated_mesh
   method collision_manager : collision_manager

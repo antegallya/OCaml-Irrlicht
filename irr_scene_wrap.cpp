@@ -745,3 +745,10 @@ extern "C" CAMLprim value ml_ISceneManager_addVolumeLightSceneNode_bytecode(
 			argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9]);
 }
 
+extern "C" CAMLprim value ml_ISceneManager_createTextureAnimator(
+		value v_manager, value v_textures, value v_time, value v_loop)
+{
+	return (value) ((ISceneManager*) v_manager)->createTextureAnimator(
+			Array_texture_val(v_textures), Int_val(v_time), Bool_val(v_loop));
+}
+
