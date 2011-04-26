@@ -44,6 +44,12 @@ let add_particles (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   ps#set_material_type `transparent_add_color;
   ps#set_material_texture (driver#get_texture "../../media/fire.bmp")
 
+let add_volume_light (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
+  let node = smgr#add_volume_light_node
+    ~foot:(Irr_core.color_ARGB 255 255 255 255) () in
+  node#set_scale (56., 56., 56.);
+  node#set_pos (-120., 50., 40.)
+
 let add_camera (device : Irr.device) (smgr : Irr_scene.manager) =
   let camera = smgr#add_camera_fps () in
   camera#set_pos (-50., 50., -150.);
@@ -56,6 +62,7 @@ let () =
   add_water driver smgr;
   add_lighting_ball driver smgr;
   add_particles driver smgr;
+  add_volume_light driver smgr;
   add_camera device smgr;
   while device#run do
     driver#begin_scene ();
