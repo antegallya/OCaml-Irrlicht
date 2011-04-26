@@ -28,17 +28,34 @@ let add_lighting_ball (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let particle_texture = driver#get_texture "../../media/particlewhite.bmp" in
   bill_node#set_material_texture particle_texture
   
+let add_particles (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
+  let ps = smgr#add_particle_system_node ~with_default_emitter:false () in
+  let em = ps#create_box_emitter ~box:((-7., 0., -7.), (7., 1., 7.))
+    ~direction:(0., 0.06, 0.) ~min_particles_per_second:80
+    ~max_particles_per_second:100
+    ~min_start_color:(Irr_core.color_ARGB 255 255 255 255)
+    ~life_time_min:800 ~life_time_max:2000 ~min_start_size:(10., 10.)
+    ~max_start_size:(20., 20.) () in
+  ps#set_emitter em;
+  ps#set_pos (-70., 60., 40.);
+  ps#set_scale (2., 2., 2.);
+  ps#set_material_flag `lighting false;
+  ps#set_material_flag `zwrite_enable false;
+  ps#set_material_type `transparent_add_color;
+  ps#set_material_texture (driver#get_texture "../../media/fire.bmp")
+
 let add_camera (device : Irr.device) (smgr : Irr_scene.manager) =
   let camera = smgr#add_camera_fps () in
   camera#set_pos (-50., 50., -150.);
   device#cursor#set_visible false
 
 let () =
-  let device = Irr.create_device ~dtype:`opengl () in
+  let device = Irr.create_device ~dtype:`opengl ~stencilbuffer:true () in
   let driver = device#driver and smgr = device#scene_manager in
   add_room driver smgr;
   add_water driver smgr;
   add_lighting_ball driver smgr;
+  add_particles driver smgr;
   add_camera device smgr;
   while device#run do
     driver#begin_scene ();
