@@ -113,6 +113,11 @@ class light_node : obj -> object
   inherit node
 end
 
+(** Class IVolumeLightSceneNode *)
+class volume_light_node : obj -> object
+  inherit node
+end
+
 (** Class IParticleEmitter *)
 class particle_emitter : obj -> object
   inherit Irr_base.attribute_exchanging_object
