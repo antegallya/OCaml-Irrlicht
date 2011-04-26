@@ -34,6 +34,8 @@ let add_particles (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
     ~min_start_color:(Irr_core.color_ARGB 255 255 255 255)
     ~life_time_min:800 ~life_time_max:2000 ~min_start_size:(10., 10.)
     ~max_start_size:(20., 20.) () in
+  let af = ps#create_fade_out_affector () in
+  ps#add_affector af;
   ps#set_emitter em;
   ps#set_pos (-70., 60., 40.);
   ps#set_scale (2., 2., 2.);
