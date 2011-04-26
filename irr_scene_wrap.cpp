@@ -294,6 +294,13 @@ extern "C" CAMLprim value
 		SColor_val(v_color), Int_val(v_time));
 }
 
+extern "C" CAMLprim value ml_IParticleSystemSceneNode_addAffector(
+		value v_ps, value v_aff)
+{
+	((IParticleSystemSceneNode*) v_ps)->addAffector((IParticleAffector*) v_aff);
+	return Val_unit;
+}
+
 /* Stub for class ISceneManager */
 
 extern "C" CAMLprim value ml_ISceneManager_addAnimatedMeshSceneNode_native(

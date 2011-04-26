@@ -146,6 +146,7 @@ class particle_system_node : obj -> object
   method set_emitter : particle_emitter -> unit
   method create_fade_out_affector :
     ?color:Irr_core.color -> ?time:int -> unit -> particle_fade_out_affector
+  method add_affector : particle_affector -> unit
 end
 
 (** Class ISceneManager *)

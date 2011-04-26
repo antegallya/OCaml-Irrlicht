@@ -385,6 +385,9 @@ external particle_system_node_create_fade_out_particle_affector :
   obj -> Irr_core.color -> int -> obj =
     "ml_IParticleSystemSceneNode_createFadeOutParticleAffector"
 
+external particle_system_node_add_affector : obj -> obj -> unit =
+  "ml_IParticleSystemSceneNode_addAffector"
+
 let free x = x#drop
 
 class particle_system_node obj = object(self)
@@ -414,6 +417,8 @@ class particle_system_node obj = object(self)
       inherit particle_fade_out_affector obj
       initializer Gc.finalise free self1
     end
+  method add_affector (affector : particle_affector) =
+    particle_system_node_add_affector self#obj affector#obj
 end
 
 (******************************************************************************)
