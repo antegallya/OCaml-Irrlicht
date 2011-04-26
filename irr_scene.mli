@@ -78,6 +78,11 @@ class mesh_node : obj -> object
   method mesh : mesh
 end
 
+(** Class IShadowVolumeSceneNode *)
+class shadow_volume_node : obj -> object
+  inherit node
+end
+
 (** Class IAnimatedMeshSceneNode *)
 class animated_mesh_node : obj -> object
   inherit node
