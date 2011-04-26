@@ -165,6 +165,10 @@ class manager : obj -> object
   method add_light_node :
     ?parent:node -> ?pos:Irr_core.vector3df -> ?color:Irr_core.colorf ->
       ?radius:float -> ?id:int -> unit -> light_node
+  method add_water_surface_node :
+    ?wave_height:float -> ?wave_speed:float -> ?wave_length:float ->
+      ?parent:node -> ?id:int -> ?pos:Irr_core.vector3df ->
+      ?rot:Irr_core.vector3df -> ?scale:Irr_core.vector3df -> mesh -> node
   method create_fly_circle :
     ?center:Irr_core.vector3df -> ?radius:float -> ?speed:float ->
       ?dir:Irr_core.vector3df -> ?start:float -> ?radius_ellipsoid:float ->

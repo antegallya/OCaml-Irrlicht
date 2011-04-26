@@ -633,3 +633,26 @@ extern "C" CAMLprim value ml_ISceneManager_addHillPlaneMesh_bytecode(
 			argv[3], argv[4], argv[5], argv[6], argv[7]);
 }
 
+extern "C" CAMLprim value ml_ISceneManager_addWaterSurfaceSceneNode_native(
+		value v_manager, value v_mesh, value v_wave_height, value v_wave_speed,
+		value v_wave_length, value v_parent, value v_id, value v_pos, value v_rot,
+		value v_scale)
+{
+	ISceneNode* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (ISceneNode*) Field(v_parent, 0);
+	ISceneNode* node = ((ISceneManager*) v_manager)->addWaterSurfaceSceneNode(
+			(IMesh*) v_mesh, Double_val(v_wave_height), Double_val(v_wave_speed),
+			Double_val(v_wave_length), parent, Int_val(v_id), Vector3df_val(v_pos),
+			Vector3df_val(v_rot), Vector3df_val(v_scale));
+	if(node == NULL) null_pointer_exn();
+	return (value) node;
+}
+
+extern "C" CAMLprim value ml_ISceneManager_addWaterSurfaceSceneNode_bytecode(
+		value* argv, int argn)
+{
+	return ml_ISceneManager_addWaterSurfaceSceneNode_native(argv[0], argv[1],
+			argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9]);
+}
+

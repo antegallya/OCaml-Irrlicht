@@ -447,6 +447,13 @@ external manager_add_hill_plane_mesh :
     "ml_ISceneManager_addHillPlaneMesh_bytecode"
     "ml_ISceneManager_addHillPlaneMesh_native"
 
+external manager_add_water_surface_scene_node :
+  obj -> obj -> float -> float -> float -> obj option -> int ->
+    Irr_core.vector3df -> Irr_core.vector3df -> Irr_core.vector3df -> obj
+  =
+    "ml_ISceneManager_addWaterSurfaceSceneNode_bytecode"
+    "ml_ISceneManager_addWaterSurfaceSceneNode_native"
+
 let free x = (print_endline "free"; x#drop)
 
 class manager obj = object(self)
@@ -584,6 +591,16 @@ class manager obj = object(self)
       height count_hills texture_repeat_count in
     object
       inherit animated_mesh obj
+      val smgr = self
+    end
+  method add_water_surface_node ?(wave_height = 2.) ?(wave_speed = 300.)
+    ?(wave_length = 10.) ?parent ?(id = -1) ?(pos = (0., 0., 0.))
+    ?(rot = (0., 0., 0.)) ?(scale = (1., 1., 1.)) (mesh : mesh) =
+    let p = match parent with None -> None | Some (x : node) -> Some x#obj in
+    let obj = manager_add_water_surface_scene_node self#obj mesh#obj
+      wave_height wave_speed wave_length p id pos rot scale in
+    object
+      inherit node obj
       val smgr = self
     end
   method create_fly_circle ?(center = (0., 0., 0.)) ?(radius = 100.)
