@@ -118,6 +118,11 @@ class particle_emitter : obj -> object
   inherit Irr_base.attribute_exchanging_object
 end
 
+(** Class IParticleBoxEmitter *)
+class particle_box_emitter : obj -> object
+  inherit particle_emitter
+end
+
 (** Class IParticleSystemSceneNode *)
 class particle_system_node : obj -> object
   inherit node
