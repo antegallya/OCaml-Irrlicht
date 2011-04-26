@@ -48,7 +48,8 @@ external device_close_device : obj -> unit = "ml_IrrlichtDevice_closeDevice"
 external device_get_color_format : obj -> Irr_enums.color_format =
   "ml_IrrlichtDevice_getColorFormat"
 
-let free x = (print_endline "big free"; x#drop; print_endline "big free done")
+let free x = () (*(print_endline "big free"; x#drop; print_endline "big free
+done")*)
 
 class device obj =
   object(self)

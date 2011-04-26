@@ -421,7 +421,7 @@ external particle_system_node_create_fade_out_particle_affector :
 external particle_system_node_add_affector : obj -> obj -> unit =
   "ml_IParticleSystemSceneNode_addAffector"
 
-let free x = x#drop
+let free x = () (*x#drop*)
 
 class particle_system_node obj = object(self)
   inherit node obj
@@ -602,7 +602,7 @@ external manager_create_texture_animator :
   obj -> obj list -> int -> bool -> obj =
     "ml_ISceneManager_createTextureAnimator"
 
-let free x = (print_endline "free"; x#drop)
+let free x = () (*(print_endline "free"; x#drop)*)
 
 class manager obj = object(self)
   inherit Irr_base.reference_counted obj

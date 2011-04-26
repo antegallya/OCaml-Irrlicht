@@ -1,5 +1,7 @@
 open Printf
 
+let oups x = print_endline "oups"
+
 let add_room (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#get_mesh "../../media/room.3ds" in
   let node = smgr#add_animated_mesh_node mesh in
@@ -55,6 +57,15 @@ let add_volume_light (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let textures = Array.to_list (Array.init 7 aux) in
   node#add_animator (smgr#create_texture_animator textures 150)
 
+let add_dwarf (smgr : Irr_scene.manager) =
+  let mesh = smgr#get_mesh "../../media/dwarf.x" in
+  let anode = smgr#add_animated_mesh_node mesh in
+  anode#set_pos (-50., 20., -60.);
+  anode#set_animation_speed 15.;
+  let _ = anode#add_shadow_volume_node () in
+  anode#set_scale (2., 2., 2.);
+  anode#set_material_flag `normalize_normals true
+
 let add_camera (device : Irr.device) (smgr : Irr_scene.manager) =
   let camera = smgr#add_camera_fps () in
   camera#set_pos (-50., 50., -150.);
@@ -62,12 +73,14 @@ let add_camera (device : Irr.device) (smgr : Irr_scene.manager) =
 
 let () =
   let device = Irr.create_device ~dtype:`opengl ~stencilbuffer:true () in
+  Gc.finalise oups device;
   let driver = device#driver and smgr = device#scene_manager in
   add_room driver smgr;
   add_water driver smgr;
   add_lighting_ball driver smgr;
   add_particles driver smgr;
   add_volume_light driver smgr;
+  add_dwarf smgr;
   add_camera device smgr;
   while device#run do
     driver#begin_scene ();
