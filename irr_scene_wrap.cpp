@@ -174,6 +174,16 @@ extern "C" CAMLprim value ml_IAnimatedMeshSceneNode_setMD2Animation(
 			md2_animation_type_val(v_type)));
 }
 
+extern "C" CAMLprim value ml_IAnimatedMeshSceneNode_addShadowVolumeSceneNode(
+		value v_node, value v_mesh, value v_id, value v_zfail, value v_infinity)
+{
+	IMesh* mesh;
+	if(v_mesh == Val_int(0)) mesh = NULL;
+	else mesh = (IMesh*) Field(v_mesh, 1);
+	return (value) ((IAnimatedMeshSceneNode*) v_node)->addShadowVolumeSceneNode(
+			mesh, Int_val(v_id), Bool_val(v_zfail), Double_val(v_infinity));
+}
+
 /* Stub for class ICameraSceneNode */
 
 extern "C" CAMLprim value ml_ICameraSceneNode_setFarValue(

@@ -253,6 +253,10 @@ external animated_mesh_node_set_md2_animation :
   obj -> Irr_enums.md2_animation_type -> bool =
     "ml_IAnimatedMeshSceneNode_setMD2Animation"
 
+external animated_mesh_node_add_shadow_volume_scene_node :
+  obj -> obj option -> int -> bool -> float -> obj =
+    "ml_IAnimatedMeshSceneNode_addShadowVolumeSceneNode"
+
 class animated_mesh_node obj = object(self)
   inherit node obj
   method set_animation_speed x =
@@ -263,6 +267,15 @@ class animated_mesh_node obj = object(self)
   method set_md2_animation t =
     if not (animated_mesh_node_set_md2_animation self#obj t) then
       raise MD2_animation_exn
+  method add_shadow_volume_node ?mesh ?(id = -1) ?(zfail_method = true)
+    ?(infinity = 10000.) () =
+    let m = match mesh with None -> None | Some (x : mesh) -> Some x#obj in
+    let obj = animated_mesh_node_add_shadow_volume_scene_node
+      self#obj m id zfail_method infinity in
+    object
+      inherit shadow_volume_node obj
+      val smgr = self
+    end
 end
 
 (******************************************************************************)

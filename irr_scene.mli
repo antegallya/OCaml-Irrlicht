@@ -90,6 +90,9 @@ class animated_mesh_node : obj -> object
   method set_frame_loop_bool : int -> int -> bool
   method set_frame_loop : int -> int -> unit
   method set_md2_animation : Irr_enums.md2_animation_type -> unit
+  method add_shadow_volume_node :
+    ?mesh:mesh -> ?id:int -> ?zfail_method:bool -> ?infinity:float -> unit ->
+      shadow_volume_node
 end
 
 (** Class ITerrainSceneNode *)
