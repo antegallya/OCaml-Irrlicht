@@ -126,6 +126,13 @@ end
 (** Class IParticleSystemSceneNode *)
 class particle_system_node : obj -> object
   inherit node
+  method create_box_emitter :
+    ?box:(float Irr_core.aabbox3d) -> ?direction:Irr_core.vector3df ->
+      ?min_particles_per_second:int -> ?max_particles_per_second:int ->
+      ?min_start_color:Irr_core.color -> ?max_start_color:Irr_core.color ->
+      ?life_time_min:int -> ?life_time_max:int -> ?max_angle_degrees:int ->
+      ?min_start_size:(float * float) -> ?max_start_size:(float * float) ->
+      unit -> particle_box_emitter
 end
 
 (** Class ISceneManager *)

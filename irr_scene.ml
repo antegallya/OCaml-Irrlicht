@@ -350,13 +350,33 @@ end
 
 (******************************************************************************)
 
-(*external particle_system_node_create_box_emitter :
-  obj -> float Irr_core.aabox3d -> Irr_core.vector3df -> int -> int ->
+external particle_system_node_create_box_emitter :
+  obj -> float Irr_core.aabbox3d -> Irr_core.vector3df -> int -> int ->
     Irr_core.color -> Irr_core.color -> int -> int -> int -> (float * float) ->
-    (float * float) -> obj*)
+    (float * float) -> obj
+  =
+    "ml_IParticleSystemSceneNode_createBoxEmitter_bytecode"
+    "ml_IParticleSystemSceneNode_createBoxEmitter_native"
+
+let free x = x#drop
 
 class particle_system_node obj = object(self)
   inherit node obj
+  method create_box_emitter ?(box = ((-10., 28., -10.), (10., 30., 10.)))
+    ?(direction = (0., 0.03, 0.)) ?(min_particles_per_second = 5)
+    ?(max_particles_per_second = 10)
+    ?(min_start_color = Irr_core.color_ARGB 255 0 0 0)
+    ?(max_start_color = Irr_core.color_ARGB 255 255 255 255)
+    ?(life_time_min = 2000) ?(life_time_max = 4000) ?(max_angle_degrees = 0)
+    ?(min_start_size = (5., 5.)) ?(max_start_size = (5., 5.)) () =
+    let obj = particle_system_node_create_box_emitter self#obj box direction
+      min_particles_per_second max_particles_per_second
+      min_start_color max_start_color life_time_min life_time_max
+      max_angle_degrees min_start_size max_start_size in
+    object(self1)
+      inherit particle_box_emitter obj
+      initializer Gc.finalise free self1
+    end
 end
 
 (******************************************************************************)

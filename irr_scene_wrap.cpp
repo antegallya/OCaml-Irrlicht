@@ -253,6 +253,31 @@ ml_ISceneCollisionManager_getSceneNodeAndCollisionPointFromRay(
 	CAMLreturn(r);
 }
 
+/* Stub for class IParticleSystemSceneNode */
+
+extern "C" CAMLprim value ml_IParticleSystemSceneNode_createBoxEmitter_native(
+		value v_ps, value v_box, value v_dir, value v_min_particles_per_second,
+		value v_max_particles_per_second, value v_min_start_color,
+		value v_max_start_color, value v_life_time_min, value v_life_time_max,
+		value v_max_angle_degree, value v_min_start_size, value v_max_start_size)
+{
+	return (value) ((IParticleSystemSceneNode*) v_ps)->createBoxEmitter(
+			Aabbox3df_val(v_box), Vector3df_val(v_dir),
+			Int_val(v_min_particles_per_second), Int_val(v_max_particles_per_second),
+			SColor_val(v_min_start_color), SColor_val(v_max_start_color),
+			Int_val(v_life_time_min), Int_val(v_life_time_max),
+			Int_val(v_max_angle_degree), Dimension2d_f32_val(v_min_start_size),
+			Dimension2d_f32_val(v_max_start_size));
+}
+
+extern "C" CAMLprim value
+	ml_IParticleSystemSceneNode_createBoxEmitter_bytecode(value* argv, int argn)
+{
+	return ml_IParticleSystemSceneNode_createBoxEmitter_native(argv[0], argv[1],
+			argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9],
+			argv[10], argv[11]);
+}
+
 /* Stub for class ISceneManager */
 
 extern "C" CAMLprim value ml_ISceneManager_addAnimatedMeshSceneNode_native(
