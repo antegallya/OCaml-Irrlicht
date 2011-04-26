@@ -113,6 +113,11 @@ class light_node : obj -> object
   inherit node
 end
 
+(** Class IParticleSystemSceneNode *)
+class particle_system_node : obj -> object
+  inherit node
+end
+
 (** Class ISceneManager *)
 class manager : obj -> object
   inherit Irr_base.reference_counted
