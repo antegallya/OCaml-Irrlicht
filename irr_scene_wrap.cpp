@@ -723,3 +723,25 @@ extern "C" CAMLprim value ml_ISceneManager_addParticleSystemSceneNode_bytecode(
 			argv[2], argv[3], argv[4], argv[5], argv[6]);
 }
 
+extern "C" CAMLprim value ml_ISceneManager_addVolumeLightSceneNode_native(
+		value v_manager, value v_parent, value v_id, value v_u, value v_v,
+		value v_foot, value v_tail, value v_pos, value v_rot, value v_scale)
+{
+	ISceneNode* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (ISceneNode*) Field(v_parent, 0);
+	IVolumeLightSceneNode* node = ((ISceneManager*) v_manager)->
+		addVolumeLightSceneNode(parent, Int_val(v_id), Int_val(v_u), Int_val(v_v),
+		SColor_val(v_foot), SColor_val(v_tail), Vector3df_val(v_pos),
+		Vector3df_val(v_rot), Vector3df_val(v_scale));
+	if(node == NULL) null_pointer_exn();
+	return (value) node;
+}
+
+extern "C" CAMLprim value ml_ISceneManager_addVolumeLightSceneNode_bytecode(
+		value* argv, int argn)
+{
+	return ml_ISceneManager_addVolumeLightSceneNode_native(argv[0], argv[1],
+			argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9]);
+}
+

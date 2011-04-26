@@ -214,6 +214,11 @@ class manager : obj -> object
     ?with_default_emitter:bool -> ?parent:node -> ?id:int ->
       ?pos:Irr_core.vector3df -> ?rot:Irr_core.vector3df ->
       ?scale:Irr_core.vector3df -> unit -> particle_system_node
+  method add_volume_light_node :
+    ?parent:node -> ?id:int -> ?subdiv_u:int -> ?subdiv_v:int ->
+      ?foot:Irr_core.color -> ?tail:Irr_core.color -> ?pos:Irr_core.vector3df ->
+      ?rot:Irr_core.vector3df -> ?scale:Irr_core.vector3df -> unit ->
+      volume_light_node
   method create_fly_circle :
     ?center:Irr_core.vector3df -> ?radius:float -> ?speed:float ->
       ?dir:Irr_core.vector3df -> ?start:float -> ?radius_ellipsoid:float ->

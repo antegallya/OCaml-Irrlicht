@@ -568,6 +568,13 @@ external manager_add_particle_system_scene_node :
     "ml_ISceneManager_addParticleSystemSceneNode_bytecode"
     "ml_ISceneManager_addParticleSystemSceneNode_native"
 
+external manager_add_volume_light_scene_node :
+  obj -> obj option -> int -> int -> int -> Irr_core.color -> Irr_core.color ->
+    Irr_core.vector3df -> Irr_core.vector3df -> Irr_core.vector3df -> obj
+  =
+    "ml_ISceneManager_addVolumeLightSceneNode_bytecode"
+    "ml_ISceneManager_addVolumeLightSceneNode_native"
+
 let free x = (print_endline "free"; x#drop)
 
 class manager obj = object(self)
@@ -725,6 +732,17 @@ class manager obj = object(self)
       with_default_emitter p id pos rot scale in
     object
       inherit particle_system_node obj
+      val smgr = self
+    end
+  method add_volume_light_node ?parent ?(id = -1) ?(subdiv_u = 32)
+    ?(subdiv_v = 32) ?(foot = Irr_core.color_ARGB 51 0 260 180)
+    ?(tail = Irr_core.color_ARGB 0 0 0 0) ?(pos = (0., 0., 0.))
+    ?(rot = (0., 0., 0.)) ?(scale = (1., 1., 1.)) () =
+    let p = match parent with None -> None | Some (x : node) -> Some x#obj in
+    let obj = manager_add_volume_light_scene_node self#obj p id subdiv_u
+      subdiv_v foot tail pos rot scale in
+    object
+      inherit volume_light_node obj
       val smgr = self
     end
   method create_fly_circle ?(center = (0., 0., 0.)) ?(radius = 100.)
