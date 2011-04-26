@@ -656,3 +656,22 @@ extern "C" CAMLprim value ml_ISceneManager_addWaterSurfaceSceneNode_bytecode(
 			argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9]);
 }
 
+extern "C" CAMLprim value ml_ISceneManager_addParticleSystemSceneNode_native(
+		value v_manager, value v_with_default_emitter, value v_parent, value v_id,
+		value v_pos, value v_rot, value v_scale)
+{
+	ISceneNode* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (ISceneNode*) Field(v_parent, 0);
+	return (value) ((ISceneManager*) v_manager)->addParticleSystemSceneNode(
+			Bool_val(v_with_default_emitter), parent, Int_val(v_id),
+			Vector3df_val(v_pos), Vector3df_val(v_rot), Vector3df_val(v_scale));
+}
+
+extern "C" CAMLprim value ml_ISceneManager_addParticleSystemSceneNode_bytecode(
+		value* argv, int argn)
+{
+	return ml_ISceneManager_addParticleSystemSceneNode_native(argv[0], argv[1],
+			argv[2], argv[3], argv[4], argv[5], argv[6]);
+}
+

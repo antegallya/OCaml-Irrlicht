@@ -174,6 +174,10 @@ class manager : obj -> object
     ?wave_height:float -> ?wave_speed:float -> ?wave_length:float ->
       ?parent:node -> ?id:int -> ?pos:Irr_core.vector3df ->
       ?rot:Irr_core.vector3df -> ?scale:Irr_core.vector3df -> mesh -> node
+  method add_particle_system_node :
+    ?with_default_emitter:bool -> ?parent:node -> ?id:int ->
+      ?pos:Irr_core.vector3df -> ?rot:Irr_core.vector3df ->
+      ?scale:Irr_core.vector3df -> unit -> particle_system_node
   method create_fly_circle :
     ?center:Irr_core.vector3df -> ?radius:float -> ?speed:float ->
       ?dir:Irr_core.vector3df -> ?start:float -> ?radius_ellipsoid:float ->
