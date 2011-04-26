@@ -1,3 +1,5 @@
+open Printf
+
 let add_room (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#get_mesh "../../media/room.3ds" in
   let node = smgr#add_animated_mesh_node mesh in
@@ -46,9 +48,12 @@ let add_particles (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
 
 let add_volume_light (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let node = smgr#add_volume_light_node
-    ~foot:(Irr_core.color_ARGB 255 255 255 255) () in
+    ~foot:(Irr_core.color_ARGB 0 255 255 255) () in
   node#set_scale (56., 56., 56.);
-  node#set_pos (-120., 50., 40.)
+  node#set_pos (-120., 50., 40.);
+  let aux i = driver#get_texture (sprintf "../../media/portal%d.bmp" (i + 1)) in
+  let textures = Array.to_list (Array.init 7 aux) in
+  node#add_animator (smgr#create_texture_animator textures 150)
 
 let add_camera (device : Irr.device) (smgr : Irr_scene.manager) =
   let camera = smgr#add_camera_fps () in

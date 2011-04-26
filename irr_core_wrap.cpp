@@ -149,8 +149,8 @@ array<ITexture*> Array_texture_val(value v_list) {
 	value v_tmp = v_list;
 	array<ITexture*> list;
 	while(v_tmp != Val_int(0)) {
-		list.push_front((ITexture*) Field(v_list, 0));
-		v_tmp = Field(v_list, 1);
+		list.push_front((ITexture*) Field(v_tmp, 0));
+		v_tmp = Field(v_tmp, 1);
 	}
 	return list;
 }
