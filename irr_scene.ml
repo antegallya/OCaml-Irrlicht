@@ -440,6 +440,13 @@ external manager_add_light_scene_node :
     "ml_ISceneManager_addLightSceneNode_bytecode"
     "ml_ISceneManager_addLightSceneNode_native"
 
+external manager_add_hill_plane_mesh :
+  obj -> string -> (float * float) -> (int * int) -> obj option -> float ->
+    (float * float) -> (float * float) -> obj
+  =
+    "ml_ISceneManager_addHillPlaneMesh_bytecode"
+    "ml_ISceneManager_addHillPlaneMesh_native"
+
 let free x = (print_endline "free"; x#drop)
 
 class manager obj = object(self)
@@ -567,6 +574,17 @@ class manager obj = object(self)
     object
       val smgr = self
       inherit light_node obj
+    end
+  method add_hill_plane_mesh name tile_size ?material ?(height = 0.)
+    ?(count_hills = (0., 0.)) ?(texture_repeat_count = (1., 1.)) tile_count =
+    let m = match material with
+    | None -> None
+    | Some (x : Irr_video.material) -> Some x#obj in
+    let obj = manager_add_hill_plane_mesh self#obj name tile_size tile_count m
+      height count_hills texture_repeat_count in
+    object
+      inherit animated_mesh obj
+      val smgr = self
     end
   method create_fly_circle ?(center = (0., 0., 0.)) ?(radius = 100.)
     ?(speed = 0.001) ?(dir = (0., 1., 0.)) ?(start = 0.)

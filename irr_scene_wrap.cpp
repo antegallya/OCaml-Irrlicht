@@ -609,3 +609,27 @@ extern "C" CAMLprim value ml_ISceneManager_addLightSceneNode_bytecode(
 			argv[3], argv[4], argv[5]);
 }
 
+extern "C" CAMLprim value ml_ISceneManager_addHillPlaneMesh_native(
+		value v_manager, value v_name, value v_tile_size, value v_tile_count,
+		value v_material, value v_hill_height, value v_count_hills,
+		value v_texture_repeat_count)
+{
+	SMaterial* material;
+	if(v_material == Val_int(0)) material = NULL;
+	else material = (SMaterial*) Field(v_material, 0);
+	IAnimatedMesh* mesh = ((ISceneManager*) v_manager)->addHillPlaneMesh(
+			String_val(v_name), Dimension2d_f32_val(v_tile_size),
+			Dimension2d_u32_val(v_tile_count), material, Double_val(v_hill_height),
+			Dimension2d_f32_val(v_count_hills),
+			Dimension2d_f32_val(v_texture_repeat_count));
+	if(mesh == NULL) null_pointer_exn();
+	return (value) mesh;
+}
+
+extern "C" CAMLprim value ml_ISceneManager_addHillPlaneMesh_bytecode(
+		value* argv, int argn)
+{
+	return ml_ISceneManager_addHillPlaneMesh_native(argv[0], argv[1], argv[2],
+			argv[3], argv[4], argv[5], argv[6], argv[7]);
+}
+

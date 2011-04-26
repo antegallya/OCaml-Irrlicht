@@ -158,6 +158,10 @@ class manager : obj -> object
     ?parent:node -> ?size:(float * float) -> ?pos:Irr_core.vector3df ->
       ?id:int -> ?color_top:Irr_core.color -> ?color_bottom:Irr_core.color ->
       unit -> billboard_node
+  method add_hill_plane_mesh :
+    string -> (float * float) -> ?material:Irr_video.material ->
+      ?height:float -> ?count_hills:(float * float) ->
+      ?texture_repeat_count:(float * float) -> (int * int) -> animated_mesh
   method add_light_node :
     ?parent:node -> ?pos:Irr_core.vector3df -> ?color:Irr_core.colorf ->
       ?radius:float -> ?id:int -> unit -> light_node
