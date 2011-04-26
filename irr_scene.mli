@@ -144,6 +144,8 @@ class particle_system_node : obj -> object
       ?min_start_size:(float * float) -> ?max_start_size:(float * float) ->
       unit -> particle_box_emitter
   method set_emitter : particle_emitter -> unit
+  method create_fade_out_affector :
+    ?color:Irr_core.color -> ?time:int -> unit -> particle_fade_out_affector
 end
 
 (** Class ISceneManager *)

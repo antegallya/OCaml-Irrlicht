@@ -381,6 +381,10 @@ external particle_system_node_create_box_emitter :
 external particle_system_node_set_emitter : obj -> obj -> unit =
   "ml_IParticleSystemSceneNode_setEmitter"
 
+external particle_system_node_create_fade_out_particle_affector :
+  obj -> Irr_core.color -> int -> obj =
+    "ml_IParticleSystemSceneNode_createFadeOutParticleAffector"
+
 let free x = x#drop
 
 class particle_system_node obj = object(self)
@@ -402,6 +406,14 @@ class particle_system_node obj = object(self)
     end
   method set_emitter (emitter : particle_emitter) =
     particle_system_node_set_emitter self#obj emitter#obj
+  method create_fade_out_affector ?(color = Irr_core.color_ARGB 0 0 0 0)
+    ?(time = 1000) () =
+    let obj = particle_system_node_create_fade_out_particle_affector self#obj
+      color time in
+    object(self1)
+      inherit particle_fade_out_affector obj
+      initializer Gc.finalise free self1
+    end
 end
 
 (******************************************************************************)

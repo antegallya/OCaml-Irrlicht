@@ -285,6 +285,15 @@ extern "C" CAMLprim value ml_IParticleSystemSceneNode_setEmitter(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value
+	ml_IParticleSystemSceneNode_createFadeOutParticleAffector(
+			value v_ps, value v_color, value v_time)
+{
+	return (value)
+		((IParticleSystemSceneNode*) v_ps)->createFadeOutParticleAffector(
+		SColor_val(v_color), Int_val(v_time));
+}
+
 /* Stub for class ISceneManager */
 
 extern "C" CAMLprim value ml_ISceneManager_addAnimatedMeshSceneNode_native(
