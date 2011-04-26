@@ -278,6 +278,13 @@ extern "C" CAMLprim value
 			argv[10], argv[11]);
 }
 
+extern "C" CAMLprim value ml_IParticleSystemSceneNode_setEmitter(
+		value v_ps, value v_emitter)
+{
+	((IParticleSystemSceneNode*) v_ps)->setEmitter((IParticleEmitter*) v_emitter);
+	return Val_unit;
+}
+
 /* Stub for class ISceneManager */
 
 extern "C" CAMLprim value ml_ISceneManager_addAnimatedMeshSceneNode_native(

@@ -358,6 +358,9 @@ external particle_system_node_create_box_emitter :
     "ml_IParticleSystemSceneNode_createBoxEmitter_bytecode"
     "ml_IParticleSystemSceneNode_createBoxEmitter_native"
 
+external particle_system_node_set_emitter : obj -> obj -> unit =
+  "ml_IParticleSystemSceneNode_setEmitter"
+
 let free x = x#drop
 
 class particle_system_node obj = object(self)
@@ -377,6 +380,8 @@ class particle_system_node obj = object(self)
       inherit particle_box_emitter obj
       initializer Gc.finalise free self1
     end
+  method set_emitter (emitter : particle_emitter) =
+    particle_system_node_set_emitter self#obj emitter#obj
 end
 
 (******************************************************************************)

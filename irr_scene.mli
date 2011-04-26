@@ -133,6 +133,7 @@ class particle_system_node : obj -> object
       ?life_time_min:int -> ?life_time_max:int -> ?max_angle_degrees:int ->
       ?min_start_size:(float * float) -> ?max_start_size:(float * float) ->
       unit -> particle_box_emitter
+  method set_emitter : particle_emitter -> unit
 end
 
 (** Class ISceneManager *)
