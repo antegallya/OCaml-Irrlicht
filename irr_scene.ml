@@ -326,9 +326,24 @@ end
 
 (******************************************************************************)
 
+(* Binding for class IParticleEmitter *)
+
+(******************************************************************************)
+
+class particle_emitter obj = object(self)
+  inherit Irr_base.attribute_exchanging_object obj
+end
+
+(******************************************************************************)
+
 (* Binding for class IParticleSystemSceneNode *)
 
 (******************************************************************************)
+
+(*external particle_system_node_create_box_emitter :
+  obj -> float Irr_core.aabox3d -> Irr_core.vector3df -> int -> int ->
+    Irr_core.color -> Irr_core.color -> int -> int -> int -> (float * float) ->
+    (float * float) -> obj*)
 
 class particle_system_node obj = object(self)
   inherit node obj
