@@ -19,6 +19,13 @@ extern "C" CAMLprim value ml_IReferenceCounted_drop(value v) {
 	return Val_bool(rc->drop());
 }
 
+/* Stub for class IAttributeExchanginObject */
+
+extern "C" CAMLprim value ml_IAttributeExchangingObject_drop(value v) {
+	IAttributeExchangingObject* rc = (IAttributeExchangingObject*) v;
+	return Val_bool(rc->drop());
+}
+
 /* Stub for class ITimer */
 
 extern "C" CAMLprim value ml_ITimer_getTime(value v_timer) {

@@ -77,8 +77,12 @@ end
 
 (******************************************************************************)
 
-class attribute_exchanging_object obj = object
+external attribute_exchanging_object_drop : obj -> bool =
+  "ml_IAttributeExchangingObject_drop"
+
+class attribute_exchanging_object obj = object(self)
   inherit reference_counted obj
+  method drop_bool = attribute_exchanging_object_drop self#obj
 end
 
 (******************************************************************************)
