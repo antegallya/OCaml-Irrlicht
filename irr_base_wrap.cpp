@@ -16,8 +16,7 @@ extern "C" CAMLprim value ml_int_of_key(value v_key) {
 
 extern "C" CAMLprim value ml_IReferenceCounted_drop(value v) {
 	IReferenceCounted* rc = (IReferenceCounted*) v;
-	rc->drop();
-	return Val_unit;
+	return Val_bool(rc->drop());
 }
 
 /* Stub for class ITimer */
