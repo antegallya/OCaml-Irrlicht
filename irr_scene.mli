@@ -108,6 +108,7 @@ class billboard_node : obj -> object
   method set_size : (float * float) -> unit
   method size : float * float
   method set_color : Irr_core.color -> Irr_core.color -> unit
+  method color : Irr_core.color * Irr_core.color
 end
 
 (** Class ISceneCollisionManager *)

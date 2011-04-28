@@ -310,13 +310,17 @@ external billboard_node_get_size : obj -> (float * float) =
 
 external billboard_node_set_color :
   obj -> Irr_core.color -> Irr_core.color -> unit =
-    "ml_IBillboard_setColor"
+    "ml_IBillboardSceneNode_setColor"
+
+external billboard_node_get_color : obj -> Irr_core.color * Irr_core.color =
+  "ml_IBillboardSceneNode_getColor"
 
 class billboard_node obj = object(self)
   inherit node obj
   method set_size d = billboard_node_set_size self#obj d
   method size = billboard_node_get_size self#obj
   method set_color c_top c_bot = billboard_node_set_color self#obj c_top c_bot
+  method color = billboard_node_get_color self#obj
 end
 
 (******************************************************************************)

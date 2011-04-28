@@ -242,6 +242,17 @@ extern "C" CAMLprim value ml_IBillboardSceneNode_setColor(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IBillboardSceneNode_getColor(value v_node) {
+	CAMLparam0();
+	CAMLlocal1(v);
+	SColor top, bot;
+	((IBillboardSceneNode*) v_node)->getColor(top, bot);
+	v = caml_alloc(2, 0);
+	Store_field(v, 0, copy_SColor(top));
+	Store_field(v, 1, copy_SColor(bot));
+	CAMLreturn(v);
+}
+
 /* Stub for class IMeshSceneNode */
 
 extern "C" CAMLprim value ml_IMeshSceneNode_getMesh(value v_node) {
