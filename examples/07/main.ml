@@ -63,6 +63,7 @@ let add_dwarf (smgr : Irr_scene.manager) =
   anode#set_pos (-50., 20., -60.);
   anode#set_animation_speed 15.;
   let _ = anode#add_shadow_volume_node () in
+  smgr#set_shadow_color (Irr_core.color_ARGB 150 0 0 0);
   anode#set_scale (2., 2., 2.);
   anode#set_material_flag `normalize_normals true
 
