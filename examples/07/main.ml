@@ -1,7 +1,5 @@
 open Printf
 
-let oups x = print_endline "oups"
-
 let add_room (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#get_mesh "../../media/room.3ds" in
   let node = smgr#add_animated_mesh_node mesh in
@@ -74,7 +72,6 @@ let add_camera (device : Irr.device) (smgr : Irr_scene.manager) =
 
 let () =
   let device = Irr.create_device ~dtype:`opengl ~stencilbuffer:true () in
-  Gc.finalise oups device;
   let driver = device#driver and smgr = device#scene_manager in
   add_room driver smgr;
   add_water driver smgr;
