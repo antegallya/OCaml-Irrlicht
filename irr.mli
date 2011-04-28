@@ -3,7 +3,7 @@
 type obj = Irr_base.obj
 
 (** Class Irrlicht Device *)
-class device : obj -> object
+class device : obj -> Irr_base.event_receiver -> object
   inherit Irr_base.reference_counted
   method close : unit
   method color_format : Irr_enums.color_format

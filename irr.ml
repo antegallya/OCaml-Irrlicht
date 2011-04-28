@@ -51,8 +51,9 @@ external device_get_color_format : obj -> Irr_enums.color_format =
 let free x = () (*(print_endline "big free"; x#drop; print_endline "big free
 done")*)
 
-class device obj =
+class device obj er =
   object(self)
+    val mutable er = er
     inherit Irr_base.reference_counted obj
     method close = device_close_device self#obj
     method color_format = device_get_color_format self#obj
@@ -95,7 +96,8 @@ class device obj =
       end
     method set_window_caption s = device_set_window_caption self#obj s
     method set_event_receiver (r : Irr_base.event_receiver) =
-      device_set_event_receiver self#obj r#obj
+      device_set_event_receiver self#obj r#obj;
+      er <- r
     method set_on_event f =
       self#set_event_receiver (new Irr_base.event_receiver_fun f)
     method set_resizable b = device_set_resizable self#obj b
@@ -110,7 +112,6 @@ let create_device ?(dtype = `software) ?(size = (640, 480)) ?(bits = 16)
   let obj =
     create_device dtype size bits fullscreen stencilbuffer vsync receiver#obj in
   object(self)
-    val receiver = receiver
-    inherit device obj
+    inherit device obj receiver
     initializer Gc.finalise free self
   end
