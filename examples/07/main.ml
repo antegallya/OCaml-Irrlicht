@@ -80,8 +80,15 @@ let () =
   add_volume_light driver smgr;
   add_dwarf smgr;
   add_camera device smgr;
+  let last_fps = ref (- 1) in
   while device#run do
     driver#begin_scene ();
     smgr#draw_all;
-    driver#end_scene
+    driver#end_scene;
+    let fps = driver#fps in
+    if !last_fps <> fps then (
+      let str = sprintf "Irrlicht Engine - SpecialFX example [%d] FPS" fps in
+      device#set_window_caption str;
+      last_fps := fps
+    )
   done
