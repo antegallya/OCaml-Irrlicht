@@ -234,6 +234,14 @@ extern "C" CAMLprim value ml_IBillboardSceneNode_getSize(value v_node) {
 	return copy_dimension2d_f32(((IBillboardSceneNode*) v_node)->getSize());
 }
 
+extern "C" CAMLprim value ml_IBillboardSceneNode_setColor(
+		value v_node, value v_top, value v_bot)
+{
+	((IBillboardSceneNode*) v_node)->setColor(SColor_val(v_top),
+		SColor_val(v_bot));
+	return Val_unit;
+}
+
 /* Stub for class IMeshSceneNode */
 
 extern "C" CAMLprim value ml_IMeshSceneNode_getMesh(value v_node) {
