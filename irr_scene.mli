@@ -247,6 +247,7 @@ class manager : obj -> object
   method create_texture_animator :
     Irr_video.texture list -> ?loop:bool -> int -> animator
   method draw_all : unit
+  method set_shadow_color : Irr_core.color -> unit
   method get_mesh : string -> animated_mesh
   method collision_manager : collision_manager
 end

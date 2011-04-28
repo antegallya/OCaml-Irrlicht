@@ -762,3 +762,10 @@ extern "C" CAMLprim value ml_ISceneManager_createTextureAnimator(
 			Array_texture_val(v_textures), Int_val(v_time), Bool_val(v_loop));
 }
 
+extern "C" CAMLprim value ml_ISceneManager_setShadowColor(
+		value v_manager, value v_color)
+{
+	((ISceneManager*) v_manager)->setShadowColor(SColor_val(v_color));
+	return Val_unit;
+}
+

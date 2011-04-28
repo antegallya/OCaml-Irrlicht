@@ -602,6 +602,9 @@ external manager_create_texture_animator :
   obj -> obj list -> int -> bool -> obj =
     "ml_ISceneManager_createTextureAnimator"
 
+external manager_set_shadow_color : obj -> Irr_core.color -> unit =
+  "ml_ISceneManager_setShadowColor"
+
 let free x = x#drop
 
 class manager obj = object(self)
@@ -828,6 +831,7 @@ class manager obj = object(self)
       initializer Gc.finalise free self1
     end
   method draw_all = manager_draw_all self#obj
+  method set_shadow_color c = manager_set_shadow_color self#obj c
   method get_mesh filename =
     let obj = manager_get_mesh self#obj filename in
     object
