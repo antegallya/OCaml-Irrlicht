@@ -106,6 +106,7 @@ end
 class billboard_node : obj -> object
   inherit node
   method set_size : (float * float) -> unit
+  method size : float * float
 end
 
 (** Class ISceneCollisionManager *)

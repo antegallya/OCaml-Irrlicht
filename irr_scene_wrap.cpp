@@ -230,6 +230,10 @@ extern "C" CAMLprim value ml_IBillboardSceneNode_setSize(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IBillboardSceneNode_getSize(value v_node) {
+	return copy_dimension2d_f32(((IBillboardSceneNode*) v_node)->getSize());
+}
+
 /* Stub for class IMeshSceneNode */
 
 extern "C" CAMLprim value ml_IMeshSceneNode_getMesh(value v_node) {

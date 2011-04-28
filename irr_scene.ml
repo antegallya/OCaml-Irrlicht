@@ -305,9 +305,13 @@ end
 external billboard_node_set_size : obj -> (float * float) -> unit =
   "ml_IBillboardSceneNode_setSize"
 
+external billboard_node_get_size : obj -> (float * float) =
+  "ml_IBillboardSceneNode_getSize"
+
 class billboard_node obj = object(self)
   inherit node obj
   method set_size d = billboard_node_set_size self#obj d
+  method size = billboard_node_get_size self#obj
 end
 
 (******************************************************************************)
