@@ -20,6 +20,7 @@ class device : obj -> Irr_base.event_receiver -> object
   method set_resizable : bool -> unit
   method is_window_active : bool
   method yield : unit
+  method get_type : Irr_enums.device_type
 end 
 
 val create_device :

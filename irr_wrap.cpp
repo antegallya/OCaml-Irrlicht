@@ -94,3 +94,7 @@ extern "C" CAMLprim value ml_IrrlichtDevice_getColorFormat(value v_device) {
 	return Val_color_format(((IrrlichtDevice*) v_device)->getColorFormat());
 }
 
+extern "C" CAMLprim value ml_IrrlichtDevice_getType(value v_device) {
+	return Val_device_type(((IrrlichtDevice*) v_device)->getType());
+}
+

@@ -48,6 +48,9 @@ external device_close_device : obj -> unit = "ml_IrrlichtDevice_closeDevice"
 external device_get_color_format : obj -> Irr_enums.color_format =
   "ml_IrrlichtDevice_getColorFormat"
 
+external device_get_type : obj -> Irr_enums.device_type =
+  "ml_IrrlichtDevice_getType"
+
 let free x = () (*(print_endline "big free"; x#drop; print_endline "big free
 done")*)
 
@@ -103,6 +106,7 @@ class device obj er =
     method set_resizable b = device_set_resizable self#obj b
     method is_window_active = device_is_window_active self#obj
     method yield = device_yield self#obj
+    method get_type = device_get_type self#obj
   end
 
 let create_device ?(dtype = `software) ?(size = (640, 480)) ?(bits = 16)
