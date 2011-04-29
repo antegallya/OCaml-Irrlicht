@@ -84,6 +84,9 @@ external material_get_anti_aliasing : obj -> Irr_enums.anti_aliasing_mode =
 external material_set_backface_culling : obj -> bool -> unit =
   "ml_SMaterial_set_BackfaceCulling"
 
+external material_get_backface_culling : obj -> bool =
+  "ml_SMaterial_get_BackfaceCulling"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -100,6 +103,7 @@ class material (obj : obj) = object(self)
   method material_type = material_get_material_type self#obj
   method ambient_color = material_get_ambient_color self#obj
   method anti_aliasing = material_get_anti_aliasing self#obj
+  method backface_culling = material_get_backface_culling self#obj
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
     material_set_texture self#obj i t#obj

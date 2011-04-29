@@ -107,6 +107,10 @@ extern "C" CAMLprim value ml_SMaterial_set_BackfaceCulling(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_BackfaceCulling(value v_mat) {
+	return Val_bool(((SMaterial*) v_mat)->BackfaceCulling);
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
