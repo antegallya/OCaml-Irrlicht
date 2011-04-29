@@ -1,3 +1,5 @@
+open Printf
+
 let is_not_pickable = 0
 let is_pickable = 1
 let is_highlightable = 2
@@ -95,6 +97,7 @@ let main () =
   let mat = new Irr_video.material_fresh in
   mat#set_wireframe true;
   mat#set_lighting false;
+  let last_fps = ref (- 1) in
   while device#run do
     driver#begin_scene ();
     smgr#draw_all;
@@ -114,6 +117,14 @@ let main () =
         if node#id land is_highlightable = is_highlightable then (
           highlighted_node := Some node;
           node#set_material_flag `lighting false
+        );
+        let fps = driver#fps in
+        if !last_fps <> fps then (
+          let str = sprintf
+            "Collision detection example - Irrlicht Engine[%s] FPS:%d"
+            driver#name fps in
+          device#set_window_caption str;
+          last_fps := fps
         )
     );
     driver#end_scene
