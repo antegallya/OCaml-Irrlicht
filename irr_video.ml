@@ -72,6 +72,9 @@ external material_create : unit -> obj =
 external material_destroy : obj -> unit =
   "ml_SMaterial_destroy"
 
+external material_set_ambient_color : obj -> Irr_core.color -> unit =
+  "ml_SMaterial_set_AmbientColor"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -93,6 +96,7 @@ class material (obj : obj) = object(self)
   method set_normalize_normals flag =
     material_set_normalize_normals self#obj flag
   method set_wireframe flag = material_set_wireframe self#obj flag
+  method set_ambient_color c = material_set_ambient_color self#obj c
 end
 
 class material_fresh = object(self)
