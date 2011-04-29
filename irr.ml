@@ -51,8 +51,7 @@ external device_get_color_format : obj -> Irr_enums.color_format =
 external device_get_type : obj -> Irr_enums.device_type =
   "ml_IrrlichtDevice_getType"
 
-let free x = () (*(print_endline "big free"; x#drop; print_endline "big free
-done")*)
+let free x = x#drop
 
 class device obj er =
   object(self)
