@@ -3,7 +3,8 @@ open Printf
 let add_room (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#get_mesh "../../media/room.3ds" in
   let node = smgr#add_animated_mesh_node mesh in
-  node#set_material_texture (driver#get_texture "../../media/wall.jpg")
+  node#set_material_texture (driver#get_texture "../../media/wall.jpg");
+  (node#material 0)#set_specular_color (Irr_core.color_ARGB 0 0 0 0)
 
 let add_water (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   let mesh = smgr#add_hill_plane_mesh "myHill" (20., 20.)
