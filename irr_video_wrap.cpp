@@ -96,6 +96,10 @@ extern "C" CAMLprim value ml_SMaterial_get_AmbientColor(value v_mat) {
 	return copy_SColor(((SMaterial*) v_mat)->AmbientColor);
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_AntiAliasing(value v_mat) {
+	return Val_anti_aliasing_mode(((SMaterial*) v_mat)->AntiAliasing);
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
