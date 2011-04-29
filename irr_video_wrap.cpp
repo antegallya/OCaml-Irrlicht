@@ -118,6 +118,10 @@ extern "C" CAMLprim value ml_SMaterial_setFlag(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_getFlag(value v_mat, value v_flag) {
+	return Bool_val(((SMaterial*) v_mat)->getFlag(material_flag_val(v_flag)));
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

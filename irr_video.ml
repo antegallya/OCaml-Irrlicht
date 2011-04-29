@@ -90,6 +90,9 @@ external material_get_backface_culling : obj -> bool =
 external material_set_flag : obj -> Irr_enums.material_flag -> bool -> unit =
   "ml_SMaterial_setFlag"
 
+external material_get_flag : obj -> Irr_enums.material_flag -> bool =
+  "ml_SMaterial_getFlag"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -107,6 +110,7 @@ class material (obj : obj) = object(self)
   method ambient_color = material_get_ambient_color self#obj
   method anti_aliasing = material_get_anti_aliasing self#obj
   method backface_culling = material_get_backface_culling self#obj
+  method flag f = material_get_flag self#obj f
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
     material_set_texture self#obj i t#obj
