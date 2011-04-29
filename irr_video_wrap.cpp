@@ -92,6 +92,10 @@ extern "C" CAMLprim value ml_SMaterial_set_AmbientColor(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_AmbientColor(value v_mat) {
+	return copy_SColor(((SMaterial*) v_mat)->AmbientColor);
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

@@ -75,6 +75,9 @@ external material_destroy : obj -> unit =
 external material_set_ambient_color : obj -> Irr_core.color -> unit =
   "ml_SMaterial_set_AmbientColor"
 
+external material_get_ambient_color : obj -> Irr_core.color =
+  "ml_SMaterial_get_AmbientColor"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -89,6 +92,7 @@ class material (obj : obj) = object(self)
   method wireframe = material_get_wireframe self#obj
   method point_cloud = material_get_point_cloud self#obj
   method material_type = material_get_material_type self#obj
+  method ambient_color = material_get_ambient_color self#obj
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
     material_set_texture self#obj i t#obj
