@@ -34,6 +34,7 @@ class material : obj -> object
   method set_wireframe : bool -> unit
   method set_ambient_color : Irr_core.color -> unit
   method set_backface_culling : bool -> unit
+  method set_flag : Irr_enums.material_flag -> bool -> unit
 end
 
 class material_fresh : object

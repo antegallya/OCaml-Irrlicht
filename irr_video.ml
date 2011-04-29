@@ -87,6 +87,9 @@ external material_set_backface_culling : obj -> bool -> unit =
 external material_get_backface_culling : obj -> bool =
   "ml_SMaterial_get_BackfaceCulling"
 
+external material_set_flag : obj -> Irr_enums.material_flag -> bool -> unit =
+  "ml_SMaterial_setFlag"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -113,6 +116,7 @@ class material (obj : obj) = object(self)
   method set_wireframe flag = material_set_wireframe self#obj flag
   method set_ambient_color c = material_set_ambient_color self#obj c
   method set_backface_culling b = material_set_backface_culling self#obj b
+  method set_flag flag b = material_set_flag self#obj flag b
 end
 
 class material_fresh = object(self)
