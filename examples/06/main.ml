@@ -94,6 +94,7 @@ let main () =
   let coll_man = smgr#collision_manager in
   let mat = new Irr_video.material_fresh in
   mat#set_wireframe true;
+  mat#set_lighting false;
   while device#run do
     driver#begin_scene ();
     smgr#draw_all;
