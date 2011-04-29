@@ -24,23 +24,6 @@ end
 
 (******************************************************************************)
 
-module Material_layer = struct
-  type t = {
-    mutable aniosotropic_filter : int;
-    mutable bilinear_filter : bool;
-    mutable lod_bias : int;
-    mutable texture : obj option;
-    mutable texture_warp_u : Irr_enums.texture_clamp;
-    mutable texture_warp_v : Irr_enums.texture_clamp;
-    mutable trilinear_filter : bool;
-    mutable matrix : Irr_core.matrix4;
-  }
-  let default = {aniosotropic_filter = 0; bilinear_filter = true;
-    lod_bias = 0; texture = None; texture_warp_u = `repeat;
-    texture_warp_v = `repeat; trilinear_filter = false;
-    matrix = Irr_core.matrix_identity ()}
-end
-
 external material_layer_set_bilinear_filter : obj -> bool -> unit =
   "ml_SMaterialLayer_set_BilinearFilter"
 
@@ -55,34 +38,6 @@ end
 (* Binding of class SMaterial *)
 
 (******************************************************************************)
-
-module Material = struct
-  type t = {
-    mutable ambiant_color : Irr_core.color;
-    mutable anti_aliasing : Irr_enums.anti_aliasing_mode;
-    mutable backface_culling : bool;
-    mutable color_mask : Irr_enums.color_plane;
-    mutable color_material : Irr_enums.colormaterial;
-    mutable diffuse_color : Irr_core.color;
-    mutable emissive_color : Irr_core.color;
-    mutable fog_enable : bool;
-    mutable fontface_culling : bool;
-    mutable shading : bool;
-    mutable lighting : bool;
-    mutable material_type : Irr_enums.material_type;
-    mutable material_type_param : float;
-    mutable material_type_param2 : float;
-    mutable normalize_normals : bool;
-    mutable point_cloud : bool;
-    mutable shininess : float;
-    mutable specular_color : Irr_core.color;
-    mutable texture_layer : Material_layer.t array;
-    mutable thickness : float;
-    mutable wireframe : bool;
-    mutable z_buffer : Irr_enums.comparison_func;
-    mutable z_write_enable : bool;
-  }
-end
 
 external material_texture_layer : obj -> int -> obj =
   "ml_SMaterial_TextureLayer"

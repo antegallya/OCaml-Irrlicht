@@ -12,51 +12,12 @@ class texture : obj -> object
 end
 
 (** Class SMaterialLayer *)
-(*module Material_layer : sig
-  type t = {
-    mutable aniosotropic_filter : int;
-    mutable bilinear_filter : bool;
-    mutable lod_bias : int;
-    mutable texture : obj option;
-    mutable texture_warp_u : Irr_enums.texture_clamp;
-    mutable texture_warp_v : Irr_enums.texture_clamp;
-    mutable trilinear_filter : bool;
-    mutable matrix : Irr_core.matrix4;
-  }
-end*)
 class material_layer : obj -> object
   method obj : obj
   method set_bilinear_filter : bool -> unit
 end
 
 (** Class SMaterial *)
-(*module Material : sig
-  type t = {
-    mutable ambiant_color : Irr_core.color;
-    mutable anti_aliasing : Irr_enums.anti_aliasing_mode;
-    mutable backface_culling : bool;
-    mutable color_mask : Irr_enums.color_plane;
-    mutable color_material : Irr_enums.colormaterial;
-    mutable diffuse_color : Irr_core.color;
-    mutable emissive_color : Irr_core.color;
-    mutable fog_enable : bool;
-    mutable fontface_culling : bool;
-    mutable shading : bool;
-    mutable lighting : bool;
-    mutable material_type : Irr_enums.material_type;
-    mutable material_type_param : float;
-    mutable material_type_param2 : float;
-    mutable normalize_normals : bool;
-    mutable point_cloud : bool;
-    mutable shininess : float;
-    mutable specular_color : Irr_core.color;
-    mutable texture_layer : Material_layer.t array;
-    mutable thickness : float;
-    mutable wireframe : bool;
-    mutable z_buffer : Irr_enums.comparison_func;
-    mutable z_write_enable : bool;
-  }
-end*)
 class material : obj -> object
   method obj : obj
   method layer : int -> material_layer

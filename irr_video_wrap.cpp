@@ -17,44 +17,6 @@ extern "C" CAMLprim value ml_ITexture_getOriginalSize(value v_tex) {
 
 /* Stub for SMaterialLayer class */
 
-/*SMaterialLayer MaterialLayer_val(value v) {
-	SMaterialLayer ml;
-	ml.AnisotropicFilter = Int_val(Field(v, 0));
-	ml.BilinearFilter = Bool_val(Field(v, 1));
-	ml.LODBias = Int_val(Field(v, 2));
-	if(Is_block(Field(v, 3)))
-			ml.Texture = (ITexture*) Field(Field(v, 3), 0);
-	ml.TextureWrapU = texture_clamp_val(Field(v, 4));
-	ml.TextureWrapV = texture_clamp_val(Field(v, 5));
-	ml.TrilinearFilter = Bool_val(Field(v, 6));
-	ml.setTextureMatrix(Matrix4_val(Field(v, 7)));
-	return ml;
-}
-
-value copy_MaterialLayer(SMaterialLayer ml) {
-	CAMLparam0();
-	CAMLlocal2(r, tmp);
-	printf("Hello1");
-	fflush(stdout);
-	r = caml_alloc(8, 0);
-	Store_field(r, 0, Val_int(ml.AnisotropicFilter));
-	Store_field(r, 1, Val_bool(ml.BilinearFilter));
-	Store_field(r, 2, Val_int(ml.LODBias));
-	if(ml.Texture == NULL) tmp = Val_int(0);
-	else {
-		tmp = caml_alloc(1, 0);
-		Store_field(tmp, 0, (value) ml.Texture);
-	}
-	Store_field(r, 3, tmp);
-	Store_field(r, 4, Val_texture_clamp((E_TEXTURE_CLAMP) ml.TextureWrapU));
-	Store_field(r, 5, Val_texture_clamp((E_TEXTURE_CLAMP) ml.TextureWrapV));
-	Store_field(r, 6, Val_bool(ml.TrilinearFilter));
-	Store_field(r, 7, copy_matrix4(ml.getTextureMatrix()));
-	printf("Hello2");
-	fflush(stdout);
-	CAMLreturn(r);
-}*/
-
 extern "C" CAMLprim value ml_SMaterialLayer_set_BilinearFilter(
 		value v_layer, value v_b)
 {
@@ -63,85 +25,6 @@ extern "C" CAMLprim value ml_SMaterialLayer_set_BilinearFilter(
 }
 
 /* Stub for SMaterial class */
-
-/*SMaterial Material_val(value v) {
-	SMaterial m;
-	int i;
-	m.AmbientColor = SColor_val(Field(v, 0));
-	m.AntiAliasing = anti_aliasing_mode_val(Field(v, 1));
-	m.BackfaceCulling = Bool_val(Field(v, 2));
-	m.ColorMask = color_plane_val(Field(v, 3));
-	m.ColorMaterial = colormaterial_val(Field(v, 4));
-	m.DiffuseColor = SColor_val(Field(v, 5));
-	m.EmissiveColor = SColor_val(Field(v, 6));
-	m.FogEnable = Bool_val(Field(v, 7));
-	m.FrontfaceCulling = Bool_val(Field(v, 8));
-	m.GouraudShading = Bool_val(Field(v, 9));
-	m.Lighting = Bool_val(Field(v, 10));
-	m.MaterialType = material_type_val(Field(v, 11));
-	m.MaterialTypeParam = Double_val(Field(v, 12));
-	m.MaterialTypeParam2 = Double_val(Field(v, 13));
-	m.NormalizeNormals = Bool_val(Field(v, 14));
-	m.PointCloud = Bool_val(Field(v, 15));
-	m.Shininess = Double_val(Field(v, 16));
-	m.SpecularColor = SColor_val(Field(v, 17));
-	for(i = 0; i < Wosize_val(Field(v, 18)); i++) {
-		m.TextureLayer[i] = MaterialLayer_val(Field(Field(v, 18), i));
-	}
-	m.Thickness = Double_val(Field(v, 19));
-	m.Wireframe = Bool_val(Field(v, 20));
-	m.ZBuffer = comparison_func_val(Field(v, 21));
-	m.ZWriteEnable = Bool_val(Field(v, 22));
-	return m;
-}
-
-value copy_material(SMaterial m) {
-	CAMLparam0();
-	CAMLlocal3(v, tmp, tmp2);
-	int i;
-	v = caml_alloc(23, 0);
-	Store_field(v, 0, copy_SColor(m.AmbientColor));
-	Store_field(v, 1, Val_anti_aliasing_mode(m.AntiAliasing));
-	Store_field(v, 2, Val_bool(m.BackfaceCulling));
-	Store_field(v, 3, Val_color_plane(m.ColorMask));
-	Store_field(v, 4, Val_colormaterial(m.ColorMaterial));
-	Store_field(v, 5, copy_SColor(m.DiffuseColor));
-	Store_field(v, 6, copy_SColor(m.EmissiveColor));
-	Store_field(v, 7, Val_bool(m.FogEnable));
-	Store_field(v, 8, Val_bool(m.FrontfaceCulling));
-	Store_field(v, 9, Val_bool(m.GouraudShading));
-	Store_field(v, 10, Val_bool(m.Lighting));
-	Store_field(v, 11, Val_material_type(m.MaterialType));
-	Store_field(v, 12, copy_double(m.MaterialTypeParam));
-	Store_field(v, 13, copy_double(m.MaterialTypeParam2));
-	Store_field(v, 14, Val_bool(m.NormalizeNormals));
-	Store_field(v, 15, Val_bool(m.PointCloud));
-	Store_field(v, 16, copy_double(m.Shininess));
-	Store_field(v, 17, copy_SColor(m.SpecularColor));
-	tmp = caml_alloc(MATERIAL_MAX_TEXTURES, 0);
-	printf("Hello3 %d\n", (int) Wosize_val(tmp));
-	printf("%d\n", (int) Wosize_val(tmp));
-	fflush(stdout);
-	for(i = 0; i < MATERIAL_MAX_TEXTURES; i++) {
-		printf(">> %d\n", (int) Wosize_val(tmp));
-		fflush(stdout);
-		tmp2 = copy_MaterialLayer(m.TextureLayer[i]);
-		printf("== %d\n", (int) Wosize_val(tmp));
-		fflush(stdout);
-		Store_field(tmp, i, tmp2);
-		printf("<< %d\n", (int) Wosize_val(tmp));
-		fflush(stdout);
-	}
-	Field(tmp, 0);
-	printf("Hello4 %d %d\n", MATERIAL_MAX_TEXTURES, (int) Wosize_val(tmp));
-	fflush(stdout);
-	Store_field(v, 18, tmp);
-	Store_field(v, 19, copy_double(m.Thickness));
-	Store_field(v, 20, Val_bool(m.Wireframe));
-	Store_field(v, 21, Val_comparison_func(m.ZBuffer));
-	Store_field(v, 22, Val_bool(m.ZWriteEnable));
-	CAMLreturn(v);
-}*/
 
 extern "C" CAMLprim value ml_SMaterial_TextureLayer(value v_mat, value v_i) {
 	return (value) &((SMaterial*) v_mat)->TextureLayer[Int_val(v_i)];
