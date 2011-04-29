@@ -50,8 +50,7 @@ let add_md2 (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
   node#set_md2_animation `point;
   node#set_animation_speed 20.;
   let material = node#material 0 in
-  (*material#set_texture 0 (driver#get_texture "../../media/faerie2.bmp");*)
-  node#set_material_texture (driver#get_texture "../../media/faerie2.bmp");
+  material#set_texture 0 (driver#get_texture "../../media/faerie2.bmp");
   material#set_lighting false;
   material#set_normalize_normals true;
   let selector = smgr#create_triangle_selector node in
@@ -131,7 +130,4 @@ let main () =
   done;
   print_endline "exiting"
 
-let () =
-  main ();
-  Gc.full_major ();
-  exit 0
+let () = main ()
