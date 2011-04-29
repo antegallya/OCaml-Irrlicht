@@ -32,6 +32,7 @@ class material : obj -> object
   method set_normalize_normals : bool -> unit
   method set_wireframe : bool -> unit
   method set_ambient_color : Irr_core.color -> unit
+  method set_backface_culling : bool -> unit
 end
 
 class material_fresh : object

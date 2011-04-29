@@ -100,6 +100,13 @@ extern "C" CAMLprim value ml_SMaterial_get_AntiAliasing(value v_mat) {
 	return Val_anti_aliasing_mode(((SMaterial*) v_mat)->AntiAliasing);
 }
 
+extern "C" CAMLprim value ml_SMaterial_set_BackfaceCulling(
+		value v_mat, value v_flag)
+{
+	((SMaterial*) v_mat)->BackfaceCulling = Bool_val(v_flag);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

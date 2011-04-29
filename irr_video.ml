@@ -81,6 +81,9 @@ external material_get_ambient_color : obj -> Irr_core.color =
 external material_get_anti_aliasing : obj -> Irr_enums.anti_aliasing_mode =
   "ml_SMaterial_get_AntiAliasing"
 
+external material_set_backface_culling : obj -> bool -> unit =
+  "ml_SMaterial_set_BackfaceCulling"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -105,6 +108,7 @@ class material (obj : obj) = object(self)
     material_set_normalize_normals self#obj flag
   method set_wireframe flag = material_set_wireframe self#obj flag
   method set_ambient_color c = material_set_ambient_color self#obj c
+  method set_backface_culling b = material_set_backface_culling self#obj b
 end
 
 class material_fresh = object(self)
