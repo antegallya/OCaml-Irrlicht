@@ -92,6 +92,8 @@ let main () =
   add_light smgr;
   let highlighted_node = ref None in
   let coll_man = smgr#collision_manager in
+  let mat = new Irr_video.material_fresh in
+  mat#set_wireframe true;
   while device#run do
     driver#begin_scene ();
     smgr#draw_all;
@@ -105,6 +107,7 @@ let main () =
     | None -> ()
     | Some(node, p, triangle) ->
         driver#set_transform `world (Irr_core.matrix_identity ());
+        driver#set_material mat;
         driver#draw_3d_triangle triangle (Irr_core.color_ARGB 0 255 0 0);
         bill#set_pos p;
         if node#id land is_highlightable = is_highlightable then (
