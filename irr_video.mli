@@ -67,6 +67,7 @@ class material : obj -> object
   method set_texture : int -> texture -> unit
   method set_lighting : bool -> unit
   method set_normalize_normals : bool -> unit
+  method set_wireframe : bool -> unit
 end
 
 (** Class IVideoDriver *)

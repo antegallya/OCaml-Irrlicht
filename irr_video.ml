@@ -108,6 +108,9 @@ external material_set_lighting : obj -> bool -> unit =
 external material_set_normalize_normals : obj -> bool -> unit =
   "ml_SMaterial_set_NormalizeNormals"
 
+external material_set_wireframe : obj -> bool -> unit =
+  "ml_SMaterial_set_Wireframe"
+
 class material (obj : obj) = object(self)
   val obj = obj
   method obj = obj
@@ -126,6 +129,7 @@ class material (obj : obj) = object(self)
   method set_lighting flag = material_set_lighting self#obj flag
   method set_normalize_normals flag =
     material_set_normalize_normals self#obj flag
+  method set_wireframe flag = material_set_wireframe self#obj flag
 end
 
 (******************************************************************************)

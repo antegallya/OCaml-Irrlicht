@@ -185,6 +185,12 @@ extern "C" CAMLprim value ml_SMaterial_set_NormalizeNormals(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_set_Wireframe(value v_mat, value v_flag) 
+{
+	((SMaterial*) v_mat)->Wireframe = Bool_val(v_flag);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
