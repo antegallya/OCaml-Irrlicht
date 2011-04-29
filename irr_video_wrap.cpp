@@ -191,6 +191,17 @@ extern "C" CAMLprim value ml_SMaterial_set_Wireframe(value v_mat, value v_flag)
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_create(value vunit) {
+	SMaterial* mat = new SMaterial;
+	if(mat == NULL) null_pointer_exn();
+	return (value) mat;
+}
+
+extern "C" CAMLprim value ml_SMaterial_destroy(value v_mat) {
+	delete ((SMaterial*) v_mat);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

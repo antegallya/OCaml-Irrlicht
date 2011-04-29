@@ -111,6 +111,14 @@ external material_set_normalize_normals : obj -> bool -> unit =
 external material_set_wireframe : obj -> bool -> unit =
   "ml_SMaterial_set_Wireframe"
 
+external material_create : unit -> obj =
+  "ml_SMaterial_create"
+
+external material_destroy : obj -> unit =
+  "ml_SMaterial_destroy"
+
+let free x = material_destroy x#obj
+
 class material (obj : obj) = object(self)
   val obj = obj
   method obj = obj
@@ -130,6 +138,11 @@ class material (obj : obj) = object(self)
   method set_normalize_normals flag =
     material_set_normalize_normals self#obj flag
   method set_wireframe flag = material_set_wireframe self#obj flag
+end
+
+class material_fresh = object(self)
+  inherit material (material_create ())
+  initializer Gc.finalise free self
 end
 
 (******************************************************************************)

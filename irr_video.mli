@@ -70,6 +70,10 @@ class material : obj -> object
   method set_wireframe : bool -> unit
 end
 
+class material_fresh : object
+  inherit material
+end
+
 (** Class IVideoDriver *)
 class driver : obj -> object
   inherit Irr_base.reference_counted
