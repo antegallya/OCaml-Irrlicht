@@ -30,6 +30,7 @@ class material : obj -> object
   method color_mask : Irr_enums.color_plane
   method color_material : Irr_enums.colormaterial
   method diffuse_color : Irr_core.color
+  method emissive_color : Irr_core.color
   method flag : Irr_enums.material_flag -> bool
   method set_anti_aliasing : Irr_enums.anti_aliasing_mode -> unit
   method set_texture : int -> texture -> unit
@@ -41,6 +42,7 @@ class material : obj -> object
   method set_color_mask : Irr_enums.color_plane -> unit
   method set_color_material : Irr_enums.colormaterial -> unit
   method set_diffuse_color : Irr_core.color -> unit
+  method set_emissive_color : Irr_core.color -> unit
   method set_flag : Irr_enums.material_flag -> bool -> unit
   method set_specular_color : Irr_core.color -> unit
 end

@@ -159,7 +159,18 @@ extern "C" CAMLprim value ml_SMaterial_set_DiffuseColor(
 }
 
 extern "C" CAMLprim value ml_SMaterial_get_DiffuseColor(value v_mat) {
-	return copy_SColor(((SMaterial*) v_mat)->ColorMaterial);
+	return copy_SColor(((SMaterial*) v_mat)->DiffuseColor);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_EmissiveColor(
+		value v_mat, value v_color)
+{
+	((SMaterial*) v_mat)->EmissiveColor = SColor_val(v_color);
+	return Val_unit;
+}
+
+extern "C" CAMLprim value ml_SMaterial_get_EmissiveColor(value v_mat) {
+	return copy_SColor(((SMaterial*) v_mat)->EmissiveColor);
 }
 
 /* Stub for IVideoDriver class */
