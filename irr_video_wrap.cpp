@@ -129,6 +129,13 @@ extern "C" CAMLprim value ml_SMaterial_set_SpecularColor(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_set_ColorMask(
+		value v_mat, value v_mask)
+{
+	((SMaterial*) v_mat)->ColorMask <- color_plane_val(v_mask);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

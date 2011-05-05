@@ -96,6 +96,9 @@ external material_get_flag : obj -> Irr_enums.material_flag -> bool =
 external material_set_specular_color : obj -> Irr_core.color -> unit =
   "ml_SMaterial_set_SpecularColor"
 
+external material_set_color_mask : obj -> Irr_enums.color_plane -> unit =
+  "ml_SMaterial_set_ColorMask"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -123,6 +126,7 @@ class material (obj : obj) = object(self)
   method set_wireframe flag = material_set_wireframe self#obj flag
   method set_ambient_color c = material_set_ambient_color self#obj c
   method set_backface_culling b = material_set_backface_culling self#obj b
+  method set_color_mask m = material_set_color_mask self#obj m
   method set_flag flag b = material_set_flag self#obj flag b
   method set_specular_color c = material_set_specular_color self#obj c
 end
