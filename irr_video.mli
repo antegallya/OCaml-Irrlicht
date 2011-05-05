@@ -39,6 +39,7 @@ class material : obj -> object
   method set_backface_culling : bool -> unit
   method set_color_mask : Irr_enums.color_plane -> unit
   method set_color_material : Irr_enums.colormaterial -> unit
+  method set_diffuse_color : Irr_core.color -> unit
   method set_flag : Irr_enums.material_flag -> bool -> unit
   method set_specular_color : Irr_core.color -> unit
 end
