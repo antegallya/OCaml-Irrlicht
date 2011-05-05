@@ -28,6 +28,7 @@ class material : obj -> object
   method anti_aliasing : Irr_enums.anti_aliasing_mode
   method backface_culling : bool
   method color_mask : Irr_enums.color_plane
+  method color_material : Irr_enums.colormaterial
   method flag : Irr_enums.material_flag -> bool
   method set_anti_aliasing : Irr_enums.anti_aliasing_mode -> unit
   method set_texture : int -> texture -> unit

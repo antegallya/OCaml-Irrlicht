@@ -147,6 +147,10 @@ extern "C" CAMLprim value ml_SMaterial_set_ColorMaterial(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_ColorMaterial(value v_mat) {
+	return Val_colormaterial(((SMaterial*) v_mat)->ColorMaterial);
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

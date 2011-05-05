@@ -105,6 +105,9 @@ external material_get_color_mask : obj -> Irr_enums.color_plane =
 external material_set_color_material : obj -> Irr_enums.colormaterial -> unit =
   "ml_SMaterial_set_ColorMaterial"
 
+external material_get_color_material : obj -> Irr_enums.colormaterial =
+  "ml_SMaterial_get_ColorMaterial"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -123,6 +126,7 @@ class material (obj : obj) = object(self)
   method anti_aliasing = material_get_anti_aliasing self#obj
   method backface_culling = material_get_backface_culling self#obj
   method color_mask = material_get_color_mask self#obj
+  method color_material = material_get_color_material self#obj
   method flag f = material_get_flag self#obj f
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
