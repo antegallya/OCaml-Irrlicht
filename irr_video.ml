@@ -111,6 +111,9 @@ external material_get_color_material : obj -> Irr_enums.colormaterial =
 external material_set_diffuse_color : obj -> Irr_core.color -> unit =
   "ml_SMaterial_set_DiffuseColor"
 
+external material_get_diffuse_color : obj -> Irr_core.color =
+  "ml_SMaterial_get_DiffuseColor"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -130,6 +133,7 @@ class material (obj : obj) = object(self)
   method backface_culling = material_get_backface_culling self#obj
   method color_mask = material_get_color_mask self#obj
   method color_material = material_get_color_material self#obj
+  method diffuse_color = material_get_diffuse_color self#obj
   method flag f = material_get_flag self#obj f
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
