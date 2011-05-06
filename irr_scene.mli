@@ -66,6 +66,10 @@ class mesh : obj -> object
   inherit Irr_base.reference_counted
 end
 
+class fresh_mesh : object
+  inherit mesh
+end
+
 (** Class IAnimatedMesh *)
 class animated_mesh : obj -> object
   inherit mesh

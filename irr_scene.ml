@@ -182,8 +182,19 @@ end
 
 (******************************************************************************)
 
+external mesh_create : unit -> obj = "ml_SMesh_create"
+
+external mesh_destroy : obj -> unit = "ml_SMesh_destroy"
+
+let free x = mesh_destroy x#obj
+
 class mesh obj = object(self)
   inherit Irr_base.reference_counted obj
+end
+
+class fresh_mesh = object(self)
+  inherit mesh (mesh_create ())
+  initializer Gc.finalise free self
 end
 
 (******************************************************************************)

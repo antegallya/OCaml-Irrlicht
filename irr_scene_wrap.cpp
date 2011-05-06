@@ -142,6 +142,19 @@ extern "C" CAMLprim value ml_ISceneNode_setName(value v_node, value v_name) {
 	return Val_unit;
 }
 
+/* Stub for class IMesh */
+
+extern "C" CAMLprim value ml_SMesh_create(value vunit) {
+	SMesh* mesh = new SMesh();
+	if(mesh == NULL) null_pointer_exn();
+	return (value) mesh;
+}
+
+extern "C" CAMLprim value ml_SMesh_destroy(value v_mesh) {
+	delete ((SMesh*) v_mesh);
+	return Val_unit;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
