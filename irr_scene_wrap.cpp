@@ -157,11 +157,6 @@ extern "C" CAMLprim value ml_SMesh_create(value vunit) {
 	return (value) mesh;
 }
 
-extern "C" CAMLprim value ml_SMesh_destroy(value v_mesh) {
-	delete ((SMesh*) v_mesh);
-	return Val_unit;
-}
-
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
