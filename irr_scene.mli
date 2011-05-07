@@ -60,6 +60,10 @@ class camera : obj -> object
   method set_far_value : float -> unit
   method set_target : Irr_core.vector3df -> unit
 end
+(** Class IMeshBuffer *)
+class mesh_buffer : obj -> object
+  inherit Irr_base.reference_counted
+end
 
 (** Class IMesh *)
 class mesh : obj -> object
