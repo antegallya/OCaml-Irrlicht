@@ -141,6 +141,13 @@ extern "C" CAMLprim value ml_ISceneNode_setName(value v_node, value v_name) {
 	((ISceneNode*) v_node)->setName(String_val(v_name));
 	return Val_unit;
 }
+/* Stub for class IMeshBuffer */
+
+extern "C" CAMLprim value ml_SMeshBuffer_create(value vunit) {
+	SMeshBuffer* buf = new SMeshBuffer();
+	if(buf == NULL) null_pointer_exn();
+	return (value) buf;
+}
 
 /* Stub for class IMesh */
 

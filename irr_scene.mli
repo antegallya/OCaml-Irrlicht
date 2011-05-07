@@ -65,6 +65,10 @@ class mesh_buffer : obj -> object
   inherit Irr_base.reference_counted
 end
 
+class fresh_mesh_buffer : object
+  inherit mesh_buffer
+end
+
 (** Class IMesh *)
 class mesh : obj -> object
   inherit Irr_base.reference_counted

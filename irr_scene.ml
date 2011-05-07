@@ -182,8 +182,17 @@ end
 
 (******************************************************************************)
 
+external mesh_buffer_create : unit -> obj = "ml_SMeshBuffer_create"
+
+let free x = x#drop
+
 class mesh_buffer obj = object(self)
   inherit Irr_base.reference_counted obj
+end
+
+class fresh_mesh_buffer = object(self)
+  inherit mesh_buffer (mesh_buffer_create ())
+  initializer Gc.finalise free self
 end
 
 (******************************************************************************)
