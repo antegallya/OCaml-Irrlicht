@@ -157,6 +157,11 @@ extern "C" CAMLprim value ml_SMesh_create(value vunit) {
 	return (value) mesh;
 }
 
+extern "C" CAMLprim value ml_SMesh_addMeshBuffer(value v_mesh, value v_buf) {
+	((SMesh*) v_mesh)->addMeshBuffer((IMeshBuffer*) v_buf);
+	return Val_unit;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(

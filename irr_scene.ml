@@ -203,6 +203,8 @@ end
 
 external mesh_create : unit -> obj = "ml_SMesh_create"
 
+external mesh_add_mesh_buffer : obj -> obj -> unit = "ml_SMesh_addMeshBuffer"
+
 let free x = x#drop
 
 class mesh obj = object(self)
@@ -211,6 +213,7 @@ end
 
 class fresh_mesh = object(self)
   inherit mesh (mesh_create ())
+  method add_buffer (buf : mesh_buffer) = mesh_add_mesh_buffer self#obj buf#obj
   initializer Gc.finalise free self
 end
 

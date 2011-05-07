@@ -76,6 +76,7 @@ end
 
 class fresh_mesh : object
   inherit mesh
+  method add_buffer : mesh_buffer -> unit
 end
 
 (** Class IAnimatedMesh *)
