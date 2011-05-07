@@ -10,7 +10,10 @@ let ml_name e s =
   let s1 = String.sub s e.prefix (String.length s - e.prefix) in
   let s2 = String.lowercase s1 in
   if not e.poly then s2.[0] <- Char.uppercase s2.[0];
-  if s2 = "end" then "ends" else s2
+  if s2 = "end" then "ends"
+  else match s2.[0] with
+  | '0'..'9' -> sprintf "_%s" s2
+  | _ -> s2
 
 (* Create the mli file *)
 
