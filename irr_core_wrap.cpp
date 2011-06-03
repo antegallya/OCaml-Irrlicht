@@ -51,6 +51,19 @@ value copy_vector3df(vector3df x) {
 	CAMLreturn(v);
 }
 
+vector2d<f32> Vector2df_val(value v) {
+	return vector2d<f32>(Double_val(Field(v, 0)), Double_val(Field(v, 1)));
+}
+
+value copy_vector2df(vector2d<f32> x) {
+	CAMLparam0();
+	CAMLlocal1(v);
+	v = caml_alloc(2, 0);
+	Store_field(v, 0, caml_copy_double(x.X));
+	Store_field(v, 1, caml_copy_double(x.Y));
+	CAMLreturn(v);
+}
+
 line3df Line3df_val(value v) {
 	return line3d<f32>(Vector3df_val(Field(v, 0)), Vector3df_val(Field(v, 1)));
 }
