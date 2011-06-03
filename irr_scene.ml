@@ -190,6 +190,9 @@ external mesh_buffer_get_vertex_count : obj -> int =
 external mesh_buffer_get_vertex : obj -> int -> Irr_video.Vertex.t =
   "ml_SMeshBuffer_get_vertex"
 
+external mesh_buffer_set_vertex : obj -> int -> Irr_video.Vertex. t -> unit =
+  "ml_SMeshBuffer_set_vertex"
+
 let free x = x#drop
 
 class mesh_buffer obj = object(self)
@@ -200,6 +203,7 @@ end
 class fresh_mesh_buffer = object(self)
   inherit mesh_buffer (mesh_buffer_create ())
   method vertex i = mesh_buffer_get_vertex self#obj i
+  method set_vertex i v = mesh_buffer_set_vertex self#obj i v
   initializer Gc.finalise free self
 end
 

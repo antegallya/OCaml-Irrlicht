@@ -157,6 +157,13 @@ extern "C" CAMLprim value ml_SMeshBuffer_get_vertex(value v_mb, value v_i) {
 	return copy_vertex(((SMeshBuffer*) v_mb)->Vertices[Int_val(v_i)]);
 }
 
+extern "C" CAMLprim value ml_SMeshBuffer_set_vertex(
+		value v_mb, value v_i, value v_vert)
+{
+	((SMeshBuffer*) v_mb)->Vertices[Int_val(v_i)] = Vertex_val(v_vert);
+	return Val_unit;
+}
+
 /* Stub for class IMesh */
 
 extern "C" CAMLprim value ml_SMesh_create(value vunit) {
