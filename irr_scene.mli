@@ -65,12 +65,14 @@ end
 class mesh_buffer : obj -> object
   inherit Irr_base.reference_counted
   method vertex_count : int
+  method index : int -> int
 end
 
 class fresh_mesh_buffer : object
   inherit mesh_buffer
   method vertex : int -> Irr_video.Vertex.t
   method set_vertex : int -> Irr_video.Vertex.t -> unit
+  method set_index : int -> int -> unit
 end
 
 (** Class IMesh *)

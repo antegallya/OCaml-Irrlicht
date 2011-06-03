@@ -193,17 +193,24 @@ external mesh_buffer_get_vertex : obj -> int -> Irr_video.Vertex.t =
 external mesh_buffer_set_vertex : obj -> int -> Irr_video.Vertex. t -> unit =
   "ml_SMeshBuffer_set_vertex"
 
+external mesh_buffer_get_index : obj -> int -> int = "ml_IMeshBuffer_get_index"
+
+external mesh_buffer_set_index : obj -> int -> int -> unit =
+  "ml_SMeshBuffer_set_index"
+
 let free x = x#drop
 
 class mesh_buffer obj = object(self)
   inherit Irr_base.reference_counted obj
   method vertex_count = mesh_buffer_get_vertex_count self#obj
+  method index i = mesh_buffer_get_index self#obj i
 end
 
 class fresh_mesh_buffer = object(self)
   inherit mesh_buffer (mesh_buffer_create ())
   method vertex i = mesh_buffer_get_vertex self#obj i
   method set_vertex i v = mesh_buffer_set_vertex self#obj i v
+  method set_index i j = mesh_buffer_set_index self#obj i j
   initializer Gc.finalise free self
 end
 

@@ -164,6 +164,17 @@ extern "C" CAMLprim value ml_SMeshBuffer_set_vertex(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IMeshBuffer_get_index(value v_mb, value v_i) {
+	return Val_int(((IMeshBuffer*) v_mb)->getIndices()[Int_val(v_i)]);
+}
+
+extern "C" CAMLprim value ml_SMeshBuffer_set_index(
+		value v_mb, value v_i, value v_j)
+{
+	((SMeshBuffer*)v_mb)->Indices[Int_val(v_i)] = Int_val(v_j);
+	return Val_unit;
+}
+
 /* Stub for class IMesh */
 
 extern "C" CAMLprim value ml_SMesh_create(value vunit) {
