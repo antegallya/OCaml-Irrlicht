@@ -6,6 +6,18 @@ let () = Callback.register_exception "Rendering_failed_exn" Rendering_failed_exn
 
 (******************************************************************************)
 
+(* Binding for class S3DVertex *)
+
+(******************************************************************************)
+
+module Vertex = struct
+  type t =
+    {color : Irr_core.color; normal : Irr_core.vector3df;
+      pos : Irr_core.vector3df; t_coords : float * float}
+end
+
+(******************************************************************************)
+
 (* Binding for class ITexture *)
 
 (******************************************************************************)

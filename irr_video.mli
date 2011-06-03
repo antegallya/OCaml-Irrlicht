@@ -5,6 +5,13 @@ exception Rendering_failed_exn
 
 type obj = Irr_base.obj
 
+(** Class S3DVertex *)
+module Vertex : sig
+  type t =
+    {color : Irr_core.color; normal : Irr_core.vector3df;
+      pos : Irr_core.vector3df; t_coords : float * float}
+end
+
 (** Class ITexture *)
 class texture : obj -> object
   inherit Irr_base.reference_counted
