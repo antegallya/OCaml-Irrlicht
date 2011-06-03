@@ -675,6 +675,7 @@ let free x = x#drop
 
 class manager obj = object(self)
   inherit Irr_base.reference_counted obj
+  val mutable meshes = []
   method add_animated_mesh_node ?parent ?(id = -1)
     ?(pos = (0., 0., 0.)) ?(rot = (0., 0., 0.)) ?(scale = (1., 1., 1.))
       (mesh : animated_mesh)
@@ -724,6 +725,7 @@ class manager obj = object(self)
     let p = match parent with
     | None -> None
     | Some (x : node) -> Some x#obj in
+    meshes <- mesh :: meshes;
     let obj =
       manager_add_mesh_scene_node self#obj mesh#obj p id pos rot scale in
     object
