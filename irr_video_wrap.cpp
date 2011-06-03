@@ -9,6 +9,28 @@ void rendering_failed_exn() {
 	caml_raise_constant(*e);
 }
 
+/* Stub for class S3DVertex */
+
+S3DVertex Vertex_val(value v) {
+	S3DVertex vert;
+	vert.Color = SColor_val(Field(v, 0));
+	vert.Normal = Vector3df_val(Field(v, 1));
+	vert.Pos = Vector3df_val(Field(v, 2));
+	vert.TCoords = Vector2df_val(Field(v, 3));
+	return vert;
+}
+
+value copy_vertex(S3DVertex vert) {
+	CAMLparam0();
+	CAMLlocal1(v);
+	v = caml_alloc(4, 0);
+	Store_field(v, 0, copy_SColor(vert.Color));
+	Store_field(v, 1, copy_vector3df(vert.Normal));
+	Store_field(v, 2, copy_vector3df(vert.Pos));
+	Store_field(v, 3, copy_vector2df(vert.TCoords));
+	CAMLreturn(v);
+}
+
 /* Stub for ITexture class */
 
 extern "C" CAMLprim value ml_ITexture_getOriginalSize(value v_tex) {
