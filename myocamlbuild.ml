@@ -16,7 +16,8 @@ let c_objs =
 let c_headers =
   ["global.h"; "irr_enums_wrap_conv.h"; "irr_enums_wrap_values.h";
   "irr_base_wrap.h";  "irr_enums_wrap.h"; "methods_hash_values.h";
-  "irr_core_wrap.h"; "utils.h"; "irr_enums_wrap_poly_values.h"]
+  "irr_core_wrap.h"; "irr_video_wrap.h"; "utils.h";
+  "irr_enums_wrap_poly_values.h"]
 
 let () = dispatch & function
   | Before_options ->

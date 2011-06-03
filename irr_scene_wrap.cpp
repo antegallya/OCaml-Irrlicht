@@ -153,6 +153,10 @@ extern "C" CAMLprim value ml_IMeshBuffer_getVertexCount(value v_mb) {
 	return Val_int(((IMeshBuffer*) v_mb)->getVertexCount());
 }
 
+extern "C" CAMLprim value ml_SMeshBuffer_get_vertex(value v_mb, value v_i) {
+	return copy_vertex(((SMeshBuffer*) v_mb)->Vertices[Int_val(v_i)]);
+}
+
 /* Stub for class IMesh */
 
 extern "C" CAMLprim value ml_SMesh_create(value vunit) {

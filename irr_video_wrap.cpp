@@ -1,6 +1,6 @@
 /* C++ stub for the Irr_video module */
 
-#include "global.h"
+#include "irr_video_wrap.h"
 
 void rendering_failed_exn() {
 	static value* e = NULL;

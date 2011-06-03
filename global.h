@@ -22,5 +22,6 @@ using namespace io;
 #include "irr_enums_wrap.h"
 #include "irr_base_wrap.h"
 #include "irr_core_wrap.h"
+#include "irr_video_wrap.h"
 
 #endif

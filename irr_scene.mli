@@ -68,6 +68,7 @@ end
 
 class fresh_mesh_buffer : object
   inherit mesh_buffer
+  method vertex : int -> Irr_video.Vertex.t
 end
 
 (** Class IMesh *)
