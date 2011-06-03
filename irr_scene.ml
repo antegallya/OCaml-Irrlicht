@@ -184,10 +184,14 @@ end
 
 external mesh_buffer_create : unit -> obj = "ml_SMeshBuffer_create"
 
+external mesh_buffer_get_vertex_count : obj -> int =
+  "ml_IMeshBuffer_getVertexCount"
+
 let free x = x#drop
 
 class mesh_buffer obj = object(self)
   inherit Irr_base.reference_counted obj
+  method vertex_count = mesh_buffer_get_vertex_count self#obj
 end
 
 class fresh_mesh_buffer = object(self)

@@ -63,6 +63,7 @@ end
 (** Class IMeshBuffer *)
 class mesh_buffer : obj -> object
   inherit Irr_base.reference_counted
+  method vertex_count : int
 end
 
 class fresh_mesh_buffer : object
