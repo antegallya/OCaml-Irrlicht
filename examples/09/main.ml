@@ -87,3 +87,15 @@ end = struct
       else (get map x (y - 1), get map x (y + 1)) in
     normalize (s *. 2. *. (zl -. zr), 4., s *. 2. *. (zd -. zu))
 end
+
+module Mesh : sig
+  type t
+  val init : Height_map.t -> float -> Colour_func.t -> Irr_video.driver -> t
+  val add_strip :
+    t -> Height_map.t -> Colour_func.t -> int -> int -> int -> unit
+end = struct
+  type t =
+    {width : int; height : int; scale : float; mesh : Irr_scene.fresh_mesh}
+  let init = assert false
+  let add_strip = assert false
+end
