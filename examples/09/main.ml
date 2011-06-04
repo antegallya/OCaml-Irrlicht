@@ -1,3 +1,7 @@
+let normalize (x, y, z) =
+  let len = sqrt (x *. x +. y *. y +. z *. z) in
+  (x /. len, y /. len, z /. len)
+
 module Colour_func : sig
   type t = float -> float -> float -> Irr_core.color
   val grey : t
@@ -48,6 +52,7 @@ module Height_map : sig
   val set : t -> int -> int -> float -> unit
   val set_i : t -> int -> float -> unit
   val get : t -> int -> int -> float
+  val get_normal : t -> int -> int -> float -> Irr_core.vector3df
 end = struct
   type t = {width : int; height : int; s : float; data : float array}
   let create w h =
@@ -68,4 +73,17 @@ end = struct
         set map x y (calc map f x y)
       done
     done
+  let get_normal map x y s =
+    let zc = get map x y in
+    let zl, zr =
+      if x = 0 then let zr = get map (x + 1) y in (zc +. zc -. zr, zr)
+      else if x = map.width - 1 then
+        let zl = get map (x - 1) y in (zl, zc +. zc -. zl)
+      else (get map (x - 1) y, get map (x + 1) y) in
+    let zu, zd =
+      if y = 0 then let zd = get map x (y + 1) in (zc +. zc -. zd, zd)
+      else if y = map.height - 1 then
+        let zu = get map x (y - 1) in (zu, zc +. zc -. zu)
+      else (get map x (y - 1), get map x (y + 1)) in
+    normalize (s *. 2. *. (zl -. zr), 4., s *. 2. *. (zd -. zu))
 end
