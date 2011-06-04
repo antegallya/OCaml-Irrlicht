@@ -73,6 +73,7 @@ class fresh_mesh_buffer : object
   method vertex : int -> Irr_video.Vertex.t
   method set_vertex : int -> Irr_video.Vertex.t -> unit
   method set_index : int -> int -> unit
+  method set_vertices_used : int -> unit
 end
 
 (** Class IMesh *)

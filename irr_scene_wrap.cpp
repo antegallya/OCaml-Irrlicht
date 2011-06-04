@@ -175,6 +175,13 @@ extern "C" CAMLprim value ml_SMeshBuffer_set_index(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMeshBuffer_set_vertices_used(
+		value v_mb, value v_n)
+{
+	((SMeshBuffer*) v_mb)->Vertices.set_used(Int_val(v_n));
+	return Val_unit;
+}
+
 /* Stub for class IMesh */
 
 extern "C" CAMLprim value ml_SMesh_create(value vunit) {

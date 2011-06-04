@@ -198,6 +198,9 @@ external mesh_buffer_get_index : obj -> int -> int = "ml_IMeshBuffer_get_index"
 external mesh_buffer_set_index : obj -> int -> int -> unit =
   "ml_SMeshBuffer_set_index"
 
+external mesh_buffer_set_vertices_used : obj -> int -> unit =
+  "ml_SMeshBuffer_set_vertices_used"
+
 let free x = x#drop
 
 class mesh_buffer obj = object(self)
@@ -211,6 +214,7 @@ class fresh_mesh_buffer = object(self)
   method vertex i = mesh_buffer_get_vertex self#obj i
   method set_vertex i v = mesh_buffer_set_vertex self#obj i v
   method set_index i j = mesh_buffer_set_index self#obj i j
+  method set_vertices_used n = mesh_buffer_set_vertices_used self#obj n
   initializer Gc.finalise free self
 end
 
