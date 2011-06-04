@@ -90,12 +90,16 @@ end
 
 module Mesh : sig
   type t
+  val create : unit -> t
   val init : Height_map.t -> float -> Colour_func.t -> Irr_video.driver -> t
   val add_strip :
     t -> Height_map.t -> Colour_func.t -> int -> int -> int -> unit
 end = struct
   type t =
-    {width : int; height : int; scale : float; mesh : Irr_scene.fresh_mesh}
+    {mutable width : int; mutable height : int; mutable scale : float;
+    mesh : Irr_scene.fresh_mesh}
+  let create () =
+    {width = 0; height = 0; scale = 0.; mesh = new Irr_scene.fresh_mesh}
   let init = assert false
   let add_strip = assert false
 end
