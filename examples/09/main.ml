@@ -37,3 +37,35 @@ end = struct
     let z = xx *. xx +. yy *. yy in
     0.3 *. z *. cos (xx *. yy)
 end
+
+module Height_map : sig
+  type t
+  val create : int -> int -> t
+  val generate : t -> Generate_func.t -> unit
+  val width : t -> int
+  val height : t -> int
+  val calc : t -> Generate_func.t -> int -> int -> float
+  val set : t -> int -> int -> float -> unit
+  val set_i : t -> int -> float -> unit
+  val get : t -> int -> int -> float
+end = struct
+  type t = {width : int; height : int; s : float; data : float array}
+  let create w h =
+    let s = sqrt (float_of_int (w * w + h * h)) in
+    let data = Array.make (w * h) 0. in
+    {width = w; height = h; s = s; data = data}
+  let set_i map x z = map.data.(x) <- z
+  let set map x y z = set_i map (y * map.width + x) z
+  let get map x y = map.data.(y * map.width + x)
+  let calc map f x y =
+    let aux z d = int_of_float (float z -. float d *. 0.5) in
+    f (aux x map.width) (aux y map.height) map.s
+  let width map = map.width
+  let height map = map.height
+  let generate map f =
+    for y = 0 to map.height - 1 do
+      for x = 0 to map.width - 1 do
+        set map x y (calc map f x y)
+      done
+    done
+end
