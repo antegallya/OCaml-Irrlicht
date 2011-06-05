@@ -4,3 +4,9 @@ Version : 0.0.2
 Synopsis : An Ocaml binding for the 3D engine Irrlicht
 Authors : Alexis Bernadet < alexis.bernadet@noos.fr >
 License : zlib
+BuildType : Custom (0.2)
+InstallType : Custom (0.2)
+XCustomBuild : make
+XCustomBuildClean : make clean
+XCustomInstall : make install
+XCustomUninstall : make uninstall
