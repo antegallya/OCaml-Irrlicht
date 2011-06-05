@@ -107,11 +107,11 @@ end = struct
   let add_strip mesh hm cf y0 y1 buf_num =
     let buf =
       if buf_num < mesh.mesh#buffer_count then List.nth mesh.buffers buf_num
-      else
+      else (
         let buf = new Irr_scene.fresh_mesh_buffer in
         mesh.buffers <- mesh.buffers @ [buf];
         mesh.mesh#add_buffer (buf :> Irr_scene.mesh_buffer);
-        buf in
+        buf ) in
     buf#set_vertices_used ((1 + y1 - y0) * mesh.width);
     let i = ref 0 in
     for y = y0 to y1 do
@@ -130,11 +130,11 @@ end = struct
       done
     done;
     i := 0;
-    buf#set_indices_used (6 * (mesh.width - 1) * (y1 - y0));
+    buf#set_indices_used (6 * mesh.width * (y1 - y0 + 1));
     for y = y0 to y1 - 1 do
-      for x = 0 to mesh.width - 1 do
+      for x = 0 to mesh.width - 2 do
         let n = (y - y0) * mesh.width + x in
-        let list = [0; mesh.height; mesh.height + 1; mesh.height + 1; 1; 0] in
+        let list = [0; mesh.width; mesh.width + 1; mesh.width + 1; 1; 0] in
         let aux di = buf#set_index !i (n + di); incr i in
         List.iter aux list
       done
@@ -145,7 +145,7 @@ end = struct
     mesh.width <- Height_map.width hm;
     mesh.height <- Height_map.height hm;
     let mp = driver#max_prim_count in
-    let sw = mp / (6 * mesh.height) in
+    let sw = mp / (6 * mesh.width) in
     let rec aux i y0 =
       if y0 >= mesh.height then ()
       else (
