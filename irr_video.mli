@@ -88,4 +88,5 @@ class driver : obj -> object
     Irr_enums.transformation_state -> Irr_core.matrix4 -> unit
   method draw_3d_triangle : Irr_core.triangle3df -> Irr_core.color -> unit
   method set_material : material -> unit
+  method max_prim_count : int
 end

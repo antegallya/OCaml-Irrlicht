@@ -357,3 +357,10 @@ extern "C" CAMLprim value ml_IVideoDriver_setMaterial(
 	((IVideoDriver*) v_driver)->setMaterial(mat);
 	return Val_unit;
 }
+
+extern "C" CAMLprim value ml_IVideoDriver_getMaximalPrimitiveCount(
+		value v_driver)
+{
+	return Val_int(((IVideoDriver*) v_driver)->getMaximalPrimitiveCount());
+}
+

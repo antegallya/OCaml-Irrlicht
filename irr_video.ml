@@ -238,6 +238,9 @@ external driver_draw_3d_triangle :
 external driver_set_material : obj -> obj -> unit =
   "ml_IVideoDriver_setMaterial"
 
+external driver_get_maximal_primitive_count : obj -> int =
+  "ml_IVideoDriver_getMaximalPrimitiveCount"
+
 class driver obj = object(self)
   inherit Irr_base.reference_counted obj
   method begin_scene ?(backbuffer = true) ?(zbuffer = true)
@@ -278,4 +281,5 @@ class driver obj = object(self)
   method set_transform state mat = driver_set_transform self#obj state mat
   method draw_3d_triangle t c = driver_draw_3d_triangle self#obj t c
   method set_material (m : material) = driver_set_material self#obj m#obj
+  method max_prim_count = driver_get_maximal_primitive_count self#obj
 end
