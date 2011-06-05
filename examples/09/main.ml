@@ -175,7 +175,7 @@ let () =
   node#add_animator anim;
   let camera = smgr#add_camera_fps () in
   camera#set_pos (-20., 150., -20.);
-  camera#set_target (200., -80., -150.);
+  camera#set_target (200., -80., 150.);
   camera#set_far_value (20000.);
   while device#run do
     driver#begin_scene ();
