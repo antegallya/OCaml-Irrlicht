@@ -4,6 +4,8 @@ let normalize (x, y, z) =
 
 let key_is_down = Array.make Irr_base.key_count false
 
+let is_key_down key = key_is_down.(Irr_base.int_of_key key)
+
 let on_event = function
   | `key_input {Irr_base.ki_key = key; ki_pressed_down = b} ->
       key_is_down.(Irr_base.int_of_key key) <- b; false
@@ -185,6 +187,18 @@ let () =
   camera#set_target (200., -80., 150.);
   camera#set_far_value (20000.);
   while device#run do
+    if is_key_down `key_w then
+      mesh_node#set_material_flag `wireframe
+        (not (mesh_node#material 0)#wireframe);
+    if is_key_down `key_1 then (
+      Height_map.generate hm Generate_func.eggbox;
+      Mesh.init mesh hm 50. Colour_func.grey driver);
+    if is_key_down `key_2 then (
+      Height_map.generate hm Generate_func.moresine;
+      Mesh.init mesh hm 50. Colour_func.yellow driver);
+    if is_key_down `key_3 then (
+      Height_map.generate hm Generate_func.justexp;
+      Mesh.init mesh hm 50. Colour_func.yellow driver); 
     driver#begin_scene ();
     smgr#draw_all;
     driver#end_scene
