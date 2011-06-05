@@ -22,8 +22,8 @@ let add_lighting_ball (driver : Irr_video.driver) (smgr : Irr_scene.manager) =
     ~radius:800. () in
   let anim = smgr#create_fly_circle ~center:(0., 150., 0.) ~radius:250. () in
   light_node#add_animator anim;
-  let bill_node = smgr#add_billboard_node ~parent:light_node ~size:(50., 50.)
-    () in
+  let bill_node = smgr#add_billboard_node ~parent:(light_node :> Irr_scene.node)
+    ~size:(50., 50.) () in
   bill_node#set_material_flag `lighting false;
   bill_node#set_material_type `transparent_add_color;
   let particle_texture = driver#get_texture "../../media/particlewhite.bmp" in
