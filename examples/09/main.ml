@@ -95,6 +95,7 @@ module Mesh : sig
     t -> Height_map.t -> float -> Colour_func.t -> Irr_video.driver -> unit
   val add_strip :
     t -> Height_map.t -> Colour_func.t -> int -> int -> int -> unit
+  val get_mesh : t -> Irr_scene.fresh_mesh 
 end = struct
   type t =
     {mutable width : int; mutable height : int; mutable scale : float;
@@ -140,6 +141,8 @@ end = struct
     done
   let init mesh hm scale cf (driver : Irr_video.driver) =
     mesh.scale <- scale;
+    mesh.width <- Height_map.width hm;
+    mesh.height <- Height_map.height hm;
     let mp = driver#max_prim_count in
     let sw = mp / (6 * mesh.height) in
     let rec aux i y0 =
@@ -149,4 +152,25 @@ end = struct
         add_strip mesh hm cf y0 y1 i;
         aux (i + 1) (y0 + sw)) in
     aux 0 0
+  let get_mesh mesh = mesh.mesh
 end
+
+let () =
+  let device = Irr.create_device ~dtype:`opengl () in
+  let driver = device#driver and smgr = device#scene_manager in
+  device#set_window_caption "Irrlicht Example fro SMesh usage";
+  let mesh = Mesh.create () in
+  let hm = Height_map.create 255 255 in
+  Height_map.generate hm  Generate_func.eggbox;
+  Mesh.init mesh hm 50. Colour_func.grey driver;
+  let mesh_node = smgr#add_mesh_node (Mesh.get_mesh mesh :> Irr_scene.mesh) in
+  mesh_node#set_material_flag `lighting false;
+  let camera = smgr#add_camera_fps () in
+  camera#set_pos (-20., 150., -20.);
+  camera#set_target (200., -80., -150.);
+  camera#set_far_value (20000.);
+  while device#run do
+    driver#begin_scene ();
+    smgr#draw_all;
+    driver#end_scene
+  done
