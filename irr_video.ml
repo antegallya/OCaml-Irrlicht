@@ -37,6 +37,15 @@ module Light = struct
     specular : Irr_core.colorf;
     ty : Irr_enums.light_type;
   }
+  let cons l ?(ambient = l.ambient) ?(attenuation = l.attenuation)
+    ?(cast_shadows = l.cast_shadows) ?(diffuse = l.diffuse)
+    ?(direction = l.direction) ?(falloff = l.falloff)
+    ?(inner_cone = l.inner_cone) ?(outer_cone = l.outer_cone) ?(pos = l.pos)
+    ?(radius = l.radius) ?(specular = l.specular) ?(ty = l.ty) () =
+    {ambient = ambient; attenuation = attenuation; cast_shadows = cast_shadows;
+    diffuse = diffuse; direction  = direction; falloff = falloff;
+    inner_cone = inner_cone; outer_cone = outer_cone; pos = pos;
+    radius = radius; specular = specular; ty = ty}
 end
 
 (******************************************************************************)
