@@ -81,6 +81,7 @@ end
 class mesh : obj -> object
   inherit Irr_base.reference_counted
   method buffer_count : int
+  method buffer : int -> mesh_buffer
 end
 
 class fresh_mesh : object

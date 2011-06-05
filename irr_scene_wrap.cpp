@@ -206,6 +206,12 @@ extern "C" CAMLprim value ml_IMesh_getMeshBufferCount(value v_mesh) {
 	return Val_int(((IMesh*) v_mesh)->getMeshBufferCount());
 }
 
+extern "C" CAMLprim value ml_IMesh_getMeshBuffer(value v_mesh, value v_i) {
+	IMeshBuffer* buf = ((IMesh*) v_mesh)->getMeshBuffer(Int_val(v_i));
+	if(buf == NULL) null_pointer_exn();
+	return (value) buf;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(
