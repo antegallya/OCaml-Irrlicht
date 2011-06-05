@@ -361,6 +361,10 @@ extern "C" CAMLprim value ml_IVideoDriver_setMaterial(
 extern "C" CAMLprim value ml_IVideoDriver_getMaximalPrimitiveCount(
 		value v_driver)
 {
-	return Val_int(((IVideoDriver*) v_driver)->getMaximalPrimitiveCount());
+	int n = ((IVideoDriver*) v_driver)->getMaximalPrimitiveCount();
+	/* Because integers of caml are represented on 31 bits we must not have
+	 * a too big n */
+	if(n > 10000000) return Val_int(10000000);
+  else return Val_int(n);
 }
 
