@@ -27,7 +27,7 @@ end = struct
   type t = int -> int -> float -> float
   let eggbox x y s =
     let r = 4. *. sqrt (float_of_int (x * x + y * y)) /. s in
-    let aux z = cos (0.2 *. float_of_int x) in
+    let aux z = cos (0.2 *. float_of_int z) in
     let z = exp (-. r *. 2.) *. (aux x) *. (aux y) in
     0.25 +. 0.25 *. z
   let moresine x y s =
