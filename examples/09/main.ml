@@ -2,6 +2,13 @@ let normalize (x, y, z) =
   let len = sqrt (x *. x +. y *. y +. z *. z) in
   (x /. len, y /. len, z /. len)
 
+let key_is_down = Array.make Irr_base.key_count false
+
+let on_event = function
+  | `key_input {Irr_base.ki_key = key; ki_pressed_down = b} ->
+      key_is_down.(Irr_base.int_of_key key) <- b; false
+  | _ -> false
+
 module Colour_func : sig
   type t = float -> float -> float -> Irr_core.color
   val grey : t
@@ -158,7 +165,7 @@ end = struct
 end
 
 let () =
-  let device = Irr.create_device ~dtype:`opengl () in
+  let device = Irr.create_device ~dtype:`opengl ~on_event () in
   let driver = device#driver and smgr = device#scene_manager in
   device#set_window_caption "Irrlicht Example for SMesh usage";
   let mesh = Mesh.create () in
