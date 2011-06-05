@@ -164,7 +164,11 @@ let () =
   Height_map.generate hm  Generate_func.eggbox;
   Mesh.init mesh hm 50. Colour_func.grey driver;
   let mesh_node = smgr#add_mesh_node (Mesh.get_mesh mesh :> Irr_scene.mesh) in
-  mesh_node#set_material_flag `lighting false;
+  mesh_node#set_material_flag `back_face_culling false;
+  let node = smgr#add_light_node ~pos:(0., 100., 0.)
+    ~color:(Irr_core.colorf_RGB 0.6 0.7 1.) ~radius:500. () in
+  let anim = smgr#create_fly_circle ~center:(0., 150., 0.) ~radius:250. () in
+  node#add_animator anim;
   let camera = smgr#add_camera_fps () in
   camera#set_pos (-20., 150., -20.);
   camera#set_target (200., -80., -150.);
