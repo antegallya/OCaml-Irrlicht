@@ -169,6 +169,8 @@ let () =
   mesh_node#set_material_flag `back_face_culling false;
   let node = smgr#add_light_node ~pos:(0., 100., 0.)
     ~color:(Irr_core.colorf_RGB 0.6 0.7 1.) ~radius:500. () in
+  let light_att = (0., 1. /. 500., 0.) in
+  node#set_data (Irr_video.Light.cons node#data ~attenuation:light_att ());
   let anim = smgr#create_fly_circle ~center:(0., 150., 0.) ~radius:250. () in
   node#add_animator anim;
   let camera = smgr#add_camera_fps () in
