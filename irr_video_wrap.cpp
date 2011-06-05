@@ -31,6 +31,44 @@ value copy_vertex(S3DVertex vert) {
 	CAMLreturn(v);
 }
 
+/* Stub for class SLight */
+
+SLight Light_val(value v) {
+	SLight light;
+	light.AmbientColor = SColorf_val(Field(v, 0));
+	light.Attenuation = Vector3df_val(Field(v, 1));
+	light.CastShadows = Bool_val(Field(v, 2));
+	light.DiffuseColor = SColorf_val(Field(v, 3));
+	light.Direction = Vector3df_val(Field(v, 4));
+	light.Falloff = Double_val(Field(v, 5));
+	light.InnerCone = Double_val(Field(v, 6));
+	light.OuterCone = Double_val(Field(v, 7));
+	light.Position = Vector3df_val(Field(v, 8));
+	light.Radius = Double_val(Field(v, 9));
+	light.SpecularColor = SColorf_val(Field(v, 10));
+	light.Type = light_type_val(Field(v, 11));
+	return light;
+}
+
+value copy_light(SLight light) {
+	CAMLparam0();
+	CAMLlocal1(v);
+	v = caml_alloc(12, 0);
+	Store_field(v, 0, copy_SColorf(light.AmbientColor));
+	Store_field(v, 1, copy_vector3df(light.Attenuation));
+	Store_field(v, 2, Val_bool(light.CastShadows));
+	Store_field(v, 3, copy_SColorf(light.DiffuseColor));
+	Store_field(v, 4, copy_vector3df(light.Direction));
+	Store_field(v, 5, copy_double(light.Falloff));
+	Store_field(v, 6, copy_double(light.InnerCone));
+	Store_field(v, 7, copy_double(light.OuterCone));
+	Store_field(v, 8, copy_vector3df(light.Position));
+	Store_field(v, 9, copy_double(light.Radius));
+	Store_field(v, 10, copy_SColorf(light.SpecularColor));
+	Store_field(v, 11, Val_light_type(light.Type));
+	CAMLreturn(v);
+}
+
 /* Stub for ITexture class */
 
 extern "C" CAMLprim value ml_ITexture_getOriginalSize(value v_tex) {

@@ -18,6 +18,29 @@ end
 
 (******************************************************************************)
 
+(* Binding for class SLight *)
+
+(******************************************************************************)
+
+module Light = struct
+  type t = {
+    ambient : Irr_core.colorf;
+    attenuation : Irr_core.vector3df;
+    cast_shadows : bool;
+    diffuse : Irr_core.colorf;
+    direction : Irr_core.vector3df;
+    falloff : float;
+    inner_cone : float;
+    outer_cone : float;
+    pos : Irr_core.vector3df;
+    radius : float;
+    specular : Irr_core.colorf;
+    ty : Irr_enums.light_type;
+  }
+end
+
+(******************************************************************************)
+
 (* Binding for class ITexture *)
 
 (******************************************************************************)
