@@ -91,7 +91,8 @@ end
 module Mesh : sig
   type t
   val create : unit -> t
-  val init : Height_map.t -> float -> Colour_func.t -> Irr_video.driver -> t
+  val init :
+    t -> Height_map.t -> float -> Colour_func.t -> Irr_video.driver -> unit
   val add_strip :
     t -> Height_map.t -> Colour_func.t -> int -> int -> int -> unit
 end = struct
@@ -137,5 +138,15 @@ end = struct
         List.iter aux list
       done
     done
-  let init = assert false
+  let init mesh hm scale cf (driver : Irr_video.driver) =
+    mesh.scale <- scale;
+    let mp = driver#max_prim_count in
+    let sw = mp / (6 * mesh.height) in
+    let rec aux i y0 =
+      if y0 >= mesh.height then ()
+      else (
+        let y1 = min (y0 + sw) (mesh.height - 1) in
+        add_strip mesh hm cf y0 y1 i;
+        aux (i + 1) (y0 + sw)) in
+    aux 0 0
 end
