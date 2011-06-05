@@ -217,6 +217,11 @@ extern "C" CAMLprim value ml_IMesh_getMeshBuffer(value v_mesh, value v_i) {
 	return (value) buf;
 }
 
+extern "C" CAMLprim value ml_SMesh_recalculateBoundingBox(value v_mesh) {
+	((SMesh*) v_mesh)->recalculateBoundingBox();
+	return Val_unit;
+}
+
 /* Stub for class IAnimatedMesh */
 
 extern "C" value ml_IAnimatedMesh_getMesh(

@@ -241,6 +241,9 @@ external mesh_get_mesh_buffer_count : obj -> int = "ml_IMesh_getMeshBufferCount"
 
 external mesh_get_mesh_buffer : obj -> int -> obj = "ml_IMesh_getMeshBuffer"
 
+external mesh_recalculate_bounding_box : obj -> unit =
+  "ml_SMesh_recalculateBoundingBox"
+
 let free x = x#drop
 
 class mesh obj = object(self)
@@ -257,6 +260,7 @@ end
 class fresh_mesh = object(self)
   inherit mesh (mesh_create ())
   method add_buffer (buf : mesh_buffer) = mesh_add_mesh_buffer self#obj buf#obj
+  method recalculate_bounding_box = mesh_recalculate_bounding_box self#obj
   initializer Gc.finalise free self
 end
 

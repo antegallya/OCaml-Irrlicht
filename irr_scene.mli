@@ -88,6 +88,7 @@ end
 class fresh_mesh : object
   inherit mesh
   method add_buffer : mesh_buffer -> unit
+  method recalculate_bounding_box : unit
 end
 
 (** Class IAnimatedMesh *)
