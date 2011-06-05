@@ -138,7 +138,8 @@ end = struct
         let aux di = buf#set_index !i (n + di); incr i in
         List.iter aux list
       done
-    done
+    done;
+    buf#recalculate_bounding_box
   let init mesh hm scale cf (driver : Irr_video.driver) =
     mesh.scale <- scale;
     mesh.width <- Height_map.width hm;
@@ -151,7 +152,8 @@ end = struct
         let y1 = min (y0 + sw) (mesh.height - 1) in
         add_strip mesh hm cf y0 y1 i;
         aux (i + 1) (y0 + sw)) in
-    aux 0 0
+    aux 0 0;
+    mesh.mesh#recalculate_bounding_box
   let get_mesh mesh = mesh.mesh
 end
 
