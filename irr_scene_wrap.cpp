@@ -270,6 +270,13 @@ extern "C" CAMLprim value ml_ILightSceneNode_getLightData(value v_node) {
 	return copy_light(((ILightSceneNode*) v_node)->getLightData());
 }
 
+extern "C" CAMLprim value ml_ILightSceneNode_setLightData(
+		value v_node, value v_data)
+{
+	((ILightSceneNode*) v_node)->setLightData(Light_val(v_data));
+	return Val_unit;
+}
+
 /* Stub for class ICameraSceneNode */
 
 extern "C" CAMLprim value ml_ICameraSceneNode_setFarValue(

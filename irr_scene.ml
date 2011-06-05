@@ -437,9 +437,13 @@ end
 external light_node_get_light_data : obj -> Irr_video.Light.t =
   "ml_ILightSceneNode_getLightData"
 
+external light_node_set_light_data : obj -> Irr_video.Light.t -> unit =
+  "ml_ILightSceneNode_setLightData"
+
 class light_node obj = object(self)
   inherit node obj
   method data = light_node_get_light_data self#obj
+  method set_data d = light_node_set_light_data self#obj d
 end
 
 (******************************************************************************)
