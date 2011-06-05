@@ -264,6 +264,12 @@ extern "C" CAMLprim value ml_IAnimatedMeshSceneNode_addShadowVolumeSceneNode(
 			mesh, Int_val(v_id), Bool_val(v_zfail), Double_val(v_infinity));
 }
 
+/* Stub for class ILightSceneNode */
+
+extern "C" CAMLprim value ml_ILightSceneNode_getLightData(value v_node) {
+	return copy_light(((ILightSceneNode*) v_node)->getLightData());
+}
+
 /* Stub for class ICameraSceneNode */
 
 extern "C" CAMLprim value ml_ICameraSceneNode_setFarValue(

@@ -147,6 +147,7 @@ end
 (** Class ILightSceneNode *)
 class light_node : obj -> object
   inherit node
+  method data : Irr_video.Light.t
 end
 
 (** Class IVolumeLightSceneNode *)

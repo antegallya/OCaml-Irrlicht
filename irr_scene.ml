@@ -434,8 +434,12 @@ end
 
 (******************************************************************************)
 
+external light_node_get_light_data : obj -> Irr_video.Light.t =
+  "ml_ILightSceneNode_getLightData"
+
 class light_node obj = object(self)
   inherit node obj
+  method data = light_node_get_light_data self#obj
 end
 
 (******************************************************************************)
