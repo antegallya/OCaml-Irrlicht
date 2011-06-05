@@ -97,9 +97,45 @@ module Mesh : sig
 end = struct
   type t =
     {mutable width : int; mutable height : int; mutable scale : float;
-    mesh : Irr_scene.fresh_mesh}
+    mesh : Irr_scene.fresh_mesh;
+    mutable buffers : Irr_scene.fresh_mesh_buffer list}
   let create () =
-    {width = 0; height = 0; scale = 0.; mesh = new Irr_scene.fresh_mesh}
+    {width = 0; height = 0; scale = 0.; mesh = new Irr_scene.fresh_mesh;
+    buffers = []}
+  let add_strip mesh hm cf y0 y1 buf_num =
+    let buf =
+      if buf_num < mesh.mesh#buffer_count then List.nth mesh.buffers buf_num
+      else
+        let buf = new Irr_scene.fresh_mesh_buffer in
+        mesh.buffers <- mesh.buffers @ [buf];
+        mesh.mesh#add_buffer (buf :> Irr_scene.mesh_buffer);
+        buf in
+    buf#set_vertices_used ((1 + y1 - y0) * mesh.width);
+    let i = ref 0 in
+    for y = y0 to y1 do
+      for x = 0 to mesh.width - 1 do
+        let z = Height_map.get hm x y in
+        let xx = float x /. float mesh.width in
+        let yy = float y /. float mesh.height in
+        let pos = (float x, mesh.scale *. float y, float y) in
+        let normal = Height_map.get_normal hm x y mesh.scale in
+        let color = cf xx yy z and t_coords = (xx, yy) in
+        let vert =
+          {Irr_video.Vertex.pos = pos; normal = normal; color = color;
+          t_coords = t_coords} in
+        buf#set_vertex !i vert;
+        incr i
+      done
+    done;
+    i := 0;
+    buf#set_indices_used (6 * (mesh.width - 1) * (y1 - y0));
+    for y = y0 to y1 - 1 do
+      for x = 0 to mesh.width - 1 do
+        let n = (y - y0) * mesh.width + x in
+        let list = [0; mesh.height; mesh.height + 1; mesh.height + 1; 1; 0] in
+        let aux di = buf#set_index !i (n + di); incr i in
+        List.iter aux list
+      done
+    done
   let init = assert false
-  let add_strip = assert false
 end
