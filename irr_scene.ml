@@ -251,10 +251,7 @@ end
 
 class fresh_mesh = object(self)
   inherit mesh (mesh_create ())
-  val mutable buffers = []
-  method add_buffer (buf : mesh_buffer) =
-    buffers <- buf :: buffers;
-    mesh_add_mesh_buffer self#obj buf#obj
+  method add_buffer (buf : mesh_buffer) = mesh_add_mesh_buffer self#obj buf#obj
   initializer Gc.finalise free self
 end
 
