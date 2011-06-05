@@ -119,7 +119,7 @@ end = struct
         let z = Height_map.get hm x y in
         let xx = float x /. float mesh.width in
         let yy = float y /. float mesh.height in
-        let pos = (float x, mesh.scale *. float y, float y) in
+        let pos = (float x, mesh.scale *. z, float y) in
         let normal = Height_map.get_normal hm x y mesh.scale in
         let color = cf xx yy z and t_coords = (xx, yy) in
         let vert =
@@ -158,7 +158,7 @@ end
 let () =
   let device = Irr.create_device ~dtype:`opengl () in
   let driver = device#driver and smgr = device#scene_manager in
-  device#set_window_caption "Irrlicht Example fro SMesh usage";
+  device#set_window_caption "Irrlicht Example for SMesh usage";
   let mesh = Mesh.create () in
   let hm = Height_map.create 255 255 in
   Height_map.generate hm  Generate_func.eggbox;
