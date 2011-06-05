@@ -232,10 +232,13 @@ external mesh_create : unit -> obj = "ml_SMesh_create"
 
 external mesh_add_mesh_buffer : obj -> obj -> unit = "ml_SMesh_addMeshBuffer"
 
+external mesh_get_mesh_buffer_count : obj -> int = "ml_IMesh_getMeshBufferCount"
+
 let free x = x#drop
 
 class mesh obj = object(self)
   inherit Irr_base.reference_counted obj
+  method buffer_count = mesh_get_mesh_buffer_count self#obj
 end
 
 class fresh_mesh = object(self)
