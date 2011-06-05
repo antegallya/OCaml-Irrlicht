@@ -204,12 +204,17 @@ external mesh_buffer_set_vertices_used : obj -> int -> unit =
 external mesh_buffer_set_indices_used : obj -> int -> unit =
   "ml_SMeshBuffer_set_indices_used"
 
+external mesh_buffer_recalculate_bounding_box : obj -> unit =
+  "ml_IMeshBuffer_recalculateBoundingBox"
+
 let free x = x#drop
 
 class mesh_buffer obj = object(self)
   inherit Irr_base.reference_counted obj
   method vertex_count = mesh_buffer_get_vertex_count self#obj
   method index i = mesh_buffer_get_index self#obj i
+  method recalculate_bounding_box =
+    mesh_buffer_recalculate_bounding_box self#obj
 end
 
 class fresh_mesh_buffer = object(self)

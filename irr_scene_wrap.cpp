@@ -189,6 +189,11 @@ extern "C" CAMLprim value ml_SMeshBuffer_set_indices_used(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IMeshBuffer_recalculateBoundingBox(value v_mb) {
+	((IMeshBuffer*) v_mb)->recalculateBoundingBox();
+	return Val_unit;
+}
+
 /* Stub for class IMesh */
 
 extern "C" CAMLprim value ml_SMesh_create(value vunit) {

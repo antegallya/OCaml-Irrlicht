@@ -66,6 +66,7 @@ class mesh_buffer : obj -> object
   inherit Irr_base.reference_counted
   method vertex_count : int
   method index : int -> int
+  method recalculate_bounding_box : unit
 end
 
 class fresh_mesh_buffer : object
