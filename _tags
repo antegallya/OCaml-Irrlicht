@@ -1,3 +1,7 @@
 # OASIS_START
-# DO NOT EDIT (digest: d41d8cd98f00b204e9800998ecf8427e)
+# DO NOT EDIT (digest: f3eaedbb26b1ec2f5552115c6e7948a7)
+# Executable make_hash_values
+"hash_values/main.byte": use_libmake_hash_values
+"hash_values/main.byte": custom
+# Executable make_enums
 # OASIS_STOP

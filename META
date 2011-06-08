@@ -1,4 +1,0 @@
-version = "0.01"
-description = "Binding for the Irrlicht engine" 
-archive(byte) = "ocaml-irrlicht.cma"
-archive(native) = "libocaml-irrlicht_stub.a ocaml-irrlicht.cmxa"

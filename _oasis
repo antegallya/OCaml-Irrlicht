@@ -1,12 +1,17 @@
-OASISFormat : 0.2
-Name : ocaml-irrlicht
-Version : 0.0.2
-Synopsis : An Ocaml binding for the 3D engine Irrlicht
-Authors : Alexis Bernadet < alexis.bernadet@noos.fr >
-License : zlib
-BuildType : Custom (0.2)
-InstallType : Custom (0.2)
-XCustomBuild : make
-XCustomBuildClean : make clean
-XCustomInstall : make install
-XCustomUninstall : make uninstall
+OASISFormat: 0.2
+Name: ocaml-irrlicht
+Version: 0.0.2
+Synopsis: An Ocaml binding for the 3D engine Irrlicht
+Authors: Alexis Bernadet < alexis.bernadet@noos.fr >
+License: zlib
+BuildTools: ocamlbuild
+Executable make_hash_values
+  Path: hash_values
+  Install: false
+  Custom: true
+  MainIs: main.ml
+  CSources: hash.c
+Executable make_enums
+  Path: enums
+  Install: false
+  MainIs: main.ml
