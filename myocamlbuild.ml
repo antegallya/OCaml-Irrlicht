@@ -526,4 +526,5 @@ let () = dispatch & fun h ->
       rule_methods_hash_values_h ();
       rule_enums ();
       rule_o_of_cpp ();
+      flag ["doc"] (A "-hide-warnings")
   | _ -> ()
