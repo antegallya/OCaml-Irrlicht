@@ -1,0 +1,9 @@
+# OASIS_START
+# DO NOT EDIT (digest: b9d400ef4abac8ce556a5766b9027050)
+version = "0.0.2"
+description = "An Ocaml binding for the 3D engine Irrlicht"
+archive(byte) = "irrlicht.cma"
+archive(native) = "irrlicht.cmxa"
+exists_if = "irrlicht.cma"
+# OASIS_STOP
+

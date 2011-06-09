@@ -1,4 +1,5 @@
 OASISFormat: 0.2
+Plugins: META (0.2)
 Name: ocaml-irrlicht
 Version: 0.0.2
 Synopsis: An Ocaml binding for the 3D engine Irrlicht
@@ -15,3 +16,9 @@ Executable make_enums
   Path: enums
   Install: false
   MainIs: main.ml
+Library irrlicht
+  Path: .
+  BuildTools: make_hash_values, make_enums
+  CCLib: -lIrrlicht
+  Modules: Irr_enums, Irr_core, Irr_video, Irr_io, Irr_gui, Irr_scene, Irr_base, Irr
+  CSources: global.h, utils.h, irr_enums_wrap.h, irr_base_wrap.h, irr_core_wrap.h, irr_video_wrap.h

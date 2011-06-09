@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 400aa877ea0b5228f38ad9ba9f7ba62c) *)
+(* DO NOT EDIT (digest: a7b002ce2ce608e589f9cf35bd2f9d2f) *)
 module OASISGettext = struct
 # 21 "/home/gildor/programmation/oasis/src/oasis/OASISGettext.ml"
   
@@ -451,13 +451,79 @@ end
 open Ocamlbuild_plugin;;
 let package_default =
   {
-     MyOCamlbuildBase.lib_ocaml = [];
-     lib_c = [("make_hash_values", "hash_values", [])];
-     flags = [];
+     MyOCamlbuildBase.lib_ocaml = [("irrlicht", [])];
+     lib_c =
+       [
+          ("make_hash_values", "hash_values", []);
+          ("irrlicht",
+            ".",
+            [
+               "global.h";
+               "utils.h";
+               "irr_enums_wrap.h";
+               "irr_base_wrap.h";
+               "irr_core_wrap.h";
+               "irr_video_wrap.h"
+            ])
+       ];
+     flags =
+       [
+          (["oasis_library_irrlicht_cclib"; "link"],
+            [(OASISExpr.EBool true, S [A "-cclib"; A "-lIrrlicht"])]);
+          (["oasis_library_irrlicht_cclib"; "ocamlmklib"; "c"],
+            [(OASISExpr.EBool true, S [A "-lIrrlicht"])])
+       ];
      }
   ;;
 
 let dispatch_default = MyOCamlbuildBase.dispatch_default package_default;;
 
 (* OASIS_STOP *)
-Ocamlbuild_plugin.dispatch dispatch_default;;
+
+open Ocamlbuild_plugin
+
+let ( & ) f x = f x
+
+let make_hash_values = "hash_values/make_hash_values"
+
+let make_enums = "enums/make_enums"
+
+let cpp_compiler = S [P "g++"; A "-I"; Sh "`ocamlc -where`"]
+
+let ccopt = S [A "-I"; P "/usr/include/irrlicht"]
+
+let generated_headers =
+  ["irr_enums_wrap_values.h"; "irr_enums_wrap_hash_values.h";
+  "methods_hash_values.h"; "irr_enums_wrap_conv.h"; "irr_enums_wrap_conv.cpp"]
+
+let rule_o_of_cpp () =
+  let deps = "%.cpp" :: generated_headers and prod = "%.o" in
+  let action env _ = Cmd (S [cpp_compiler; ccopt; A "-c"; P (env "%.cpp")]) in
+  rule "o_of_cpp" ~deps ~prod action
+
+let rule_methods_hash_values_h () =
+  let dep = "methods_hash_values.txt" and prod = "methods_hash_values.h" in
+  let action _ _ = Cmd(S [P make_hash_values; P dep; Sh ">"; P prod]) in
+  rule "methods_hash_values.h" ~dep ~prod action
+
+let rule_enums () =
+  let dep = "irr_enums.txt" in
+  let prods =
+    ["irr_enums.mli"; "irr_enums.ml"; "irr_enums_wrap_values.h";
+    "irr_enums_wrap_hash_values.h"; "irr_enums_wrap_conv.h";
+    "irr_enums_wrap_conv.cpp"] in
+  let action _ _ =
+    Seq [Cmd(S [P make_enums; P "irr_enums.txt"]);
+    Cmd(S [P make_hash_values; P "irr_enums_poly_values.txt"; Sh ">";
+      P "irr_enums_wrap_poly_values.h"]);
+    cp "irr_enums.mli" "irr_enums.ml"] in
+  rule "enums" ~dep ~prods action
+
+let () = dispatch & fun h ->
+  dispatch_default h;
+  match h with
+  | Before_rules ->
+      rule_methods_hash_values_h ();
+      rule_enums ();
+      rule_o_of_cpp ();
+  | _ -> ()

@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: d41d8cd98f00b204e9800998ecf8427e)
+# OASIS_STOP
+irr_enums_wrap.o
+irr_core_wrap.o
+irr_video_wrap.o
+irr_scene_wrap.o
+irr_io_wrap.o
+irr_gui_wrap.o
+irr_base_wrap.o
+irr_wrap.o
+utils.o

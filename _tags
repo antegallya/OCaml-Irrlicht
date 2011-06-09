@@ -1,7 +1,15 @@
 # OASIS_START
-# DO NOT EDIT (digest: f3eaedbb26b1ec2f5552115c6e7948a7)
+# DO NOT EDIT (digest: c528a16d79633e9694715a1cb3c51486)
 # Executable make_hash_values
 "hash_values/main.byte": use_libmake_hash_values
 "hash_values/main.byte": custom
 # Executable make_enums
+# Library irrlicht
+<irrlicht.{cma,cmxa}>: oasis_library_irrlicht_cclib
+"libirrlicht.lib": oasis_library_irrlicht_cclib
+"dllirrlicht.dll": oasis_library_irrlicht_cclib
+"libirrlicht.a": oasis_library_irrlicht_cclib
+"dllirrlicht.so": oasis_library_irrlicht_cclib
+<irrlicht.{cma,cmxa}>: use_libirrlicht
 # OASIS_STOP
+"irr_enums_wrap.cpp": cpp
