@@ -488,7 +488,7 @@ let make_hash_values = "hash_values/make_hash_values"
 
 let make_enums = "enums/make_enums"
 
-let cpp_compiler = S [P "g++"; A "-I"; Sh "`ocamlc -where`"]
+let cpp_compiler = S [P "g++"; A "-fPIC"; A "-I"; Sh "`ocamlc -where`"]
 
 let ccopt = S [A "-I"; P "/usr/include/irrlicht"]
 
