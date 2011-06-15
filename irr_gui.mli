@@ -39,6 +39,11 @@ class skin : obj -> object
   method set_font : ?which:Irr_enums.gui_default_font -> font -> unit
 end
 
+(** Class IGUIButton *)
+class button : obj -> object
+  inherit element
+end
+
 (** Class IGUIEnvironment *)
 class environment : obj -> object
   inherit Irr_base.reference_counted
