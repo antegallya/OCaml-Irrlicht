@@ -1,7 +1,13 @@
+let change_font (env : Irr_gui.environment) =
+  let skin = env#skin in
+  let font = env#font "../../media/fonthaettenschweiler.bmp" in
+  skin#set_font font
+
 let () =
   let device = Irr.create_device ~dtype:`opengl () in
   let driver = device#driver in
   let env = device#gui_env in
+  change_font env;
   let _ = env#add_button ~text:"Quit" ~tooltiptext:"Exits program"
     (10, 240, 110, 240 + 32) in
   let _ = env#add_button ~text:"New window" ~tooltiptext:"Launches a new Window"
