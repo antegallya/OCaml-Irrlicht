@@ -493,7 +493,7 @@ let cpp_compiler = S [P "g++"; A "-fPIC"; A "-I"; Sh "`ocamlc -where`"]
 let ccopt = S [A "-I"; P "/usr/include/irrlicht"]
 
 let generated_headers =
-  ["irr_enums_wrap_values.h"; "irr_enums_wrap_hash_values.h";
+  ["irr_enums_wrap_values.h"; "irr_enums_wrap_poly_values.h";
   "methods_hash_values.h"; "irr_enums_wrap_conv.h"; "irr_enums_wrap_conv.cpp"]
 
 let rule_o_of_cpp () =
@@ -510,7 +510,7 @@ let rule_enums () =
   let dep = "irr_enums.txt" in
   let prods =
     ["irr_enums.mli"; "irr_enums.ml"; "irr_enums_wrap_values.h";
-    "irr_enums_wrap_hash_values.h"; "irr_enums_wrap_conv.h";
+    "irr_enums_wrap_poly_values.h"; "irr_enums_wrap_conv.h";
     "irr_enums_wrap_conv.cpp"] in
   let action _ _ =
     Seq [Cmd(S [P make_enums; P "irr_enums.txt"]);
