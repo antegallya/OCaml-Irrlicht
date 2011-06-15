@@ -56,5 +56,8 @@ class environment : obj -> object
   method add_static_text : string -> ?border:bool -> ?word_warp:bool ->
     ?parent:element -> ?id:int -> ?fill_bg:bool -> int Irr_core.rect ->
     static_text
+  method add_button :
+    ?parent:element -> ?id:int -> ?text:string -> ?tooltiptext:string ->
+      int Irr_core.rect -> button
   method draw_all : unit
 end

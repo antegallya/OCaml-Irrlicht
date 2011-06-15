@@ -132,3 +132,40 @@ extern "C" CAMLprim value ml_IGUIEnvironment_getSkin(value v_env) {
 	return (value) ((IGUIEnvironment*) v_env)->getSkin();
 }
 
+extern "C" CAMLprim value ml_IGUIEnvironment_addButton_native(
+		value v_env, value v_rect, value v_parent, value v_id, value v_text,
+		value v_tooltiptext)
+{
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	int text_size, tooltiptext_size;
+	if(v_text == Val_int(0)) text_size = 0;
+	else text_size = strlen(String_val(Field(v_text, 0)));
+	if(v_tooltiptext == Val_int(0)) tooltiptext_size = 0;
+	else tooltiptext_size = strlen(String_val(Field(v_tooltiptext, 0)));
+	wchar_t text_data[text_size + 1], tooltiptext_data[tooltiptext_size + 1];
+	wchar_t *text, *tooltiptext;
+	if(v_text == Val_int(0)) text = NULL;
+	else {
+		mbstowcs(text_data, String_val(Field(v_text, 0)), text_size + 1);
+		text = text_data;
+	}
+	if(v_tooltiptext == Val_int(0)) tooltiptext = NULL;
+	else {
+		mbstowcs(tooltiptext_data, String_val(Field(v_tooltiptext, 0)),
+				tooltiptext_size + 1);
+		tooltiptext = tooltiptext_data;
+	}
+	IGUIButton* button = ((IGUIEnvironment*) v_env)->addButton(
+			Rect_s32_val(v_rect), parent, Int_val(v_id), text, tooltiptext);
+	if(button == NULL) null_pointer_exn();
+	return (value) button;
+}
+
+extern "C" CAMLprim value ml_IGUIEnvironment_addButton_bytecode(
+		value* argv, int argn) {
+	return ml_IGUIEnvironment_addButton_native(argv[0], argv[1], argv[2],
+			argv[3], argv[4], argv[5]);
+}
+

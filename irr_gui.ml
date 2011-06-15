@@ -126,6 +126,13 @@ external environment_get_font : obj -> string -> obj =
 external environment_get_skin : obj -> obj =
   "ml_IGUIEnvironment_getSkin"
 
+external environment_add_button :
+  obj -> int Irr_core.rect -> obj option -> int -> string option ->
+    string option -> obj
+  =
+    "ml_IGUIEnvironment_addButton_bytecode"
+    "ml_IGUIEnvironment_addButton_native"
+
 class environment obj = object(self)
   inherit Irr_base.reference_counted obj
   method built_in_font =
@@ -168,6 +175,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit static_text obj
+    end
+  method add_button ?parent ?(id = -1) ?text ?tooltiptext rect =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_button self#obj rect p id text tooltiptext in
+    object
+      val env = self
+      inherit button obj
     end
   method draw_all = environment_draw_all self#obj
 end
