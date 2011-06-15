@@ -8,8 +8,12 @@ let () =
     (10, 280, 110, 280 + 32) in
   let _ = env#add_button ~text:"File open" ~tooltiptext:"Opens a file"
     (10, 320, 110, 320 + 32) in
+  let _ = env#add_static_text "Transparent Control:"
+    ~border:true (150, 20, 350, 40) in
+  let _ = env#add_static_text "Logging ListBox" ~border:true
+    (50, 110, 250, 130) in
   while device#run do
-    driver#begin_scene ();
+    driver#begin_scene ~color:(Irr_core.color_ARGB 0 200 200 200) ();
     env#draw_all;
     driver#end_scene
   done
