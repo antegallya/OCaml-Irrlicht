@@ -1,7 +1,8 @@
 let change_font (env : Irr_gui.environment) =
   let skin = env#skin in
   let font = env#font "../../media/fonthaettenschweiler.bmp" in
-  skin#set_font font
+  skin#set_font font;
+  skin#set_font ~which:`tooltip env#built_in_font
 
 let () =
   let device = Irr.create_device ~dtype:`opengl () in
