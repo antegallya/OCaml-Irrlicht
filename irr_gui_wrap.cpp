@@ -57,6 +57,13 @@ extern "C" value ml_IGUISkin_setFont(
 	return Val_unit;
 }
 
+/* Stub for class IGUIScrollBar */
+
+extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
+	((IGUIScrollBar*) v_sb)->setMax(Int_val(v_n));
+	return Val_unit;
+}
+
 /* Stub for class IGUIEnvironment */
 
 extern "C" value ml_IGUIEnvironment_getBuiltInFont(value v_env) {

@@ -47,6 +47,7 @@ end
 (** Class IGUIScrollBar *)
 class scroll_bar : obj -> object
   inherit element
+  method set_max : int -> unit
 end
 
 (** Class IGUIEnvironment *)

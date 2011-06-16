@@ -102,8 +102,12 @@ end
 
 (******************************************************************************)
 
+external scroll_bar_set_max : obj -> int -> unit =
+  "ml_IGUIScrollBar_setMax"
+
 class scroll_bar obj = object(self)
   inherit element obj
+  method set_max n = scroll_bar_set_max self#obj n
 end
 
 (******************************************************************************)
