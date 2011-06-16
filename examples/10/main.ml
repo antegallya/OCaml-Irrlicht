@@ -16,6 +16,7 @@ let () =
     (10, 320, 110, 320 + 32) in
   let _ = env#add_static_text "Transparent Control:"
     ~border:true (150, 20, 350, 40) in
+  let _ = env#add_scroll_bar true (150, 45, 350, 60) in
   let _ = env#add_static_text "Logging ListBox" ~border:true
     (50, 110, 250, 130) in
   while device#run do
