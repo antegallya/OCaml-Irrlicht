@@ -98,6 +98,16 @@ end
 
 (******************************************************************************)
 
+(* Binding for class IGUIScrollBar *)
+
+(******************************************************************************)
+
+class scroll_bar obj = object(self)
+  inherit element obj
+end
+
+(******************************************************************************)
+
 (* Binding for class IGUIEnvironment *)
 
 (******************************************************************************)
@@ -132,6 +142,10 @@ external environment_add_button :
   =
     "ml_IGUIEnvironment_addButton_bytecode"
     "ml_IGUIEnvironment_addButton_native"
+
+external environment_add_scroll_bar :
+  obj -> bool -> int Irr_core.rect -> obj option -> int -> obj =
+    "ml_IGUIEnvironment_addScrollBar"
 
 class environment obj = object(self)
   inherit Irr_base.reference_counted obj
@@ -182,6 +196,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit button obj
+    end
+  method add_scroll_bar h ?parent ?(id = -1) rect =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_scroll_bar self#obj h rect p id in
+    object
+      val env = self
+      inherit scroll_bar obj
     end
   method draw_all = environment_draw_all self#obj
 end

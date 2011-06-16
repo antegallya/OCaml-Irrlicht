@@ -169,3 +169,15 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addButton_bytecode(
 			argv[3], argv[4], argv[5]);
 }
 
+extern "C" CAMLprim value ml_IGUIEnvironment_addScrollBar(
+		value v_env, value v_h, value v_rect, value v_parent, value v_id)
+{
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	IGUIScrollBar* sb = ((IGUIEnvironment*) v_env)->addScrollBar(Bool_val(v_h),
+			Rect_s32_val(v_rect), parent, Int_val(v_id));
+	if(sb == NULL) null_pointer_exn();
+	return (value) sb;
+}
+

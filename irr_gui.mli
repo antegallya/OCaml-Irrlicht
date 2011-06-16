@@ -44,6 +44,11 @@ class button : obj -> object
   inherit element
 end
 
+(** Class IGUIScrollBar *)
+class scroll_bar : obj -> object
+  inherit element
+end
+
 (** Class IGUIEnvironment *)
 class environment : obj -> object
   inherit Irr_base.reference_counted
@@ -59,5 +64,7 @@ class environment : obj -> object
   method add_button :
     ?parent:element -> ?id:int -> ?text:string -> ?tooltiptext:string ->
       int Irr_core.rect -> button
+  method add_scroll_bar :
+    bool -> ?parent:element -> ?id:int -> int Irr_core.rect -> scroll_bar
   method draw_all : unit
 end
