@@ -72,5 +72,7 @@ class environment : obj -> object
       int Irr_core.rect -> button
   method add_scroll_bar :
     bool -> ?parent:element -> ?id:int -> int Irr_core.rect -> scroll_bar
+  method add_list_box :
+    ?parent:element -> ?id:int -> ?draw_bg:bool -> int Irr_core.rect -> list_box
   method draw_all : unit
 end

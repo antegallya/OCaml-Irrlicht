@@ -188,3 +188,15 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addScrollBar(
 	return (value) sb;
 }
 
+extern "C" CAMLprim value ml_IGUIEnvironment_addListBox(
+		value v_env, value v_rect, value v_parent, value v_id, value v_dbg)
+{
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	IGUIListBox* lb = ((IGUIEnvironment*) v_env)->addListBox(Rect_s32_val(v_rect),
+			parent, Int_val(v_id), Bool_val(v_dbg));
+	if(lb == NULL) null_pointer_exn();
+	return (value) lb;
+}
+

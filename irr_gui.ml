@@ -161,6 +161,10 @@ external environment_add_scroll_bar :
   obj -> bool -> int Irr_core.rect -> obj option -> int -> obj =
     "ml_IGUIEnvironment_addScrollBar"
 
+external environment_add_list_box :
+  obj -> int Irr_core.rect -> obj option -> int -> bool -> obj =
+    "ml_IGUIEnvironment_addListBox"
+
 class environment obj = object(self)
   inherit Irr_base.reference_counted obj
   method built_in_font =
@@ -217,6 +221,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit scroll_bar obj
+    end
+  method add_list_box ?parent ?(id = -1) ?(draw_bg = false) rect =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_list_box self#obj rect p id draw_bg in
+    object
+      val env = self
+      inherit list_box obj
     end
   method draw_all = environment_draw_all self#obj
 end
