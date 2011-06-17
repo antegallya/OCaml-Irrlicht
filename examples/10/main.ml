@@ -1,3 +1,21 @@
+module Id : sig
+  type t =
+    Quit_button | New_window_button | File_open_button |
+    Transparency_scroll_bar
+  val of_int : int -> t option
+  val to_int : t -> int
+end = struct
+  type t =
+    Quit_button | New_window_button | File_open_button |
+    Transparency_scroll_bar
+  let assoc =
+    [(Quit_button, 101); (New_window_button, 1); (File_open_button, 2);
+    (Transparency_scroll_bar, 3)]
+  let assoc_inv = List.map (fun (x, y) -> (y, x)) assoc
+  let of_int i = try Some (List.assoc i assoc_inv) with Not_found -> None
+  let to_int x = try List.assoc x assoc with Not_found -> assert false
+end
+
 let change_font (env : Irr_gui.environment) =
   let skin = env#skin in
   let font = env#font "../../media/fonthaettenschweiler.bmp" in
