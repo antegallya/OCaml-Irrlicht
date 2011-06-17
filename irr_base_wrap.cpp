@@ -99,6 +99,11 @@ value copy_SEvent(SEvent e) {
 			Store_field(v, 0, Val_mouse_input);
 			Store_field(v, 1, copy_SMouseInput(e.MouseInput));
 			break;
+	  case EET_GUI_EVENT:
+			v = caml_alloc(2, 0);
+			Store_field(v, 0, Val_gui_event);
+			Store_field(v, 1, copy_SGUIEvent(e.GUIEvent));
+			break;
 		default:
 			v = Val_other;
 	}

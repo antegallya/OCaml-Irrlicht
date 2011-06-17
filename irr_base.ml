@@ -35,6 +35,7 @@ type gui_event = {
 type event = [
 | `key_input of key_input
 | `mouse_input of mouse_input
+| `gui_event of gui_event
 | `other]
 
 type key_map = Irr_enums.key_action * Irr_enums.key_code
