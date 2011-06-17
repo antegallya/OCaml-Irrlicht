@@ -55,6 +55,11 @@ class list_box : obj -> object
   inherit element
 end
 
+(** Class IGUIEditBox *)
+class edit_box : obj -> object
+  inherit element
+end
+
 (** Class IGUIEnvironment *)
 class environment : obj -> object
   inherit Irr_base.reference_counted
@@ -74,5 +79,8 @@ class environment : obj -> object
     bool -> ?parent:element -> ?id:int -> int Irr_core.rect -> scroll_bar
   method add_list_box :
     ?parent:element -> ?id:int -> ?draw_bg:bool -> int Irr_core.rect -> list_box
+  method add_edit_box :
+    string -> ?border:bool -> ?parent:element -> ?id:int -> int Irr_core.rect ->
+      edit_box
   method draw_all : unit
 end

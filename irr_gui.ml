@@ -122,6 +122,16 @@ end
 
 (******************************************************************************)
 
+(* Binding for class IGUIEditBox *)
+
+(******************************************************************************)
+
+class edit_box obj = object(self)
+  inherit element obj
+end
+
+(******************************************************************************)
+
 (* Binding for class IGUIEnvironment *)
 
 (******************************************************************************)
@@ -164,6 +174,11 @@ external environment_add_scroll_bar :
 external environment_add_list_box :
   obj -> int Irr_core.rect -> obj option -> int -> bool -> obj =
     "ml_IGUIEnvironment_addListBox"
+
+external environment_add_edit_box :
+  obj -> string -> int Irr_core.rect -> bool -> obj option -> int -> obj =
+    "ml_IGUIEnvironment_addEditBox_bytecode"
+    "ml_IGUIEnvironment_addEditBox_native"
 
 class environment obj = object(self)
   inherit Irr_base.reference_counted obj
@@ -228,6 +243,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit list_box obj
+    end
+  method add_edit_box text ?(border = true) ?parent ?(id = -1) rect =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_edit_box self#obj text rect border p id in
+    object
+      val env = self
+      inherit edit_box obj
     end
   method draw_all = environment_draw_all self#obj
 end

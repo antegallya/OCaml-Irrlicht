@@ -200,3 +200,26 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addListBox(
 	return (value) lb;
 }
 
+extern "C" CAMLprim value ml_IGUIEnvironment_addEditBox_native(
+		value v_env, value v_text, value v_rect, value v_border, value v_parent,
+		value v_id)
+{
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	int text_size = strlen(String_val(v_text));
+	wchar_t text[text_size + 1];
+	mbstowcs(text, String_val(v_text), text_size + 1);
+	IGUIEditBox* eb = ((IGUIEnvironment*) v_env)->addEditBox(text,
+			Rect_s32_val(v_rect), Bool_val(v_border), parent, Int_val(v_id));
+	if(eb == NULL) null_pointer_exn();
+	return (value) eb;
+}
+
+extern "C" CAMLprim value ml_IGUIEnvironment_addEditBox_bytecode(
+		value* argv, int argn)
+{
+	return ml_IGUIEnvironment_addEditBox_native(argv[0], argv[1], argv[2],
+			argv[3], argv[4], argv[5]);
+}
+
