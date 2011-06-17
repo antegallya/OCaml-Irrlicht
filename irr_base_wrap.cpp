@@ -78,7 +78,8 @@ value copy_SMouseInput(SEvent::SMouseInput mi) {
 value copy_SGUIEvent(SEvent::SGUIEvent ge) {
 	value v = caml_alloc(3, 0);
 	Store_field(v, 0, Val_int(ge.Caller->getID()));
-	Store_field(v, 1, Val_int(ge.Element->getID()));
+	if(ge.Element == NULL) Store_field(v, 1, Val_int(-1));
+	else Store_field(v, 1, Val_int(ge.Element->getID()));
 	Store_field(v, 2, Val_gui_event_type(ge.EventType));
 	return v;
 }

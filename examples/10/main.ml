@@ -42,6 +42,13 @@ let () =
     (50, 110, 250, 130) in
   let _ = env#add_list_box (50, 140, 250, 210) in
   let _ = env#add_edit_box "Editable Text" (350, 80, 550, 100) in
+  let on_event = function
+    | `gui_event {Irr_base.ge_caller = id; ge_type = `button_clicked} ->
+        (match Id.of_int id with
+        | Some Id.Quit_button -> device#close; true
+        | _ -> false)
+    | _ -> false in
+  device#set_on_event on_event;
   while device#run do
     if device#is_window_active then (
       driver#begin_scene ~color:(Irr_core.color_ARGB 0 200 200 200) ();
