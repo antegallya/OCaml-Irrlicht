@@ -50,6 +50,11 @@ class scroll_bar : obj -> object
   method set_max : int -> unit
 end
 
+(** Class IGUIListBox *)
+class list_box : obj -> object
+  inherit element
+end
+
 (** Class IGUIEnvironment *)
 class environment : obj -> object
   inherit Irr_base.reference_counted
