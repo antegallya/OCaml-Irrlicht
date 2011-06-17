@@ -26,6 +26,12 @@ type mouse_input = {
   mi_y : int
 }
 
+type gui_event = {
+  ge_caller : int;
+  ge_element : int;
+  ge_type : Irr_enums.gui_event_type
+}
+
 type event = [
 | `key_input of key_input
 | `mouse_input of mouse_input

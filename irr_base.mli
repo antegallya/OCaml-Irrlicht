@@ -50,6 +50,13 @@ type mouse_input = {
   mi_y : int;
 }
 
+(** Class SGUIEvent *)
+type gui_event = {
+  ge_caller : int;
+  ge_element : int;
+  ge_type : Irr_enums.gui_event_type
+}
+
 (** Class SEvent *)
 type event = [
 | `key_input of key_input
