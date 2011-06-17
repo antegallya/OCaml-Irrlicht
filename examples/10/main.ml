@@ -22,6 +22,7 @@ let () =
   let _ = env#add_static_text "Logging ListBox" ~border:true
     (50, 110, 250, 130) in
   let _ = env#add_list_box (50, 140, 250, 210) in
+  let _ = env#add_edit_box "Editable Text" (350, 80, 550, 100) in
   while device#run do
     if device#is_window_active then (
       driver#begin_scene ~color:(Irr_core.color_ARGB 0 200 200 200) ();
