@@ -28,14 +28,15 @@ let () =
   let env = device#gui_env in
   change_font env;
   let _ = env#add_button ~text:"Quit" ~tooltiptext:"Exits program"
-    (10, 240, 110, 240 + 32) in
+    ~id:(Id.to_int Id.Quit_button) (10, 240, 110, 240 + 32) in
   let _ = env#add_button ~text:"New window" ~tooltiptext:"Launches a new Window"
-    (10, 280, 110, 280 + 32) in
+    ~id:(Id.to_int Id.New_window_button) (10, 280, 110, 280 + 32) in
   let _ = env#add_button ~text:"File open" ~tooltiptext:"Opens a file"
-    (10, 320, 110, 320 + 32) in
+    ~id:(Id.to_int Id.File_open_button) (10, 320, 110, 320 + 32) in
   let _ = env#add_static_text "Transparent Control:"
     ~border:true (150, 20, 350, 40) in
-  let scroll_bar = env#add_scroll_bar true (150, 45, 350, 60) in
+  let scroll_bar = env#add_scroll_bar true
+    ~id:(Id.to_int Id.Transparency_scroll_bar) (150, 45, 350, 60) in
   scroll_bar#set_max 255;
   let _ = env#add_static_text "Logging ListBox" ~border:true
     (50, 110, 250, 130) in
