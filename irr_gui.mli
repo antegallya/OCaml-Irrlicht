@@ -42,6 +42,8 @@ end
 
 val default_color_count : int
 
+val default_color_of_int : int -> Irr_enums.gui_default_color
+
 (** Class IGUIButton *)
 class button : obj -> object
   inherit element

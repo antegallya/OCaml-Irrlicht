@@ -66,6 +66,10 @@ extern "C" value ml_get_EGDC_COUNT(value v_unit) {
 	return Val_int(EGDC_COUNT);
 }
 
+extern "C" value ml_gui_default_color_of_int(value v_n) {
+	return Val_gui_default_color((EGUI_DEFAULT_COLOR) Int_val(v_n));
+}
+
 /* Stub for class IGUIScrollBar */
 
 extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
