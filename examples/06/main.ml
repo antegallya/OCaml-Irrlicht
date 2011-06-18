@@ -127,7 +127,6 @@ let main () =
         )
     );
     driver#end_scene
-  done;
-  print_endline "exiting"
+  done
 
 let () = main ()
