@@ -53,6 +53,7 @@ end
 (** Class IGUIListBox *)
 class list_box : obj -> object
   inherit element
+  method add_item : ?icon:int -> string -> int
 end
 
 (** Class IGUIEditBox *)

@@ -116,8 +116,12 @@ end
 
 (******************************************************************************)
 
+external list_box_add_item : obj -> string -> int -> int =
+  "ml_IGUIListBox_addItem"
+
 class list_box obj = object(self)
   inherit element obj
+  method add_item ?(icon = -1) text = list_box_add_item self#obj text icon
 end
 
 (******************************************************************************)

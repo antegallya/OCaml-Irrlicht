@@ -64,6 +64,15 @@ extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
 	return Val_unit;
 }
 
+/* Stub for class IGUIListBox */
+
+extern "C" value ml_IGUIListBox_addItem(value v_lb, value v_text, value v_icon) {
+	int text_size = strlen(String_val(v_text));
+	wchar_t text[text_size + 1];
+	mbstowcs(text, String_val(v_text), text_size + 1);
+	return Val_int(((IGUIListBox*) v_lb)->addItem(text, Int_val(v_icon)));
+}
+
 /* Stub for class IGUIEnvironment */
 
 extern "C" value ml_IGUIEnvironment_getBuiltInFont(value v_env) {
