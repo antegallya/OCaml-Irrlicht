@@ -66,6 +66,11 @@ class window : obj -> object
   inherit element
 end
 
+(** Class IGUIFileOpenDialog *)
+class file_open_dialog : obj -> object
+  inherit element
+end
+
 (** Class IGUIEnvironment *)
 class environment : obj -> object
   inherit Irr_base.reference_counted
