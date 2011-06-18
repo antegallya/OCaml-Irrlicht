@@ -275,7 +275,7 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addFileOpenDialog(
 	wchar_t* title;
 	if(v_title == Val_int(0)) title = NULL;
 	else {
-		mbstowcs(title, String_val(Field(v_title, 0)), title_size + 1);
+		mbstowcs(title_data, String_val(Field(v_title, 0)), title_size + 1);
 		title = title_data;
 	}
 	IGUIFileOpenDialog* fod = ((IGUIEnvironment*) v_env)->addFileOpenDialog(

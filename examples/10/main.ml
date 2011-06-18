@@ -56,6 +56,10 @@ let () =
             let _ = env#add_static_text "Please close me" ~border:true
               ~word_wrap:false ~parent:window (35, 35, 140, 50) in
             true
+        | Some Id.File_open_button ->
+            let _ = list_box#add_item "File open" in
+            let _ = env#add_file_open_dialog ~title:"Please choose a file" () in
+            true
         | _ -> false)
     | _ -> false in
   device#set_on_event on_event;
