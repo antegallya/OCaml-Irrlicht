@@ -62,6 +62,15 @@ let () =
             let _ = env#add_file_open_dialog ~title:"Please choose a file" () in
             true
         | _ -> false)
+    | `gui_event {Irr_base.ge_type = `scroll_bar_changed} ->
+        let pos = scroll_bar#pos in
+        for i = 0 to Irr_gui.default_color_count - 1 do
+          let col = env#skin#color (Irr_gui.default_color_of_int i) in
+          let col1 = {Irr_core.a = pos; r = col.Irr_core.r;
+            g = col.Irr_core.g; b = col.Irr_core.b} in
+          env#skin#set_color (Irr_gui.default_color_of_int i) col1
+        done;
+        true
     | _ -> false in
   device#set_on_event on_event;
   let _ = env#add_image (driver#get_texture "../../media/irrlichtlogo2.png")
