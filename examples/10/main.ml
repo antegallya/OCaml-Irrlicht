@@ -53,8 +53,8 @@ let () =
             let f x = x + !counter in
             let window = env#add_window ~text:"Test window"
               (f 100, f 100, f 300, f 200) in
-            env#add_static_text "Please close me" ~border:true ~word_wrap:false
-              ~parent:window (35, 35, 140, 50);
+            let _ = env#add_static_text "Please close me" ~border:true
+              ~word_wrap:false ~parent:window (35, 35, 140, 50) in
             true
         | _ -> false)
     | _ -> false in
