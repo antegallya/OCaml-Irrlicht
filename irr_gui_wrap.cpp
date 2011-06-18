@@ -64,6 +64,11 @@ extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
 	return Val_unit;
 }
 
+extern "C" value ml_IGUIScrollBar_setPos(value v_sb, value v_n) {
+	((IGUIScrollBar*) v_sb)->setPos(Int_val(v_n));
+	return Val_unit;
+}
+
 /* Stub for class IGUIListBox */
 
 extern "C" value ml_IGUIListBox_addItem(value v_lb, value v_text, value v_icon) {
