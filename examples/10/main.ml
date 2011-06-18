@@ -50,6 +50,9 @@ let () =
         | Some Id.New_window_button ->
             let _ = list_box#add_item "Window created" in
             counter := (!counter + 30) mod 200;
+            let f x = x + !counter in
+            let _ = env#add_window ~text:"Test window"
+              (f 100, f 100, f 300, f 200) in 
             true
         | _ -> false)
     | _ -> false in
