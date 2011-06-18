@@ -194,6 +194,12 @@ external environment_add_edit_box :
     "ml_IGUIEnvironment_addEditBox_bytecode"
     "ml_IGUIEnvironment_addEditBox_native"
 
+external environment_add_window :
+  obj -> int Irr_core.rect -> bool -> string option -> obj option -> int -> obj
+  =
+    "ml_IGUIEnvironment_addWindow_bytecode"
+    "ml_IGUIEnvironment_addWindow_native"
+
 class environment obj = object(self)
   inherit Irr_base.reference_counted obj
   method built_in_font =
@@ -264,6 +270,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit edit_box obj
+    end
+  method add_window ?(modal = false) ?text ?parent ?(id = -1) rect =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_window self#obj rect modal text p id in
+    object
+      val env = self
+      inherit window obj
     end
   method draw_all = environment_draw_all self#obj
 end

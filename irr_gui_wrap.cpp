@@ -232,3 +232,33 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addEditBox_bytecode(
 			argv[3], argv[4], argv[5]);
 }
 
+extern "C" CAMLprim value ml_IGUIEnvironment_addWindow_native(
+		value v_env, value v_rect, value v_modal, value v_text, value v_parent,
+		value v_id)
+{
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	int text_size;
+	if(v_text == Val_int(0)) text_size = 0;
+	else text_size = strlen(String_val(Field(v_text, 0)));
+	wchar_t text_data[text_size + 1];
+	wchar_t* text;
+	if(v_text == Val_int(0)) text = NULL;
+	else {
+		mbstowcs(text_data, String_val(Field(v_text, 0)), text_size + 1);
+		text = text_data;
+	}
+	IGUIWindow* window = ((IGUIEnvironment*) v_env)->addWindow(
+			Rect_s32_val(v_rect), Bool_val(v_modal), text, parent, Int_val(v_id));
+	if(window == NULL) null_pointer_exn();
+	return (value) window;
+}
+
+extern "C" CAMLprim value ml_IGUIEnvironment_addWindow_bytecode(
+		value* argv, int argn)
+{
+	return ml_IGUIEnvironment_addWindow_native(argv[0], argv[1], argv[2], argv[3],
+			argv[4], argv[5]);
+}
+

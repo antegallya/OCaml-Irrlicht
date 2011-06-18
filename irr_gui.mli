@@ -88,5 +88,8 @@ class environment : obj -> object
   method add_edit_box :
     string -> ?border:bool -> ?parent:element -> ?id:int -> int Irr_core.rect ->
       edit_box
+  method add_window :
+    ?modal:bool -> ?text:string -> ?parent:element -> ?id:int ->
+      int Irr_core.rect -> window
   method draw_all : unit
 end
