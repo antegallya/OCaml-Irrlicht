@@ -64,6 +64,8 @@ let () =
         | _ -> false)
     | _ -> false in
   device#set_on_event on_event;
+  let _ = env#add_image (driver#get_texture "../../media/irrlichtlogo2.png")
+    (10, 10) in
   while device#run do
     if device#is_window_active then (
       driver#begin_scene ~color:(Irr_core.color_ARGB 0 200 200 200) ();
