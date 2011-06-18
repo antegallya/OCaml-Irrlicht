@@ -80,10 +80,14 @@ end
 external skin_set_font : obj -> obj -> Irr_enums.gui_default_font -> unit =
   "ml_IGUISkin_setFont"
 
+external skin_get_color : obj -> Irr_enums.gui_default_color -> Irr_core.color =
+  "ml_IGUISkin_getColor"
+
 class skin obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method set_font ?(which = `default) (font : font) =
     skin_set_font self#obj font#obj which
+  method get_color which = skin_get_color self#obj which
 end
 
 (******************************************************************************)

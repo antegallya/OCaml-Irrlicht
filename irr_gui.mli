@@ -37,6 +37,7 @@ end
 class skin : obj -> object
   inherit Irr_base.attribute_exchanging_object
   method set_font : ?which:Irr_enums.gui_default_font -> font -> unit
+  method get_color : Irr_enums.gui_default_color -> Irr_core.color
 end
 
 (** Class IGUIButton *)

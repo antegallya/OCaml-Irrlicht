@@ -57,6 +57,11 @@ extern "C" value ml_IGUISkin_setFont(
 	return Val_unit;
 }
 
+extern "C" value ml_IGUISkin_getColor(value v_skin, value v_which) {
+	return copy_SColor(((IGUISkin*) v_skin)->getColor(
+				gui_default_color_val(v_which)));
+}
+
 /* Stub for class IGUIScrollBar */
 
 extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
