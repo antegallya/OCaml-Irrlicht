@@ -38,6 +38,7 @@ class skin : obj -> object
   inherit Irr_base.attribute_exchanging_object
   method set_font : ?which:Irr_enums.gui_default_font -> font -> unit
   method color : Irr_enums.gui_default_color -> Irr_core.color
+  method set_color : Irr_enums.gui_default_color -> Irr_core.color -> unit
 end
 
 val default_color_count : int

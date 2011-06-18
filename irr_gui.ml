@@ -88,6 +88,10 @@ external get_gui_default_color_count : unit -> int = "ml_get_EGDC_COUNT"
 external default_color_of_int : int -> Irr_enums.gui_default_color =
   "ml_gui_default_color_of_int"
 
+external skin_set_color :
+  obj -> Irr_enums.gui_default_color -> Irr_core.color -> unit =
+    "ml_IGUISkin_setColor"
+
 let default_color_count = get_gui_default_color_count ()
 
 class skin obj = object(self)
@@ -95,6 +99,7 @@ class skin obj = object(self)
   method set_font ?(which = `default) (font : font) =
     skin_set_font self#obj font#obj which
   method color which = skin_get_color self#obj which
+  method set_color which c = skin_set_color self#obj which c
 end
 
 (******************************************************************************)

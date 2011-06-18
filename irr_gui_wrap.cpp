@@ -70,6 +70,12 @@ extern "C" value ml_gui_default_color_of_int(value v_n) {
 	return Val_gui_default_color((EGUI_DEFAULT_COLOR) Int_val(v_n));
 }
 
+extern "C" value ml_IGUISkin_setColor(value v_skin, value v_which, value v_c) {
+	((IGUISkin*) v_skin)->setColor(gui_default_color_val(v_which),
+		SColor_val(v_c));
+	return Val_unit;
+}
+
 /* Stub for class IGUIScrollBar */
 
 extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
