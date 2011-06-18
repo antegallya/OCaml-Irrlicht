@@ -231,13 +231,13 @@ class environment obj = object(self)
       val env = self
       inherit image obj
     end
-  method add_static_text text ?(border = false) ?(word_warp = true) ?parent
+  method add_static_text text ?(border = false) ?(word_wrap = true) ?parent
     ?(id = -1) ?(fill_bg = false) rect =
     let p = match parent with
     | None -> None
     | Some (x : element) -> Some x#obj in
     let obj =
-      environment_add_static_text self#obj text rect border word_warp p id
+      environment_add_static_text self#obj text rect border word_wrap p id
       fill_bg in
     object
       val env = self

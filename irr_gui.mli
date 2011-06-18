@@ -75,7 +75,7 @@ class environment : obj -> object
   method add_image :
     Irr_video.texture -> ?use_alpha:bool -> ?parent:element -> ?id:int ->
       ?text:string -> int Irr_core.pos_2d -> image
-  method add_static_text : string -> ?border:bool -> ?word_warp:bool ->
+  method add_static_text : string -> ?border:bool -> ?word_wrap:bool ->
     ?parent:element -> ?id:int -> ?fill_bg:bool -> int Irr_core.rect ->
     static_text
   method add_button :
