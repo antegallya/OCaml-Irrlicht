@@ -1,7 +1,7 @@
 Roadmap to version 0.0.3 :
 
 - Port the GUI example to OCaml. This will develop the binding of the gui
-namespace
+namespace DONE
 
 - Complete the binding of SMaterial and allow rendering batches via IVideoDriver
 
