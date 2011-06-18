@@ -119,10 +119,13 @@ external scroll_bar_set_max : obj -> int -> unit =
 external scroll_bar_set_pos : obj -> int -> unit =
   "ml_IGUIScrollBar_setPos"
 
+external scroll_bar_get_pos : obj -> int = "ml_IGUIScrollBar_getPos"
+
 class scroll_bar obj = object(self)
   inherit element obj
   method set_max n = scroll_bar_set_max self#obj n
   method set_pos n = scroll_bar_set_pos self#obj n
+  method pos = scroll_bar_get_pos self#obj
 end
 
 (******************************************************************************)

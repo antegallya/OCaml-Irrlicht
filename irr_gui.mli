@@ -54,6 +54,7 @@ class scroll_bar : obj -> object
   inherit element
   method set_max : int -> unit
   method set_pos : int -> unit
+  method pos : int
 end
 
 (** Class IGUIListBox *)

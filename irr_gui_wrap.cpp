@@ -82,6 +82,10 @@ extern "C" value ml_IGUIScrollBar_setPos(value v_sb, value v_n) {
 	return Val_unit;
 }
 
+extern "C" value ml_IGUIScrollBar_getPos(value v_sb) {
+	return Val_int(((IGUIScrollBar*) v_sb)->getPos());
+}
+
 /* Stub for class IGUIListBox */
 
 extern "C" value ml_IGUIListBox_addItem(value v_lb, value v_text, value v_icon) {
