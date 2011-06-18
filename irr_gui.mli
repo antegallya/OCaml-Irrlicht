@@ -96,5 +96,8 @@ class environment : obj -> object
   method add_window :
     ?modal:bool -> ?text:string -> ?parent:element -> ?id:int ->
       int Irr_core.rect -> window
+  method add_file_open_dialog :
+    ?title:string -> ?modal:bool -> ?parent:element -> ?id:int -> unit ->
+      file_open_dialog
   method draw_all : unit
 end

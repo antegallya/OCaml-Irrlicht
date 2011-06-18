@@ -262,3 +262,25 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addWindow_bytecode(
 			argv[4], argv[5]);
 }
 
+extern "C" CAMLprim value ml_IGUIEnvironment_addFileOpenDialog(
+		value v_env, value v_title, value v_modal, value v_parent, value v_id)
+{
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	int title_size;
+	if(v_title == Val_int(0)) title_size = 0;
+	else title_size = strlen(String_val(Field(v_title, 0)));
+	wchar_t title_data[title_size + 1];
+	wchar_t* title;
+	if(v_title == Val_int(0)) title = NULL;
+	else {
+		mbstowcs(title, String_val(Field(v_title, 0)), title_size + 1);
+		title = title_data;
+	}
+	IGUIFileOpenDialog* fod = ((IGUIEnvironment*) v_env)->addFileOpenDialog(
+			title, Bool_val(v_modal), parent, Int_val(v_id));
+	if(fod == NULL) null_pointer_exn();
+	return (value) fod;
+}
+

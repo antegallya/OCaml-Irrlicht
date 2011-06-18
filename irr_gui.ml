@@ -210,6 +210,10 @@ external environment_add_window :
     "ml_IGUIEnvironment_addWindow_bytecode"
     "ml_IGUIEnvironment_addWindow_native"
 
+external environment_add_file_open_dialog :
+  obj -> string option -> bool -> obj option -> int -> obj =
+    "ml_IGUIEnvironment_addFileOpenDialog"
+
 class environment obj = object(self)
   inherit Irr_base.reference_counted obj
   method built_in_font =
@@ -287,6 +291,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit window obj
+    end
+  method add_file_open_dialog ?title ?(modal = true) ?parent ?(id = -1) () =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_file_open_dialog self#obj title modal p id in
+    object
+      val env = self
+      inherit file_open_dialog obj
     end
   method draw_all = environment_draw_all self#obj
 end
