@@ -38,6 +38,7 @@ let () =
   let scroll_bar = env#add_scroll_bar true
     ~id:(Id.to_int Id.Transparency_scroll_bar) (150, 45, 350, 60) in
   scroll_bar#set_max 255;
+  scroll_bar#set_pos (env#skin#color `window).Irr_core.a;
   let _ = env#add_static_text "Logging ListBox" ~border:true
     (50, 110, 250, 130) in
   let list_box = env#add_list_box (50, 140, 250, 210) in

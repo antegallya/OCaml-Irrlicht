@@ -87,7 +87,7 @@ class skin obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method set_font ?(which = `default) (font : font) =
     skin_set_font self#obj font#obj which
-  method get_color which = skin_get_color self#obj which
+  method color which = skin_get_color self#obj which
 end
 
 (******************************************************************************)
