@@ -61,6 +61,11 @@ class edit_box : obj -> object
   inherit element
 end
 
+(** Class IGUIWindow *)
+class window : obj -> object
+  inherit element
+end
+
 (** Class IGUIEnvironment *)
 class environment : obj -> object
   inherit Irr_base.reference_counted
