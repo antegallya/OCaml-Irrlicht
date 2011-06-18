@@ -40,12 +40,17 @@ let () =
   scroll_bar#set_max 255;
   let _ = env#add_static_text "Logging ListBox" ~border:true
     (50, 110, 250, 130) in
-  let _ = env#add_list_box (50, 140, 250, 210) in
+  let list_box = env#add_list_box (50, 140, 250, 210) in
   let _ = env#add_edit_box "Editable Text" (350, 80, 550, 100) in
+  let counter = ref 0 in
   let on_event = function
     | `gui_event {Irr_base.ge_caller = id; ge_type = `button_clicked} ->
         (match Id.of_int id with
         | Some Id.Quit_button -> device#close; true
+        | Some Id.New_window_button ->
+            let _ = list_box#add_item "Window created" in
+            counter := (!counter + 30) mod 200;
+            true
         | _ -> false)
     | _ -> false in
   device#set_on_event on_event;
