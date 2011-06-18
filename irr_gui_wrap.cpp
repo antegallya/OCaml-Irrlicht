@@ -62,6 +62,10 @@ extern "C" value ml_IGUISkin_getColor(value v_skin, value v_which) {
 				gui_default_color_val(v_which)));
 }
 
+extern "C" value ml_get_EGDC_COUNT(value v_unit) {
+	return Val_int(EGDC_COUNT);
+}
+
 /* Stub for class IGUIScrollBar */
 
 extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {

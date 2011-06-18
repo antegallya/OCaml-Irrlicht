@@ -83,6 +83,10 @@ external skin_set_font : obj -> obj -> Irr_enums.gui_default_font -> unit =
 external skin_get_color : obj -> Irr_enums.gui_default_color -> Irr_core.color =
   "ml_IGUISkin_getColor"
 
+external get_gui_default_color_count : unit -> int = "ml_get_EGDC_COUNT"
+
+let default_color_count = get_gui_default_color_count ()
+
 class skin obj = object(self)
   inherit Irr_base.attribute_exchanging_object obj
   method set_font ?(which = `default) (font : font) =

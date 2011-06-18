@@ -40,6 +40,8 @@ class skin : obj -> object
   method color : Irr_enums.gui_default_color -> Irr_core.color
 end
 
+val default_color_count : int
+
 (** Class IGUIButton *)
 class button : obj -> object
   inherit element
