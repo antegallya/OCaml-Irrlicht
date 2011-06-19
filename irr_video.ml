@@ -164,6 +164,11 @@ external material_set_emissive_color : obj -> Irr_core.color -> unit =
 external material_get_emissive_color : obj -> Irr_core.color =
   "ml_SMaterial_get_EmissiveColor"
 
+external material_get_fog_enable : obj -> bool = "ml_SMaterial_get_FogEnable"
+
+external material_set_fog_enable : obj -> bool -> unit =
+  "ml_SMaterial_set_FogEnable"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -185,6 +190,7 @@ class material (obj : obj) = object(self)
   method color_material = material_get_color_material self#obj
   method diffuse_color = material_get_diffuse_color self#obj
   method emissive_color = material_get_emissive_color self#obj
+  method fog_enable = material_get_fog_enable self#obj
   method flag f = material_get_flag self#obj f
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
@@ -199,6 +205,7 @@ class material (obj : obj) = object(self)
   method set_color_material cm = material_set_color_material self#obj cm
   method set_diffuse_color c = material_set_diffuse_color self#obj c
   method set_emissive_color c = material_set_emissive_color self#obj c
+  method set_fog_enable b = material_set_fog_enable self#obj b
   method set_flag flag b = material_set_flag self#obj flag b
   method set_specular_color c = material_set_specular_color self#obj c
 end

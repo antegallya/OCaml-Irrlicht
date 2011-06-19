@@ -233,6 +233,15 @@ extern "C" CAMLprim value ml_SMaterial_get_EmissiveColor(value v_mat) {
 	return copy_SColor(((SMaterial*) v_mat)->EmissiveColor);
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_FogEnable(value v_mat) {
+	return Val_bool(((SMaterial*) v_mat)->FogEnable);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_FogEnable(value v_mat, value v_b) {
+	((SMaterial*) v_mat)->FogEnable = Bool_val(v_b);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
