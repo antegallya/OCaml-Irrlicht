@@ -68,6 +68,8 @@ class material : obj -> object
   method flag : Irr_enums.material_flag -> bool
   method thickness : float
   method zbuffer : Irr_enums.comparison_func
+  method material_type_param : float
+  method material_type_param2 : float
   method set_anti_aliasing : Irr_enums.anti_aliasing_mode -> unit
   method set_texture : int -> texture -> unit
   method set_lighting : bool -> unit
@@ -86,6 +88,8 @@ class material : obj -> object
   method set_specular_color : Irr_core.color -> unit
   method set_thickness : float -> unit
   method set_zbuffer : Irr_enums.comparison_func -> unit
+  method set_material_type_param : float -> unit
+  method set_material_type_param2 : float -> unit
 end
 
 class material_fresh : object

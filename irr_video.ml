@@ -191,6 +191,18 @@ external material_get_zbuffer : obj -> Irr_enums.comparison_func =
 external material_set_zbuffer : obj -> Irr_enums.comparison_func -> unit =
   "ml_SMaterial_set_ZBuffer"
 
+external material_get_material_type_param : obj -> float =
+  "ml_SMaterial_get_MaterialTypeParam"
+
+external material_set_material_type_param : obj -> float -> unit =
+  "ml_SMaterial_set_MaterialTypeParam"
+
+external material_get_material_type_param2 : obj -> float =
+  "ml_SMaterial_get_MaterialTypeParam2"
+
+external material_set_material_type_param2 : obj -> float -> unit =
+  "ml_SMaterial_set_MaterialTypeParam2"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -218,6 +230,8 @@ class material (obj : obj) = object(self)
   method thickness = material_get_thickness self#obj
   method zbuffer = material_get_zbuffer self#obj
   method flag f = material_get_flag self#obj f
+  method material_type_param = material_get_material_type_param self#obj
+  method material_type_param2 = material_get_material_type_param2 self#obj
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
     material_set_texture self#obj i t#obj
@@ -238,6 +252,9 @@ class material (obj : obj) = object(self)
   method set_specular_color c = material_set_specular_color self#obj c
   method set_thickness x = material_set_thickness self#obj x
   method set_zbuffer x = material_set_zbuffer self#obj x
+  method set_material_type_param x = material_set_material_type_param self#obj x
+  method set_material_type_param2 x =
+    material_set_material_type_param2 self#obj x
 end
 
 class material_fresh = object(self)

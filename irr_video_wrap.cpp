@@ -279,6 +279,28 @@ extern "C" CAMLprim value ml_SMaterial_set_ZBuffer(value v_mat, value v_x) {
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_MaterialTypeParam(value v_mat) {
+	return copy_double(((SMaterial*) v_mat)->MaterialTypeParam);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_MaterialTypeParam(
+		value v_mat, value v_x)
+{
+	((SMaterial*) v_mat)->MaterialTypeParam = Double_val(v_x);
+	return Val_unit;
+}
+
+extern "C" CAMLprim value ml_SMaterial_get_MaterialTypeParam2(value v_mat) {
+	return copy_double(((SMaterial*) v_mat)->MaterialTypeParam2);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_MaterialTypeParam2(
+		value v_mat, value v_x)
+{
+	((SMaterial*) v_mat)->MaterialTypeParam2 = Double_val(v_x);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
