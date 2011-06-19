@@ -488,7 +488,11 @@ let make_hash_values = "hash_values" / "make_hash_values"
 
 let make_enums = "enums" / "make_enums"
 
-let cpp_compiler = S [P "g++"; A "-fPIC"; A "-I"; Sh "`ocamlc -where`"]
+let env = BaseEnvLight.load ()
+
+let cpp_compiler_var = BaseEnvLight.var_get "cpp_compiler" env
+
+let cpp_compiler = S [Sh cpp_compiler_var; A "-I"; Sh "`ocamlc -where`"]
 
 let ccopt = S [A "-I"; P "/usr/include/irrlicht"]
 
