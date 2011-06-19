@@ -248,6 +248,15 @@ extern "C" CAMLprim value ml_SMaterial_set_MaterialType(value v_mat, value v_mt)
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_Shininess(value v_mat) {
+	return copy_double(((SMaterial*) v_mat)->Shininess);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_Shininess(value v_mat, value v_x) {
+	((SMaterial*) v_mat)->Shininess = Double_val(v_x);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

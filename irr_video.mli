@@ -63,6 +63,7 @@ class material : obj -> object
   method diffuse_color : Irr_core.color
   method emissive_color : Irr_core.color
   method fog_enable : bool
+  method shininess : float
   method flag : Irr_enums.material_flag -> bool
   method set_anti_aliasing : Irr_enums.anti_aliasing_mode -> unit
   method set_texture : int -> texture -> unit
@@ -77,6 +78,7 @@ class material : obj -> object
   method set_emissive_color : Irr_core.color -> unit
   method set_fog_enable : bool -> unit
   method set_material_type : Irr_enums.material_type -> unit
+  method set_shininess : float -> unit
   method set_flag : Irr_enums.material_flag -> bool -> unit
   method set_specular_color : Irr_core.color -> unit
 end

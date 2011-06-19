@@ -172,6 +172,11 @@ external material_set_fog_enable : obj -> bool -> unit =
 external material_set_material_type : obj -> Irr_enums.material_type -> unit =
   "ml_SMaterial_set_MaterialType"
 
+external material_get_shininess : obj -> float = "ml_SMaterial_get_Shininess"
+
+external material_set_shininess : obj -> float -> unit =
+  "ml_SMaterial_set_Shininess"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -194,6 +199,7 @@ class material (obj : obj) = object(self)
   method diffuse_color = material_get_diffuse_color self#obj
   method emissive_color = material_get_emissive_color self#obj
   method fog_enable = material_get_fog_enable self#obj
+  method shininess = material_get_shininess self#obj
   method flag f = material_get_flag self#obj f
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
@@ -210,6 +216,7 @@ class material (obj : obj) = object(self)
   method set_emissive_color c = material_set_emissive_color self#obj c
   method set_fog_enable b = material_set_fog_enable self#obj b
   method set_material_type mt = material_set_material_type self#obj mt
+  method set_shininess x = material_set_shininess self#obj x
   method set_flag flag b = material_set_flag self#obj flag b
   method set_specular_color c = material_set_specular_color self#obj c
 end
