@@ -257,6 +257,10 @@ extern "C" CAMLprim value ml_SMaterial_set_Shininess(value v_mat, value v_x) {
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_SpecularColor(value v_mat) {
+	return copy_SColor(((SMaterial*) v_mat)->SpecularColor);
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
