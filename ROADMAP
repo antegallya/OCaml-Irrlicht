@@ -10,4 +10,4 @@ namespace DONE
 - In myocamlbuild.ml, make portable code for filenames (\ for windows) DONE
 
 - Allow the user to use a C++ compiler other than g++ via oasis and by
-editing setup.ml
+editing setup.ml DONE
