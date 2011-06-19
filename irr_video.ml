@@ -169,6 +169,9 @@ external material_get_fog_enable : obj -> bool = "ml_SMaterial_get_FogEnable"
 external material_set_fog_enable : obj -> bool -> unit =
   "ml_SMaterial_set_FogEnable"
 
+external material_set_material_type : obj -> Irr_enums.material_type -> unit =
+  "ml_SMaterial_set_MaterialType"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -206,6 +209,7 @@ class material (obj : obj) = object(self)
   method set_diffuse_color c = material_set_diffuse_color self#obj c
   method set_emissive_color c = material_set_emissive_color self#obj c
   method set_fog_enable b = material_set_fog_enable self#obj b
+  method set_material_type mt = material_set_material_type self#obj mt
   method set_flag flag b = material_set_flag self#obj flag b
   method set_specular_color c = material_set_specular_color self#obj c
 end

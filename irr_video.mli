@@ -76,6 +76,7 @@ class material : obj -> object
   method set_diffuse_color : Irr_core.color -> unit
   method set_emissive_color : Irr_core.color -> unit
   method set_fog_enable : bool -> unit
+  method set_material_type : Irr_enums.material_type -> unit
   method set_flag : Irr_enums.material_flag -> bool -> unit
   method set_specular_color : Irr_core.color -> unit
 end

@@ -242,6 +242,12 @@ extern "C" CAMLprim value ml_SMaterial_set_FogEnable(value v_mat, value v_b) {
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_set_MaterialType(value v_mat, value v_mt)
+{
+	((SMaterial*) v_mat)->MaterialType = material_type_val(v_mt);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
