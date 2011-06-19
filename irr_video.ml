@@ -180,6 +180,11 @@ external material_set_shininess : obj -> float -> unit =
 external material_get_specular_color : obj -> Irr_core.color =
   "ml_SMaterial_get_SpecularColor"
 
+external material_get_thickness : obj -> float = "ml_SMaterial_get_Thickness"
+
+external material_set_thickness : obj -> float -> unit =
+  "ml_SMaterial_set_Thickness"
+
 let free x = material_destroy x#obj
 
 class material (obj : obj) = object(self)
@@ -204,6 +209,7 @@ class material (obj : obj) = object(self)
   method fog_enable = material_get_fog_enable self#obj
   method shininess = material_get_shininess self#obj
   method specular_color = material_get_specular_color self#obj
+  method thickness = material_get_thickness self#obj
   method flag f = material_get_flag self#obj f
   method set_anti_aliasing m = material_set_anti_aliasing self#obj m
   method set_texture i (t : texture) =
@@ -223,6 +229,7 @@ class material (obj : obj) = object(self)
   method set_shininess x = material_set_shininess self#obj x
   method set_flag flag b = material_set_flag self#obj flag b
   method set_specular_color c = material_set_specular_color self#obj c
+  method set_thickness x = material_set_thickness self#obj x
 end
 
 class material_fresh = object(self)

@@ -261,6 +261,15 @@ extern "C" CAMLprim value ml_SMaterial_get_SpecularColor(value v_mat) {
 	return copy_SColor(((SMaterial*) v_mat)->SpecularColor);
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_Thickness(value v_mat) {
+	return copy_double(((SMaterial*) v_mat)->Thickness);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_Thickness(value v_mat, value v_x) {
+	((SMaterial*) v_mat)->Thickness = Double_val(v_x);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,

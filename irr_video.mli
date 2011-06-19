@@ -66,6 +66,7 @@ class material : obj -> object
   method shininess : float
   method specular_color : Irr_core.color
   method flag : Irr_enums.material_flag -> bool
+  method thickness : float
   method set_anti_aliasing : Irr_enums.anti_aliasing_mode -> unit
   method set_texture : int -> texture -> unit
   method set_lighting : bool -> unit
@@ -82,6 +83,7 @@ class material : obj -> object
   method set_shininess : float -> unit
   method set_flag : Irr_enums.material_flag -> bool -> unit
   method set_specular_color : Irr_core.color -> unit
+  method set_thickness : float -> unit
 end
 
 class material_fresh : object
