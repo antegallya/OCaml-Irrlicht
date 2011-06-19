@@ -484,9 +484,9 @@ open Ocamlbuild_plugin
 
 let ( & ) f x = f x
 
-let make_hash_values = "hash_values/make_hash_values"
+let make_hash_values = "hash_values" / "make_hash_values"
 
-let make_enums = "enums/make_enums"
+let make_enums = "enums" / "make_enums"
 
 let cpp_compiler = S [P "g++"; A "-fPIC"; A "-I"; Sh "`ocamlc -where`"]
 

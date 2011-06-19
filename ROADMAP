@@ -7,7 +7,7 @@ namespace DONE
 
 - Bind SAnimatedMesh and add a few functions to SMeshBuffer
 
-- In myocamlbuild.ml, make portable code for filenames (\ for windows)
+- In myocamlbuild.ml, make portable code for filenames (\ for windows) DONE
 
 - Allow the user to use a C++ compiler other than g++ via oasis and by
 editing setup.ml
