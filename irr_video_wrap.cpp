@@ -270,6 +270,15 @@ extern "C" CAMLprim value ml_SMaterial_set_Thickness(value v_mat, value v_x) {
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_ZBuffer(value v_mat) {
+	return Val_comparison_func(((SMaterial*) v_mat)->ZBuffer);
+}
+
+extern "C" CAMLprim value ml_SMaterial_set_ZBuffer(value v_mat, value v_x) {
+	((SMaterial*) v_mat)->ZBuffer = comparison_func_val(v_x);
+	return Val_unit;
+}
+
 /* Stub for IVideoDriver class */
 
 extern "C" CAMLprim value ml_IVideoDriver_beginScene(value v_driver,
