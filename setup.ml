@@ -5150,4 +5150,10 @@ let setup_t =
 let setup () = BaseSetup.setup setup_t;;
 
 (* OASIS_STOP *)
+
+let _ =
+  BaseEnv.var_define ~cli:BaseEnv.CLIAuto ~arg_help:"compiler"
+  ~short_desc:(fun () -> "C++ compiler") "cpp_compiler"
+  (lazy "g++ -fPIC") ()
+
 let () = setup ();;
