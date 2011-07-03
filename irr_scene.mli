@@ -97,6 +97,11 @@ class animated_mesh : obj -> object
   method mesh : ?detail_lv:int -> ?start:int -> ?ends:int -> int -> mesh
 end
 
+class fresh_animated_mesh :
+  ?mesh:mesh -> ?typ:Irr_enums.animated_mesh_type -> unit -> object
+    inherit animated_mesh
+  end
+
 (** Class IMeshSceneNode *)
 class mesh_node : obj -> object
   inherit node

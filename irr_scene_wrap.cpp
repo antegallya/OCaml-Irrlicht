@@ -231,6 +231,15 @@ extern "C" value ml_IAnimatedMesh_getMesh(
 			Int_val(v_detail_lv), Int_val(v_start), Int_val(v_end)*/);
 }
 
+extern "C" value ml_SAnimatedMesh_create(value v_mesh, value v_type) {
+	IMesh* mesh;
+	if(v_mesh == Val_int(0)) mesh = NULL;
+	else mesh = (IMesh*) Field(v_mesh, 0);
+	SAnimatedMesh* am = new SAnimatedMesh(mesh, animated_mesh_type_val(v_type));
+	if(am == NULL) null_pointer_exn();
+	return (value) am;
+}
+
 /* Stub for class IAnimatedMeshSceneNode */
 
 extern "C" CAMLprim value ml_IAnimatedMeshSceneNode_setAnimationSpeed(

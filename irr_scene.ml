@@ -273,6 +273,10 @@ end
 external animated_mesh_get_mesh : obj -> int -> int -> int -> int -> obj =
   "ml_IAnimatedMesh_getMesh"
 
+external animated_mesh_create :
+  obj option -> Irr_enums.animated_mesh_type -> obj =
+    "ml_SAnimatedMesh_create"
+
 class animated_mesh obj = object(self)
   inherit mesh obj
   method mesh ?(detail_lv = 255) ?(start = -1)
@@ -283,6 +287,16 @@ class animated_mesh obj = object(self)
       inherit mesh obj
     end 
 end
+
+let free x = x#drop
+
+class fresh_animated_mesh ?mesh ?(typ = `unknown) () =
+  object(self)
+    inherit animated_mesh (
+      let m = match mesh with Some (x : mesh) -> Some x#obj | None -> None in
+      animated_mesh_create m typ)
+    initializer Gc.finalise free self
+  end
 
 (******************************************************************************)
 
