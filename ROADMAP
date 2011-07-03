@@ -6,7 +6,7 @@ namespace DONE
 - Complete the binding of SMaterial and allow rendering batches via IVideoDriver
 PARTIALLY DONE
 
-- Bind SAnimatedMesh and add a few functions to SMeshBuffer
+- Bind SAnimatedMesh and add a few functions to SMeshBuffer DONE
 
 - In myocamlbuild.ml, make portable code for filenames (\ for windows) DONE
 
