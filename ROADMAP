@@ -4,6 +4,7 @@ Roadmap to version 0.0.3 :
 namespace DONE
 
 - Complete the binding of SMaterial and allow rendering batches via IVideoDriver
+PARTIALLY DONE
 
 - Bind SAnimatedMesh and add a few functions to SMeshBuffer
 
