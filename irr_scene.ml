@@ -432,6 +432,10 @@ external collision_manager_get_scene_node_and_collision_point_from_ray :
     (obj * Irr_core.vector3df * Irr_core.triangle3df) option
   = "ml_ISceneCollisionManager_getSceneNodeAndCollisionPointFromRay"
 
+external collision_manager_get_ray_from_screen_coordinates :
+  obj -> (int * int) -> obj option -> Irr_core.line3df =
+    "ml_ISceneCollisionManager_getRayFromScreenCoordinates"
+
 class collision_manager obj = object(self)
   inherit Irr_base.reference_counted obj
   method node_and_point_from_ray ?(id = 0) ?root ?(no_debug_object = false)
@@ -446,6 +450,10 @@ class collision_manager obj = object(self)
           val coll_man = self
           inherit node obj end in
         Some(node, p, t)
+  method ray_from_screen_coordinates ?camera pos =
+    let cam =
+      match camera with Some (x : camera) -> Some x#obj | None -> None in
+    collision_manager_get_ray_from_screen_coordinates self#obj pos cam
 end
 
 (******************************************************************************)

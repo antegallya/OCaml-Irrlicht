@@ -149,6 +149,8 @@ class collision_manager : obj -> object
   method node_and_point_from_ray :
     ?id:int -> ?root:node -> ?no_debug_object:bool -> Irr_core.line3df ->
       (node * Irr_core.vector3df * Irr_core.triangle3df) option
+  method ray_from_screen_coordinates :
+    ?camera:camera -> (int * int) -> Irr_core.line3df
 end
 
 (** Class ILightSceneNode *)

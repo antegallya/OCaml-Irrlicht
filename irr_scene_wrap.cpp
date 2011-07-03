@@ -396,6 +396,16 @@ ml_ISceneCollisionManager_getSceneNodeAndCollisionPointFromRay(
 	CAMLreturn(r);
 }
 
+extern "C" CAMLprim value ml_ISceneCollisionManager_getRayFromScreenCoordinates(
+		value v_manager, value v_pos, value v_camera)
+{
+	ICameraSceneNode* camera;
+	if(v_camera == Val_int(0)) camera = NULL;
+	camera = (ICameraSceneNode*) Field(v_camera, 0);
+	return copy_line3df(((ISceneCollisionManager*) v_manager)->
+			getRayFromScreenCoordinates(Pos2d_s32_val(v_pos), camera));
+}
+
 /* Stub for class IParticleSystemSceneNode */
 
 extern "C" CAMLprim value ml_IParticleSystemSceneNode_createBoxEmitter_native(
