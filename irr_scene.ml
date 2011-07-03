@@ -207,6 +207,10 @@ external mesh_buffer_set_indices_used : obj -> int -> unit =
 external mesh_buffer_recalculate_bounding_box : obj -> unit =
   "ml_IMeshBuffer_recalculateBoundingBox"
 
+external mesh_buffer_set_hardware_mapping_hint :
+  obj -> Irr_enums.hardware_mapping -> Irr_enums.buffer_type -> unit =
+    "ml_IMeshBuffer_setHardwareMappingHint"
+
 let free x = x#drop
 
 class mesh_buffer obj = object(self)
@@ -215,6 +219,8 @@ class mesh_buffer obj = object(self)
   method index i = mesh_buffer_get_index self#obj i
   method recalculate_bounding_box =
     mesh_buffer_recalculate_bounding_box self#obj
+  method set_hardware_mapping_hint ?(buffer = `vertex_and_index) hint =
+    mesh_buffer_set_hardware_mapping_hint self#obj hint buffer
 end
 
 class fresh_mesh_buffer = object(self)

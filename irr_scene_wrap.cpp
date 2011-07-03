@@ -194,6 +194,14 @@ extern "C" CAMLprim value ml_IMeshBuffer_recalculateBoundingBox(value v_mb) {
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IMeshBuffer_setHardwareMappingHint(
+		value v_mb, value v_hint, value v_type)
+{
+	((IMeshBuffer*) v_mb)->setHardwareMappingHint(hardware_mapping_val(v_hint),
+		buffer_type_val(v_type));
+	return Val_unit;
+}
+
 /* Stub for class IMesh */
 
 extern "C" CAMLprim value ml_SMesh_create(value vunit) {

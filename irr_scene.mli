@@ -67,6 +67,8 @@ class mesh_buffer : obj -> object
   method vertex_count : int
   method index : int -> int
   method recalculate_bounding_box : unit
+  method set_hardware_mapping_hint :
+    ?buffer:Irr_enums.buffer_type -> Irr_enums.hardware_mapping -> unit
 end
 
 class fresh_mesh_buffer : object
