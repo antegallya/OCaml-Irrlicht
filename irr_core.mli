@@ -4,7 +4,7 @@ type 'a pos_2d = 'a * 'a
 
 type 'a vector_3d = 'a * 'a * 'a
 
-type vector3df = float * float * float
+type vector3df = float vector_3d
 
 type line3df = vector3df * vector3df
 
