@@ -530,6 +530,27 @@ extern "C" CAMLprim value ml_ISceneManager_addCameraSceneNodeFPS_bytecode(
 			argv[10]);
 }
 
+
+extern "C" CAMLprim value ml_ISceneManager_addCameraSceneNodeMaya_native(
+		value v_manager, value v_parent, value v_rs, value v_zs,
+		value v_ts, value v_id, value v_ma) {
+	ISceneNode* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (ISceneNode*) v_parent;
+	ICameraSceneNode* node =
+		((ISceneManager*) v_manager)->addCameraSceneNodeMaya(
+		parent, Double_val(v_rs), Double_val(v_zs), Double_val(v_ts),
+		Int_val(v_id), Bool_val(v_ma));
+	if(node == NULL) null_pointer_exn();
+	return (value) node;
+}
+
+extern "C" CAMLprim value ml_ISceneManager_addCameraSceneNodeMaya_bytecode(
+		value* argv, int argn) {
+	return ml_ISceneManager_addCameraSceneNodeMaya_native(argv[0], argv[1],
+		argv[2], argv[3], argv[4], argv[5], argv[6]);
+}
+
 extern "C" CAMLprim value ml_ISceneManager_drawAll(value v_manager) {
 	((ISceneManager*) v_manager)->drawAll();
 	return Val_unit;

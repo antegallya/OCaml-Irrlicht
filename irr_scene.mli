@@ -215,6 +215,9 @@ class manager : obj -> object
     ?parent:node -> ?rs:float -> ?ms:float -> ?id:int ->
       ?km:Irr_base.key_map list -> ?nvm:bool -> ?js:float -> ?im:bool ->
       ?ma:bool -> unit -> camera
+  method add_camera_maya :
+    ?parent:node -> ?rs:float -> ?zs:float -> ?ts:float -> ?id:int ->
+      ?ma:bool -> unit -> camera
   method add_cube_node :
     ?size:float -> ?parent:node -> ?id:int -> ?pos:Irr_core.vector3df ->
       ?rot:Irr_core.vector3df -> ?scale:Irr_core.vector3df -> unit -> mesh_node

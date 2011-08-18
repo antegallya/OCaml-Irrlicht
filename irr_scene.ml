@@ -605,6 +605,12 @@ external manager_add_camera_scene_node_fps :
   "ml_ISceneManager_addCameraSceneNodeFPS_bytecode"
   "ml_ISceneManager_addCameraSceneNodeFPS_native"
 
+external manager_add_camera_scene_node_maya :
+  obj -> obj option -> float -> float -> float -> int ->
+    bool -> obj =
+  "ml_ISceneManager_addCameraSceneNodeMaya_bytecode"
+  "ml_ISceneManager_addCameraSceneNodeMaya_native"
+
 external manager_add_cube_scene_node :
   obj -> float -> obj option -> int -> Irr_core.vector3df ->
     Irr_core.vector3df -> Irr_core.vector3df -> obj =
@@ -769,6 +775,16 @@ class manager obj = object(self)
     let obj = manager_add_camera_scene_node_fps self#obj p rs ms id km
       (List.length km) nvm js im
       ma in
+    object
+      val smgr = self
+      inherit camera obj
+    end
+  method add_camera_maya ?parent ?(rs = -1500.) ?(zs = 200.) ?(ts = 1500.)
+    ?(id = -1) ?(ma = true) () =
+    let p = match parent with
+    | None -> None
+    | Some (x : node) -> Some x#obj in
+    let obj = manager_add_camera_scene_node_maya self#obj p rs zs ts id ma in
     object
       val smgr = self
       inherit camera obj
