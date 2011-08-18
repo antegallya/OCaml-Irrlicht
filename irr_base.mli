@@ -53,7 +53,7 @@ type mouse_input = {
 (** Class SGUIEvent *)
 type gui_event = {
   ge_caller : int;
-  ge_element : int;
+  ge_element : int option;
   ge_type : Irr_enums.gui_event_type
 }
 

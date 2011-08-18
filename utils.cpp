@@ -1,5 +1,14 @@
 #include "global.h"
 
+value Val_some(value v)
+{
+    CAMLparam1(v);
+    CAMLlocal1(some);
+    some = caml_alloc_small(1, 0);
+    Field(some, 0) = v;
+    CAMLreturn(some);
+}
+
 void null_pointer_exn() {
 	static value*  e = NULL;
 	if(e == NULL) {
