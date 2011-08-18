@@ -448,6 +448,13 @@ extern "C" CAMLprim value ml_IVideoDriver_setTransform(
 	return Val_unit;
 }
 
+extern "C" CAMLprim value ml_IVideoDriver_draw3DLine(
+		value v_driver, value v_start, value v_end, value v_color) {
+	((IVideoDriver*) v_driver)->draw3DLine(Vector3df_val(v_start),
+		Vector3df_val(v_end), SColor_val(v_color));
+	return Val_unit;
+}
+
 extern "C" CAMLprim value ml_IVideoDriver_draw3DTriangle(
 		value v_driver, value v_tri, value v_color)
 {

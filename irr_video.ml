@@ -317,6 +317,10 @@ external driver_set_transform :
   obj -> Irr_enums.transformation_state -> Irr_core.matrix4 -> unit =
     "ml_IVideoDriver_setTransform"
 
+external driver_draw_3d_line :
+  obj -> Irr_core.vector3df -> Irr_core.vector3df -> Irr_core.color -> unit =
+    "ml_IVideoDriver_draw3DLine"
+
 external driver_draw_3d_triangle :
   obj -> Irr_core.triangle3df -> Irr_core.color -> unit =
     "ml_IVideoDriver_draw3DTriangle"
@@ -365,6 +369,8 @@ class driver obj = object(self)
   method set_texture_creation_flag flag b =
     driver_set_texture_creation_flag self#obj flag b
   method set_transform state mat = driver_set_transform self#obj state mat
+  method draw_3d_line ?(color = Irr_core.color_ARGB 255 255 255 255)
+    vstart vend = driver_draw_3d_line self#obj vstart vend color
   method draw_3d_triangle t c = driver_draw_3d_triangle self#obj t c
   method set_material (m : material) = driver_set_material self#obj m#obj
   method max_prim_count = driver_get_maximal_primitive_count self#obj
