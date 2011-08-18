@@ -371,7 +371,8 @@ class driver obj = object(self)
   method set_transform state mat = driver_set_transform self#obj state mat
   method draw_3d_line ?(color = Irr_core.color_ARGB 255 255 255 255)
     vstart vend = driver_draw_3d_line self#obj vstart vend color
-  method draw_3d_triangle t c = driver_draw_3d_triangle self#obj t c
+  method draw_3d_triangle ?(color = Irr_core.color_ARGB 255 255 255 255) t =
+    driver_draw_3d_triangle self#obj t color
   method set_material (m : material) = driver_set_material self#obj m#obj
   method max_prim_count = driver_get_maximal_primitive_count self#obj
 end

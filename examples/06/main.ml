@@ -111,7 +111,7 @@ let main () =
     | Some(node, p, triangle) ->
         driver#set_transform `world (Irr_core.matrix_identity ());
         driver#set_material mat;
-        driver#draw_3d_triangle triangle (Irr_core.color_ARGB 0 255 0 0);
+        driver#draw_3d_triangle triangle ~color:(Irr_core.color_ARGB 0 255 0 0);
         bill#set_pos p;
         if node#id land is_highlightable = is_highlightable then (
           highlighted_node := Some node;

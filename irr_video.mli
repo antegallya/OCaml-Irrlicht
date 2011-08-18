@@ -126,7 +126,7 @@ class driver : obj -> object
     Irr_enums.transformation_state -> Irr_core.matrix4 -> unit
   method draw_3d_line : ?color:Irr_core.color -> Irr_core.vector3df ->
     Irr_core.vector3df -> unit
-  method draw_3d_triangle : Irr_core.triangle3df -> Irr_core.color -> unit
+  method draw_3d_triangle : ?color:Irr_core.color -> Irr_core.triangle3df -> unit
   method set_material : material -> unit
   method max_prim_count : int
 end
