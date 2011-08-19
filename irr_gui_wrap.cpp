@@ -76,6 +76,39 @@ extern "C" value ml_IGUISkin_setColor(value v_skin, value v_which, value v_c) {
 	return Val_unit;
 }
 
+/* Stub for class IGUIContextMenu */
+
+extern "C" CAMLprim value ml_IGUIContextMenu_addItem_native(
+		value v_cm, value v_text, value v_cmd_id, value v_enabled,
+		value v_has_submenu, value v_checked, value v_auto_checking) {
+	int text_size = caml_string_length(v_text);
+	IGUIContextMenu* cm = (IGUIContextMenu*) v_cm;
+	wchar_t text[text_size + 1];
+	u32 idx;
+	mbstowcs(text, String_val(v_text), text_size);
+	idx = cm->addItem(text, Bool_val(v_enabled), Bool_val(v_has_submenu),
+		Bool_val(v_checked), Bool_val(v_auto_checking));
+	return Val_int(idx);
+}
+
+extern "C" CAMLprim value ml_IGUIContextMenu_addItem_bytecode(
+		value *argv, int argn) {
+	return ml_IGUIContextMenu_addItem_native(argv[0], argv[1], argv[2],
+		argv[3], argv[4], argv[5], argv[6]);
+}
+
+extern "C" CAMLprim value ml_IGUIContextMenu_addSeparator(value v_cm) {
+	((IGUIContextMenu*) v_cm)->addSeparator();
+	return Val_unit;
+}
+
+extern "C" CAMLprim value ml_IGUIContextMenu_setCloseHandling(
+		value v_cm, value v_on_close) {
+	((IGUIContextMenu*) v_cm)->
+		setCloseHandling(context_menu_close_val(v_on_close));
+	return Val_unit;
+}
+
 /* Stub for class IGUIScrollBar */
 
 extern "C" value ml_IGUIScrollBar_setMax(value v_sb, value v_n) {
@@ -211,6 +244,17 @@ extern "C" CAMLprim value ml_IGUIEnvironment_addButton_bytecode(
 		value* argv, int argn) {
 	return ml_IGUIEnvironment_addButton_native(argv[0], argv[1], argv[2],
 			argv[3], argv[4], argv[5]);
+}
+
+extern "C" CAMLprim value ml_IGUIEnvironment_addMenu(
+		value v_env, value v_parent, value v_id) {
+	IGUIElement* parent;
+	if(v_parent == Val_int(0)) parent = NULL;
+	else parent = (IGUIElement*) Field(v_parent, 0);
+	IGUIContextMenu* cm = ((IGUIEnvironment*) v_env)->addMenu(
+		parent, Int_val(v_id));
+	if(cm == NULL) null_pointer_exn();
+	return (value) cm;
 }
 
 extern "C" CAMLprim value ml_IGUIEnvironment_addScrollBar(

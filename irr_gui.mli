@@ -50,6 +50,15 @@ class button : obj -> object
   inherit element
 end
 
+(** Class IGUIContextMenu *)
+class context_menu : obj -> object
+  inherit element
+  method add_item : ?command_id:int -> ?enabled:bool -> ?has_submenu:bool ->
+    ?checked:bool -> ?auto_checking:bool -> string -> int
+  method add_separator : unit
+  method set_close_handling : Irr_enums.context_menu_close -> unit
+end
+
 (** Class IGUIScrollBar *)
 class scroll_bar : obj -> object
   inherit element
@@ -94,6 +103,8 @@ class environment : obj -> object
   method add_button :
     ?parent:element -> ?id:int -> ?text:string -> ?tooltiptext:string ->
       int Irr_core.rect -> button
+  method add_menu :
+    ?parent:element -> ?id:int -> unit -> context_menu
   method add_scroll_bar :
     bool -> ?parent:element -> ?id:int -> int Irr_core.rect -> scroll_bar
   method add_list_box :

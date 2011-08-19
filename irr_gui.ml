@@ -114,6 +114,35 @@ end
 
 (******************************************************************************)
 
+(* Binding for class IGUIContextMenu *)
+
+(******************************************************************************)
+
+external context_menu_add_item : obj -> string -> int ->
+  bool -> bool -> bool -> bool -> int =
+  "ml_IGUIContextMenu_addItem_bytecode"
+  "ml_IGUIContextMenu_addItem_native"
+
+external context_menu_add_separator : obj -> unit =
+  "ml_IGUIContextMenu_addSeparator"
+
+external context_menu_set_close_handling :
+  obj -> Irr_enums.context_menu_close -> unit =
+  "ml_IGUIContextMenu_setCloseHandling"
+
+class context_menu obj = object(self)
+  inherit element obj
+  method add_item ?(command_id=(-1)) ?(enabled=true) ?(has_submenu=false)
+    ?(checked=false) ?(auto_checking=false) text =
+    context_menu_add_item self#obj text command_id enabled has_submenu
+      checked auto_checking
+  method add_separator = context_menu_add_separator self#obj
+  method set_close_handling on_close =
+    context_menu_set_close_handling self#obj on_close
+end
+
+(******************************************************************************)
+
 (* Binding for class IGUIScrollBar *)
 
 (******************************************************************************)
@@ -214,6 +243,10 @@ external environment_add_button :
     "ml_IGUIEnvironment_addButton_bytecode"
     "ml_IGUIEnvironment_addButton_native"
 
+external environment_add_menu :
+  obj -> obj option -> int -> obj =
+    "ml_IGUIEnvironment_addMenu"
+
 external environment_add_scroll_bar :
   obj -> bool -> int Irr_core.rect -> obj option -> int -> obj =
     "ml_IGUIEnvironment_addScrollBar"
@@ -286,6 +319,13 @@ class environment obj = object(self)
     object
       val env = self
       inherit button obj
+    end
+  method add_menu ?parent ?(id = -1) () =
+    let p = match parent with Some (x : element) -> Some x#obj | None -> None in
+    let obj = environment_add_menu self#obj p id in
+    object
+      val env = self
+      inherit context_menu obj
     end
   method add_scroll_bar h ?parent ?(id = -1) rect =
     let p = match parent with Some (x : element) -> Some x#obj | None -> None in
