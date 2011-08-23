@@ -325,6 +325,12 @@ external driver_draw_3d_triangle :
   obj -> Irr_core.triangle3df -> Irr_core.color -> unit =
     "ml_IVideoDriver_draw3DTriangle"
 
+external driver_draw_vertex_primitive_list :
+  obj -> Vertex.t array -> ('a, 'b, Bigarray.c_layout) Bigarray.Array1.t ->
+  int -> Irr_enums.primitive_type -> Irr_enums.index_type-> unit =
+  "ml_IVideoDriver_drawVertexPrimitiveList_standard_bytecode"
+  "ml_IVideoDriver_drawVertexPrimitiveList_standard_native"
+
 external driver_set_material : obj -> obj -> unit =
   "ml_IVideoDriver_setMaterial"
 
@@ -373,6 +379,18 @@ class driver obj = object(self)
     vstart vend = driver_draw_3d_line self#obj vstart vend color
   method draw_3d_triangle ?(color = Irr_core.color_ARGB 255 255 255 255) t =
     driver_draw_3d_triangle self#obj t color
+  method draw_vertex_primitive_list_16 vertices
+    (indexes:(int, Bigarray.int16_signed_elt, Bigarray.c_layout)
+       Bigarray.Array1.t)
+    primitive_count primitive_type =
+    driver_draw_vertex_primitive_list self#obj vertices indexes primitive_count
+      primitive_type `_16bit
+  method draw_vertex_primitive_list_32 vertices
+    (indexes:(int32, Bigarray.int32_elt, Bigarray.c_layout)
+       Bigarray.Array1.t)
+    primitive_count primitive_type =
+    driver_draw_vertex_primitive_list self#obj vertices indexes primitive_count
+      primitive_type `_32bit
   method set_material (m : material) = driver_set_material self#obj m#obj
   method max_prim_count = driver_get_maximal_primitive_count self#obj
 end

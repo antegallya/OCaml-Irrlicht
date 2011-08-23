@@ -127,6 +127,12 @@ class driver : obj -> object
   method draw_3d_line : ?color:Irr_core.color -> Irr_core.vector3df ->
     Irr_core.vector3df -> unit
   method draw_3d_triangle : ?color:Irr_core.color -> Irr_core.triangle3df -> unit
+  method draw_vertex_primitive_list_16 : Vertex.t array ->
+    (int, Bigarray.int16_signed_elt, Bigarray.c_layout) Bigarray.Array1.t ->
+    int -> Irr_enums.primitive_type -> unit
+  method draw_vertex_primitive_list_32 : Vertex.t array ->
+    (int32, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t ->
+    int -> Irr_enums.primitive_type -> unit
   method set_material : material -> unit
   method max_prim_count : int
 end

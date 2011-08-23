@@ -1,6 +1,7 @@
 /* C++ stub for the Irr_video module */
 
 #include "irr_video_wrap.h"
+#include "caml/bigarray.h"
 
 void rendering_failed_exn() {
 	static value* e = NULL;
@@ -461,6 +462,30 @@ extern "C" CAMLprim value ml_IVideoDriver_draw3DTriangle(
 	((IVideoDriver*) v_driver)->draw3DTriangle(Triangle3df_val(v_tri),
 		SColor_val(v_color));
 	return Val_unit;
+}
+
+extern "C" CAMLprim
+value ml_IVideoDriver_drawVertexPrimitiveList_standard_native(
+		value v_driver, value v_vert_arr, value v_idxs_ba,
+		value v_prim_count, value v_prim_type, value v_idx_type) {
+	int vertexCount = Wosize_val(v_vert_arr);
+	S3DVertex vertices[vertexCount];
+	int i;
+        
+	for(i = 0; i < vertexCount; ++i)
+		((S3DVertex *)vertices)[i] = Vertex_val(Field(v_vert_arr, i));
+
+	((IVideoDriver*) v_driver)->drawVertexPrimitiveList(
+		vertices, vertexCount, Data_bigarray_val(v_idxs_ba),
+		Int_val(v_prim_count), EVT_STANDARD,
+		primitive_type_val(v_prim_type), index_type_val(v_idx_type));
+}
+
+extern "C" CAMLprim
+value ml_IVideoDriver_drawVertexPrimitiveList_standard_bytecode(
+		value* argv, int argn) {
+	return ml_IVideoDriver_drawVertexPrimitiveList_standard_native(
+		argv[0], argv[1], argv[2], argv[3], argv[4], argv[5]);
 }
 
 extern "C" CAMLprim value ml_IVideoDriver_setMaterial(
