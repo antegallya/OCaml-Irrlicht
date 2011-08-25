@@ -193,7 +193,7 @@ extern "C" CAMLprim value ml_SMaterial_set_SpecularColor(
 extern "C" CAMLprim value ml_SMaterial_set_ColorMask(
 		value v_mat, value v_mask)
 {
-	((SMaterial*) v_mat)->ColorMask <- color_plane_val(v_mask);
+	((SMaterial*) v_mat)->ColorMask = color_plane_val(v_mask);
 	return Val_unit;
 }
 
