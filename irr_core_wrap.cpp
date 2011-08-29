@@ -36,6 +36,21 @@ value copy_pos2d_s32(position2d<s32> pos) {
 	return v;
 }
 
+position2d<f32> Pos2d_f32_val(value v) {
+	return position2d<f32>(Double_val(Field(v, 0)), Double_val(Field(v, 1)));
+}
+
+value copy_pos2d_f32(position2d<f32> pos) {
+	CAMLparam0();
+	CAMLlocal2(v, v_double);
+	v = caml_alloc(2, 0);
+	v_double = caml_copy_double(pos.X);
+	Store_field(v, 0, v_double);
+	v_double = caml_copy_double(pos.Y);
+	Store_field(v, 1, v_double);
+	CAMLreturn(v);
+}
+
 vector3df Vector3df_val(value v) {
 	return vector3df(Double_val(Field(v, 0)), Double_val(Field(v, 1)),
 			Double_val(Field(v, 2)));

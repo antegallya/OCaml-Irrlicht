@@ -9,12 +9,16 @@ type obj = Irr_base.obj
 external cursor_get_position : obj -> int Irr_core.pos_2d =
   "ml_ICursorControl_getPosition"
 
+external cursor_get_relative_position : obj -> float Irr_core.pos_2d =
+  "ml_ICursorControl_getRelativePosition"
+
 external cursor_set_visible : obj -> bool -> unit =
   "ml_ICursorControl_setVisible"
 
 class cursor obj = object(self)
   inherit Irr_base.reference_counted obj
   method pos = cursor_get_position self#obj
+  method rel_pos = cursor_get_relative_position self#obj
   method set_visible b = cursor_set_visible self#obj b
 end
 

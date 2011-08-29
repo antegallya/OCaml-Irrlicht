@@ -6,6 +6,7 @@ type obj = Irr_base.obj
 class cursor : obj -> object
   inherit Irr_base.reference_counted
   method pos : int Irr_core.pos_2d
+  method rel_pos : float Irr_core.pos_2d
   method set_visible : bool -> unit
 end
 
