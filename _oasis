@@ -3,7 +3,9 @@ Plugins: META (0.2)
 Name: ocaml-irrlicht
 Version: 0.0.3
 Synopsis: An Ocaml binding for the 3D engine Irrlicht
-Authors: Alexis Bernadet < alexis.bernadet@noos.fr >
+Authors:
+  Alexis Bernadet < alexis.bernadet ate noos.fr >,
+  Pierre Hauweele <pierre ate hauweele.net>
 License: zlib
 BuildTools: ocamlbuild
 Executable make_hash_values
