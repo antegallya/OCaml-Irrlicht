@@ -18,7 +18,7 @@ extern "C" {
 #include<caml/misc.h>
 }
 
-value Val_some(value);
+value copy_Some(value);
 
 /* Raise Null_pointer_exn */
 void null_pointer_exn();
