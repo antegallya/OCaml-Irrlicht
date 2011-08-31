@@ -6,6 +6,12 @@ extern "C" CAMLprim value ml_ICursorControl_getPosition(value v_cursor) {
 	return copy_pos2d_s32(((ICursorControl*) v_cursor)->getPosition());
 }
 
+extern "C" CAMLprim
+value ml_ICursorControl_getRelativePosition(value v_cursor) {
+	return copy_pos2d_f32(((ICursorControl*) v_cursor)->
+		getRelativePosition());
+}
+
 extern "C" CAMLprim value ml_ICursorControl_setVisible(
 		value v_cursor, value v_b)
 {

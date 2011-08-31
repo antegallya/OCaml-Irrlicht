@@ -45,7 +45,7 @@ type mouse_input = {
   mi_control : bool;
   mi_event : Irr_enums.mouse_input_event;
   mi_shift : bool;
-  mi_weel : float;
+  mi_wheel : float;
   mi_x : int;
   mi_y : int;
 }

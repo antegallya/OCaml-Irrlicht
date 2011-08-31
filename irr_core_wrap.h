@@ -12,6 +12,9 @@ value copy_dimension2d_f32(dimension2d<f32>);
 position2d<s32> Pos2d_s32_val(value);
 value copy_pos2d_s32(position2d<s32>);
 
+position2d<f32> Pos2d_f32_val(value);
+value copy_pos2d_f32(position2d<f32>);
+
 vector3df Vector3df_val(value);
 value copy_vector3df(vector3df);
 

@@ -188,8 +188,14 @@ external material_set_thickness : obj -> float -> unit =
 external material_get_zbuffer : obj -> Irr_enums.comparison_func =
   "ml_SMaterial_get_ZBuffer"
 
+external material_get_zwrite_enable : obj -> bool =
+  "ml_SMaterial_get_ZWriteEnable"
+
 external material_set_zbuffer : obj -> Irr_enums.comparison_func -> unit =
   "ml_SMaterial_set_ZBuffer"
+
+external material_set_zwrite_enable : obj -> bool -> unit =
+  "ml_SMaterial_set_ZWriteEnable"
 
 external material_get_material_type_param : obj -> float =
   "ml_SMaterial_get_MaterialTypeParam"
@@ -229,6 +235,7 @@ class material (obj : obj) = object(self)
   method specular_color = material_get_specular_color self#obj
   method thickness = material_get_thickness self#obj
   method zbuffer = material_get_zbuffer self#obj
+  method zwrite = material_get_zwrite_enable self#obj
   method flag f = material_get_flag self#obj f
   method material_type_param = material_get_material_type_param self#obj
   method material_type_param2 = material_get_material_type_param2 self#obj
@@ -252,6 +259,7 @@ class material (obj : obj) = object(self)
   method set_specular_color c = material_set_specular_color self#obj c
   method set_thickness x = material_set_thickness self#obj x
   method set_zbuffer x = material_set_zbuffer self#obj x
+  method set_zwrite b = material_set_zwrite_enable self#obj b
   method set_material_type_param x = material_set_material_type_param self#obj x
   method set_material_type_param2 x =
     material_set_material_type_param2 self#obj x

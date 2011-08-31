@@ -275,8 +275,18 @@ extern "C" CAMLprim value ml_SMaterial_get_ZBuffer(value v_mat) {
 	return Val_comparison_func(((SMaterial*) v_mat)->ZBuffer);
 }
 
+extern "C" CAMLprim value ml_SMaterial_get_ZWriteEnable(value v_mat) {
+	return Val_bool(((SMaterial*) v_mat)->ZWriteEnable);
+}
+
 extern "C" CAMLprim value ml_SMaterial_set_ZBuffer(value v_mat, value v_x) {
 	((SMaterial*) v_mat)->ZBuffer = comparison_func_val(v_x);
+	return Val_unit;
+}
+
+extern "C" CAMLprim
+value ml_SMaterial_set_ZWriteEnable(value v_mat, value v_b) {
+	((SMaterial*) v_mat)->ZWriteEnable = Bool_val(v_b);
 	return Val_unit;
 }
 
