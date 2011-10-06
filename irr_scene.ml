@@ -407,10 +407,10 @@ external billboard_node_get_size : obj -> (float * float) =
   "ml_IBillboardSceneNode_getSize"
 
 external billboard_node_set_color :
-  obj -> Irr_core.color -> Irr_core.color -> unit =
+  obj -> int Irr_core.color -> int Irr_core.color -> unit =
     "ml_IBillboardSceneNode_setColor"
 
-external billboard_node_get_color : obj -> Irr_core.color * Irr_core.color =
+external billboard_node_get_color : obj -> int Irr_core.color * int Irr_core.color =
   "ml_IBillboardSceneNode_getColor"
 
 class billboard_node obj = object(self)
@@ -532,7 +532,7 @@ end
 
 external particle_system_node_create_box_emitter :
   obj -> float Irr_core.aabbox3d -> Irr_core.vector3df -> int -> int ->
-    Irr_core.color -> Irr_core.color -> int -> int -> int -> (float * float) ->
+    int Irr_core.color -> int Irr_core.color -> int -> int -> int -> (float * float) ->
     (float * float) -> obj
   =
     "ml_IParticleSystemSceneNode_createBoxEmitter_bytecode"
@@ -542,7 +542,7 @@ external particle_system_node_set_emitter : obj -> obj -> unit =
   "ml_IParticleSystemSceneNode_setEmitter"
 
 external particle_system_node_create_fade_out_particle_affector :
-  obj -> Irr_core.color -> int -> obj =
+  obj -> int Irr_core.color -> int -> obj =
     "ml_IParticleSystemSceneNode_createFadeOutParticleAffector"
 
 external particle_system_node_add_affector : obj -> obj -> unit =
@@ -647,7 +647,7 @@ external manager_add_sky_dome_scene_node :
 
 external manager_add_billboard_scene_node :
   obj -> obj option -> float Irr_core.dimension_2d -> Irr_core.vector3df ->
-    int -> Irr_core.color -> Irr_core.color -> obj
+    int -> int Irr_core.color -> int Irr_core.color -> obj
   =
     "ml_ISceneManager_addBillboardSceneNode_bytecode"
     "ml_ISceneManager_addBillboardSceneNode_native"
@@ -670,7 +670,7 @@ external manager_get_mesh : obj -> string -> obj = "ml_ISceneManager_getMesh"
 
 external manager_add_terrain_scene_node :
   obj -> string -> obj option -> int -> Irr_core.vector3df ->
-    Irr_core.vector3df -> Irr_core.vector3df -> Irr_core.color -> int ->
+    Irr_core.vector3df -> Irr_core.vector3df -> int Irr_core.color -> int ->
     Irr_enums.terrain_patch_size -> int -> bool -> obj
   =
     "ml_ISceneManager_addTerrainSceneNode_bytecode"
@@ -697,7 +697,7 @@ external manager_create_triangle_selector : obj -> obj -> obj =
   "ml_ISceneManager_createTriangleSelector"
 
 external manager_add_light_scene_node :
-  obj -> obj option -> Irr_core.vector3df -> Irr_core.colorf -> float -> int ->
+  obj -> obj option -> Irr_core.vector3df -> float Irr_core.color -> float -> int ->
     obj
   =
     "ml_ISceneManager_addLightSceneNode_bytecode"
@@ -725,7 +725,7 @@ external manager_add_particle_system_scene_node :
     "ml_ISceneManager_addParticleSystemSceneNode_native"
 
 external manager_add_volume_light_scene_node :
-  obj -> obj option -> int -> int -> int -> Irr_core.color -> Irr_core.color ->
+  obj -> obj option -> int -> int -> int -> int Irr_core.color -> int Irr_core.color ->
     Irr_core.vector3df -> Irr_core.vector3df -> Irr_core.vector3df -> obj
   =
     "ml_ISceneManager_addVolumeLightSceneNode_bytecode"
@@ -735,7 +735,7 @@ external manager_create_texture_animator :
   obj -> obj list -> int -> bool -> obj =
     "ml_ISceneManager_createTextureAnimator"
 
-external manager_set_shadow_color : obj -> Irr_core.color -> unit =
+external manager_set_shadow_color : obj -> int Irr_core.color -> unit =
   "ml_ISceneManager_setShadowColor"
 
 let free x = x#drop

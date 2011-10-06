@@ -14,7 +14,7 @@ end
 class font : obj -> object
   inherit Irr_base.reference_counted
   method draw : string -> int Irr_core.rect -> ?hcenter:bool -> ?vcenter:bool ->
-    ?clip:int Irr_core.rect -> Irr_core.color -> unit
+    ?clip:int Irr_core.rect -> int Irr_core.color -> unit
 end
 
 (** Class IGUIElement *)
@@ -26,7 +26,7 @@ end
 (** Class IGUIStaticText *)
 class static_text : obj -> object
   inherit element
-  method set_override_color : Irr_core.color -> unit
+  method set_override_color : int Irr_core.color -> unit
 end
 
 (** Class IGUIImage *)
@@ -38,8 +38,8 @@ end
 class skin : obj -> object
   inherit Irr_base.attribute_exchanging_object
   method set_font : ?which:Irr_enums.gui_default_font -> font -> unit
-  method color : Irr_enums.gui_default_color -> Irr_core.color
-  method set_color : Irr_enums.gui_default_color -> Irr_core.color -> unit
+  method color : Irr_enums.gui_default_color -> int Irr_core.color
+  method set_color : Irr_enums.gui_default_color -> int Irr_core.color -> unit
 end
 
 val default_color_count : int
