@@ -29,7 +29,7 @@ end
 (******************************************************************************)
 
 external font_draw :
-  obj -> string -> int Irr_core.rect -> Irr_core.color -> bool -> bool ->
+  obj -> string -> int Irr_core.rect -> int Irr_core.color -> bool -> bool ->
     (int Irr_core.rect) option -> unit =
       "ml_IGUIFont_draw_bytecode"
       "ml_IGUIFont_draw_native"
@@ -57,7 +57,7 @@ end
 
 (******************************************************************************)
 
-external static_text_set_override_color : obj -> Irr_core.color -> unit =
+external static_text_set_override_color : obj -> int Irr_core.color -> unit =
   "ml_IGUIStaticText_setOverrideColor"
 
 class static_text obj = object(self)
@@ -84,7 +84,7 @@ end
 external skin_set_font : obj -> obj -> Irr_enums.gui_default_font -> unit =
   "ml_IGUISkin_setFont"
 
-external skin_get_color : obj -> Irr_enums.gui_default_color -> Irr_core.color =
+external skin_get_color : obj -> Irr_enums.gui_default_color -> int Irr_core.color =
   "ml_IGUISkin_getColor"
 
 external get_gui_default_color_count : unit -> int = "ml_get_EGDC_COUNT"
@@ -93,7 +93,7 @@ external default_color_of_int : int -> Irr_enums.gui_default_color =
   "ml_gui_default_color_of_int"
 
 external skin_set_color :
-  obj -> Irr_enums.gui_default_color -> Irr_core.color -> unit =
+  obj -> Irr_enums.gui_default_color -> int Irr_core.color -> unit =
     "ml_IGUISkin_setColor"
 
 let default_color_count = get_gui_default_color_count ()

@@ -8,32 +8,32 @@ type obj = Irr_base.obj
 (** Class S3DVertex *)
 module Vertex : sig
   type t =
-    {color : Irr_core.color; normal : Irr_core.vector3df;
+    {color : int Irr_core.color; normal : Irr_core.vector3df;
       pos : Irr_core.vector3df; t_coords : float * float}
 end
 
 (** Class SLight *)
 module Light : sig
   type t = {
-    ambient : Irr_core.colorf;
+    ambient : float Irr_core.color;
     attenuation : Irr_core.vector3df;
     cast_shadows : bool;
-    diffuse : Irr_core.colorf;
+    diffuse : float Irr_core.color;
     direction : Irr_core.vector3df;
     falloff : float;
     inner_cone : float;
     outer_cone : float;
     pos : Irr_core.vector3df;
     radius : float;
-    specular : Irr_core.colorf;
+    specular : float Irr_core.color;
     ty : Irr_enums.light_type;
   }
   val cons :
-    t -> ?ambient:Irr_core.colorf -> ?attenuation:Irr_core.vector3df ->
-      ?cast_shadows:bool -> ?diffuse:Irr_core.colorf ->
+    t -> ?ambient:float Irr_core.color -> ?attenuation:Irr_core.vector3df ->
+      ?cast_shadows:bool -> ?diffuse:float Irr_core.color ->
       ?direction:Irr_core.vector3df -> ?falloff:float -> ?inner_cone:float ->
       ?outer_cone:float -> ?pos:Irr_core.vector3df -> ?radius:float ->
-      ?specular:Irr_core.colorf -> ?ty:Irr_enums.light_type -> unit -> t
+      ?specular:float Irr_core.color -> ?ty:Irr_enums.light_type -> unit -> t
 end
 
 (** Class ITexture *)
@@ -55,16 +55,16 @@ class material : obj -> object
   method wireframe : bool
   method point_cloud : bool
   method material_type : Irr_enums.material_type
-  method ambient_color : Irr_core.color
+  method ambient_color : int Irr_core.color
   method anti_aliasing : Irr_enums.anti_aliasing_mode
   method backface_culling : bool
   method color_mask : Irr_enums.color_plane
   method color_material : Irr_enums.colormaterial
-  method diffuse_color : Irr_core.color
-  method emissive_color : Irr_core.color
+  method diffuse_color : int Irr_core.color
+  method emissive_color : int Irr_core.color
   method fog_enable : bool
   method shininess : float
-  method specular_color : Irr_core.color
+  method specular_color : int Irr_core.color
   method flag : Irr_enums.material_flag -> bool
   method thickness : float
   method zbuffer : Irr_enums.comparison_func
@@ -76,17 +76,17 @@ class material : obj -> object
   method set_lighting : bool -> unit
   method set_normalize_normals : bool -> unit
   method set_wireframe : bool -> unit
-  method set_ambient_color : Irr_core.color -> unit
+  method set_ambient_color : int Irr_core.color -> unit
   method set_backface_culling : bool -> unit
   method set_color_mask : Irr_enums.color_plane -> unit
   method set_color_material : Irr_enums.colormaterial -> unit
-  method set_diffuse_color : Irr_core.color -> unit
-  method set_emissive_color : Irr_core.color -> unit
+  method set_diffuse_color : int Irr_core.color -> unit
+  method set_emissive_color : int Irr_core.color -> unit
   method set_fog_enable : bool -> unit
   method set_material_type : Irr_enums.material_type -> unit
   method set_shininess : float -> unit
   method set_flag : Irr_enums.material_flag -> bool -> unit
-  method set_specular_color : Irr_core.color -> unit
+  method set_specular_color : int Irr_core.color -> unit
   method set_thickness : float -> unit
   method set_zbuffer : Irr_enums.comparison_func -> unit
   method set_zwrite : bool -> unit
@@ -102,18 +102,18 @@ end
 class driver : obj -> object
   inherit Irr_base.reference_counted
   method begin_scene : ?backbuffer:bool -> ?zbuffer:bool ->
-    ?color:Irr_core.color -> unit -> unit
+    ?color:int Irr_core.color -> unit -> unit
   method end_scene : unit
   method draw_2d_image :
     texture -> ?src:int Irr_core.rect -> ?clip:int Irr_core.rect ->
-      ?color:Irr_core.color -> ?alpha:bool -> int Irr_core.dimension_2d -> unit
+      ?color:int Irr_core.color -> ?alpha:bool -> int Irr_core.dimension_2d -> unit
   method draw_2d_image_scale :
     texture -> ?src:int Irr_core.rect -> ?clip:int Irr_core.rect ->
-    ?colors:(Irr_core.color * Irr_core.color * Irr_core.color *
-      Irr_core.color) ->
+    ?colors:(int Irr_core.color * int Irr_core.color * int Irr_core.color *
+      int Irr_core.color) ->
     ?alpha:bool -> int Irr_core.rect -> unit
   method draw_2d_rect :
-    Irr_core.color -> ?clip:int Irr_core.rect -> int Irr_core.rect -> unit
+    int Irr_core.color -> ?clip:int Irr_core.rect -> int Irr_core.rect -> unit
   method get_texture : string -> texture
   method material_2d : material
   method enable_material_2d : unit
@@ -126,7 +126,7 @@ class driver : obj -> object
     Irr_enums.texture_creation_flag -> bool -> unit
   method set_transform :
     Irr_enums.transformation_state -> Irr_core.matrix4 -> unit
-  method draw_3d_line : ?color:Irr_core.color -> Irr_core.vector3df ->
+  method draw_3d_line : ?color:int Irr_core.color -> Irr_core.vector3df ->
     Irr_core.vector3df -> unit
   method draw_3d_triangle :
     ?color:Irr_core.color -> Irr_core.triangle3df -> unit

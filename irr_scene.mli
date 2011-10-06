@@ -139,8 +139,8 @@ class billboard_node : obj -> object
   inherit node
   method set_size : (float * float) -> unit
   method size : float * float
-  method set_color : Irr_core.color -> Irr_core.color -> unit
-  method color : Irr_core.color * Irr_core.color
+  method set_color : int Irr_core.color -> int Irr_core.color -> unit
+  method color : int Irr_core.color * int Irr_core.color
 end
 
 (** Class ISceneCollisionManager *)
@@ -191,13 +191,13 @@ class particle_system_node : obj -> object
   method create_box_emitter :
     ?box:(float Irr_core.aabbox3d) -> ?direction:Irr_core.vector3df ->
       ?min_particles_per_second:int -> ?max_particles_per_second:int ->
-      ?min_start_color:Irr_core.color -> ?max_start_color:Irr_core.color ->
+      ?min_start_color:int Irr_core.color -> ?max_start_color:int Irr_core.color ->
       ?life_time_min:int -> ?life_time_max:int -> ?max_angle_degrees:int ->
       ?min_start_size:(float * float) -> ?max_start_size:(float * float) ->
       unit -> particle_box_emitter
   method set_emitter : particle_emitter -> unit
   method create_fade_out_affector :
-    ?color:Irr_core.color -> ?time:int -> unit -> particle_fade_out_affector
+    ?color:int Irr_core.color -> ?time:int -> unit -> particle_fade_out_affector
   method add_affector : particle_affector -> unit
 end
 
@@ -233,7 +233,7 @@ class manager : obj -> object
   method add_terrain_node :
     ?parent:node -> ?id:int -> ?pos:Irr_core.vector3df ->
       ?rot:Irr_core.vector3df -> ?scale:Irr_core.vector3df ->
-      ?color:Irr_core.color -> ?max_lod:int ->
+      ?color:int Irr_core.color -> ?max_lod:int ->
       ?patch_size:Irr_enums.terrain_patch_size -> ?smooth_factor:int ->
       ?add_also_if_heightmap_empty:bool -> string -> terrain_node
   method add_sky_box_node :
@@ -247,14 +247,14 @@ class manager : obj -> object
       Irr_video.texture -> node
   method add_billboard_node :
     ?parent:node -> ?size:(float * float) -> ?pos:Irr_core.vector3df ->
-      ?id:int -> ?color_top:Irr_core.color -> ?color_bottom:Irr_core.color ->
+      ?id:int -> ?color_top:int Irr_core.color -> ?color_bottom:int Irr_core.color ->
       unit -> billboard_node
   method add_hill_plane_mesh :
     string -> (float * float) -> ?material:Irr_video.material ->
       ?height:float -> ?count_hills:(float * float) ->
       ?texture_repeat_count:(float * float) -> (int * int) -> animated_mesh
   method add_light_node :
-    ?parent:node -> ?pos:Irr_core.vector3df -> ?color:Irr_core.colorf ->
+    ?parent:node -> ?pos:Irr_core.vector3df -> ?color:float Irr_core.color ->
       ?radius:float -> ?id:int -> unit -> light_node
   method add_water_surface_node :
     ?wave_height:float -> ?wave_speed:float -> ?wave_length:float ->
@@ -266,7 +266,7 @@ class manager : obj -> object
       ?scale:Irr_core.vector3df -> unit -> particle_system_node
   method add_volume_light_node :
     ?parent:node -> ?id:int -> ?subdiv_u:int -> ?subdiv_v:int ->
-      ?foot:Irr_core.color -> ?tail:Irr_core.color -> ?pos:Irr_core.vector3df ->
+      ?foot:int Irr_core.color -> ?tail:int Irr_core.color -> ?pos:Irr_core.vector3df ->
       ?rot:Irr_core.vector3df -> ?scale:Irr_core.vector3df -> unit ->
       volume_light_node
   method create_fly_circle :
@@ -289,7 +289,7 @@ class manager : obj -> object
   method create_texture_animator :
     Irr_video.texture list -> ?loop:bool -> int -> animator
   method draw_all : unit
-  method set_shadow_color : Irr_core.color -> unit
+  method set_shadow_color : int Irr_core.color -> unit
   method get_mesh : string -> animated_mesh
   method collision_manager : collision_manager
 end

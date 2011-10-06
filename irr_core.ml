@@ -10,15 +10,14 @@ type line3df = vector3df * vector3df
 
 type triangle3df = vector3df * vector3df * vector3df
 
-type color = {a : int; r : int; g : int; b : int}
-
-type colorf = {af : float; rf : float; gf : float; bf : float}
-
 type 'a rect = 'a * 'a * 'a * 'a
+
+type 'a color = {a : 'a; r : 'a; g : 'a; b : 'a}
 
 let color_ARGB ~a ~r ~g ~b = {a = a; r = r; g = g; b = b}
 
-let colorf_RGB ?(a = 1.) r g b = {af = a; rf = r; gf = g; bf = b}
+let color_RGB ?(a = 1) = color_ARGB ~a
+let colorf_RGB ?(a = 1.) = color_ARGB ~a
 
 type matrix4 = float array
 

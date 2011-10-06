@@ -12,7 +12,7 @@ let () = Callback.register_exception "Rendering_failed_exn" Rendering_failed_exn
 
 module Vertex = struct
   type t =
-    {color : Irr_core.color; normal : Irr_core.vector3df;
+    {color : int Irr_core.color; normal : Irr_core.vector3df;
       pos : Irr_core.vector3df; t_coords : float * float}
 end
 
@@ -24,17 +24,17 @@ end
 
 module Light = struct
   type t = {
-    ambient : Irr_core.colorf;
+    ambient : float Irr_core.color;
     attenuation : Irr_core.vector3df;
     cast_shadows : bool;
-    diffuse : Irr_core.colorf;
+    diffuse : float Irr_core.color;
     direction : Irr_core.vector3df;
     falloff : float;
     inner_cone : float;
     outer_cone : float;
     pos : Irr_core.vector3df;
     radius : float;
-    specular : Irr_core.colorf;
+    specular : float Irr_core.color;
     ty : Irr_enums.light_type;
   }
   let cons l ?(ambient = l.ambient) ?(attenuation = l.attenuation)
@@ -116,10 +116,10 @@ external material_create : unit -> obj =
 external material_destroy : obj -> unit =
   "ml_SMaterial_destroy"
 
-external material_set_ambient_color : obj -> Irr_core.color -> unit =
+external material_set_ambient_color : obj -> int Irr_core.color -> unit =
   "ml_SMaterial_set_AmbientColor"
 
-external material_get_ambient_color : obj -> Irr_core.color =
+external material_get_ambient_color : obj -> int Irr_core.color =
   "ml_SMaterial_get_AmbientColor"
 
 external material_get_anti_aliasing : obj -> Irr_enums.anti_aliasing_mode =
@@ -137,7 +137,7 @@ external material_set_flag : obj -> Irr_enums.material_flag -> bool -> unit =
 external material_get_flag : obj -> Irr_enums.material_flag -> bool =
   "ml_SMaterial_getFlag"
 
-external material_set_specular_color : obj -> Irr_core.color -> unit =
+external material_set_specular_color : obj -> int Irr_core.color -> unit =
   "ml_SMaterial_set_SpecularColor"
 
 external material_set_color_mask : obj -> Irr_enums.color_plane -> unit =
@@ -152,16 +152,16 @@ external material_set_color_material : obj -> Irr_enums.colormaterial -> unit =
 external material_get_color_material : obj -> Irr_enums.colormaterial =
   "ml_SMaterial_get_ColorMaterial"
 
-external material_set_diffuse_color : obj -> Irr_core.color -> unit =
+external material_set_diffuse_color : obj -> int Irr_core.color -> unit =
   "ml_SMaterial_set_DiffuseColor"
 
-external material_get_diffuse_color : obj -> Irr_core.color =
+external material_get_diffuse_color : obj -> int Irr_core.color =
   "ml_SMaterial_get_DiffuseColor"
 
-external material_set_emissive_color : obj -> Irr_core.color -> unit =
+external material_set_emissive_color : obj -> int Irr_core.color -> unit =
   "ml_SMaterial_set_EmissiveColor"
 
-external material_get_emissive_color : obj -> Irr_core.color =
+external material_get_emissive_color : obj -> int Irr_core.color =
   "ml_SMaterial_get_EmissiveColor"
 
 external material_get_fog_enable : obj -> bool = "ml_SMaterial_get_FogEnable"
@@ -177,7 +177,7 @@ external material_get_shininess : obj -> float = "ml_SMaterial_get_Shininess"
 external material_set_shininess : obj -> float -> unit =
   "ml_SMaterial_set_Shininess"
 
-external material_get_specular_color : obj -> Irr_core.color =
+external material_get_specular_color : obj -> int Irr_core.color =
   "ml_SMaterial_get_SpecularColor"
 
 external material_get_thickness : obj -> float = "ml_SMaterial_get_Thickness"
@@ -276,27 +276,27 @@ end
 
 (******************************************************************************)
 
-external driver_begin_scene : obj -> bool -> bool -> Irr_core.color -> unit =
+external driver_begin_scene : obj -> bool -> bool -> int Irr_core.color -> unit =
   "ml_IVideoDriver_beginScene"
 
 external driver_end_scene : obj -> unit = "ml_IVideoDriver_endScene"
 
 external driver_draw_2d_image :
   obj -> obj -> int Irr_core.dimension_2d -> int Irr_core.rect ->
-    (int Irr_core.rect) option -> Irr_core.color -> bool -> unit =
+    (int Irr_core.rect) option -> int Irr_core.color -> bool -> unit =
       "ml_IVideoDriver_draw2DImage_bytecode"
       "ml_IVideoDriver_draw2DImage_native"
 
 external driver_draw_2d_image_scale :
   obj -> obj -> int Irr_core.rect -> int Irr_core.rect ->
   (int Irr_core.rect) option ->
-  (Irr_core.color * Irr_core.color * Irr_core.color * Irr_core.color) option ->
+  (int Irr_core.color * int Irr_core.color * int Irr_core.color * int Irr_core.color) option ->
   bool -> unit =
     "ml_IVideoDriver_draw2DImage_scale_bytecode"
     "ml_IVideoDriver_draw2DImage_scale_native"
 
 external driver_draw_2d_rectangle :
-  obj -> Irr_core.color -> int Irr_core.rect -> (int Irr_core.rect) option ->
+  obj -> int Irr_core.color -> int Irr_core.rect -> (int Irr_core.rect) option ->
     unit =
       "ml_IVideoDriver_draw2DRectangle"
 
@@ -326,11 +326,11 @@ external driver_set_transform :
     "ml_IVideoDriver_setTransform"
 
 external driver_draw_3d_line :
-  obj -> Irr_core.vector3df -> Irr_core.vector3df -> Irr_core.color -> unit =
+  obj -> Irr_core.vector3df -> Irr_core.vector3df -> int Irr_core.color -> unit =
     "ml_IVideoDriver_draw3DLine"
 
 external driver_draw_3d_triangle :
-  obj -> Irr_core.triangle3df -> Irr_core.color -> unit =
+  obj -> Irr_core.triangle3df -> int Irr_core.color -> unit =
     "ml_IVideoDriver_draw3DTriangle"
 
 external driver_draw_vertex_primitive_list :
