@@ -129,7 +129,7 @@ class driver : obj -> object
   method draw_3d_line : ?color:int Irr_core.color -> Irr_core.vector3df ->
     Irr_core.vector3df -> unit
   method draw_3d_triangle :
-    ?color:Irr_core.color -> Irr_core.triangle3df -> unit
+    ?color:int Irr_core.color -> Irr_core.triangle3df -> unit
   method draw_vertex_primitive_list_16 : Vertex.t array ->
     (int, Bigarray.int16_signed_elt, Bigarray.c_layout) Bigarray.Array1.t ->
     int -> Irr_enums.primitive_type -> unit
